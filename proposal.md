@@ -617,3 +617,45 @@ Section,Category,Item,Requirement,Detailed Specification,Acceptance Criteria,Pri
 "23. DELIVERABLES","Docs","README NOTES.md content inventory launch checklist","",P0,""
 "23. DELIVERABLES","Bots","Telegram + WhatsApp integrated; documented","",P0,""
 "23. DELIVERABLES","Tests","Automated test suite + CI config","",P0,""
+---
+## Дополнительные требования — Премиум + Трафик + Mobile
+
+### 1. Ультра-премиум визуал
+- Сайт — editorial creative agency уровня Pentagram, не шаблон
+- Каждый блок — отдельная композиция: hero → direct answer → trust strip → service grid → process → portfolio → pricing → FAQ → CTA
+- Крупная editorial типографика, cinematic imagery, generous whitespace
+- Hero с премиум визуалом + CTA
+- CSS-only subtle animated gradient фон (prefers-reduced-motion)
+
+### 2. Блочная структура (Landing Page)
+- Минимум 10-15 блоков на коммерческих страницах
+- Блоки чередуются: текст/изображение/карточки/сравнение/процесс/отзывы/FAQ/CTA
+- Никаких стен текста — каждый блок решает конверсионную задачу
+- Reusable: Announcement Bar, Hero, Direct Answer, Trust Strip, Service Grid, Portfolio, Case Study, Before/After, Pricing, FAQ, CTA, Contact Form
+
+### 3. Mobile-first скорость
+- Mobile-first (320-430px база, desktop — расширение)
+- Core Web Vitals: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1
+- Total page weight ≤ 1.5MB mobile
+- Images: AVIF/WebP, srcset, lazy-load, preload только hero
+- Минимум JS, критический CSS inline
+
+### 4. Органический трафик (SEO/GEO)
+- Один primary intent на страницу — никакой каннибализации
+- Direct Answer (40-80 слов) на всех коммерческих страницах
+- FAQ (6-10 уникальных вопросов) на каждой странице услуги
+- Semantic HTML + JSON-LD schema (Organization, Service, BreadcrumbList, FAQPage, Article)
+- Hreflang EN/RU/TH/HE + sitemap.xml + robots.txt + llms.txt
+- AI-citability (GEO ready) — факты в crawlable HTML
+- Internal link graph — все страницы связаны, 0 orphans
+- Content clusters для каждой ниши (advertising, social, villas, food, web)
+
+### 5. 3000+ URL architecture (без doorway)
+- Только страницы с уникальным intent
+- Programmatic generation только где есть genuine контент
+- Sub-services с уникальными landing, не doorway
+
+### 6. Telegram/WhatsApp боты
+- Intake funnel: Language → Service → Location → Budget → Files → Contact → Submit
+- Contextual CTA: service page preselects service, location preselects location
+- Security: sanitize input, rate-limit, validate uploads, protect webhooks
