@@ -1,4 +1,46 @@
 # Техническое задание — CreativeLAB.in.th
+
+## 🎯 МИССИЯ
+Создать премиум сайт креативного / рекламного агентства с фотосъёмкой и production на Koh Phangan (Таиланд).  
+Сайт = editorial creative agency уровня Pentagram, конвертирует в лиды, собирает органический трафик через SEO/GEO,  
+работает на 4 языках (EN/RU/TH/HE) с Telegram и WhatsApp ботами для сбора заявок.
+
+## 🏗 ЧТО ДЕЛАЕМ
+- Полноценный многостраничный сайт (3000+ URL) с блочной landing-page структурой
+- 8 основных направлений: Advertising, Social Media, Villas & Real Estate, Food, Local, Web, Video, Branding
+- Telegram и WhatsApp боты как intake funnel (язык → услуга → локация → бюджет → файлы → контакт)
+- SEO/GEO: каждая страница — уникальный intent, Direct Answer, FAQ, schema, hreflang
+- 4 языка с отдельными URL, Hebrew RTL
+- Premium дизайн: editorial aesthetic, cinematic imagery, слайдеры, крупная типографика
+
+## 🛣 ROADMAP
+1. Brand shell + design system + reusable components
+2. Homepage + 8 service hubs
+3. 50+ sub-service landing pages
+4. Portfolio / Case Studies pages
+5. Bot integration (Telegram + WhatsApp)
+6. SEO/schema/hreflang/sitemap/llms.txt
+7. 4 languages (EN/RU/TH/HE)
+8. Performance optimization (CWV)
+9. QA + тестирование
+10. Launch checklist
+
+## ✅ ТЕСТИРОВАНИЕ — ОБЯЗАТЕЛЬНО ДЛЯ ВСЕГО
+- **Каждая страница**: title, H1, meta, canonicals, hreflang, schema, alt text
+- **Все ссылки**: 0 broken, 0 orphan, передают вес
+- **Core Web Vitals**: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1
+- **Адаптивность**: mobile (320-430px), tablet (768px), desktop (1440-1920px)
+- **4 языка**: контент полный, Hebrew true RTL, Thai ICU line-breaking
+- **Боты**: все услуги × все локации × 4 языка — 0 dead ends
+- **Формы**: валидация, успех/ошибка, spam protection
+- **Доступность**: axe-core 0 critical/serious, keyboard nav, focus visible
+- **Lighthouse**: Performance ≥ 90, SEO 100, A11y ≥ 95
+- **Визуальные регрессии**: 6 breakpoints × 4 языка
+- **Rich Results**: 0 errors всех типов schema
+
+---
+
+# Техническое задание — CreativeLAB.in.th
 ## Креативное агентство / рекламное агентство с фотосъёмкой и production, Koh Phangan
 
 ## 00_README
