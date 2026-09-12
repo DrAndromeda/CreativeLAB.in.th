@@ -659,3 +659,16 @@ Section,Category,Item,Requirement,Detailed Specification,Acceptance Criteria,Pri
 - Intake funnel: Language → Service → Location → Budget → Files → Contact → Submit
 - Contextual CTA: service page preselects service, location preselects location
 - Security: sanitize input, rate-limit, validate uploads, protect webhooks
+
+### 7. Четыре языка — отдельные URL для каждого
+- EN (канонический / x-default): /, /advertising/, /social-media/...
+- RU: /ru/, /ru/advertising/, /ru/social-media/...
+- TH: /th/, /th/advertising/, /th/social-media/...
+- HE (RTL): /he/, /he/advertising/, /he/social-media/...
+- Каждый язык — полноценная копия контента, не автоперевод
+- Hreflang reciprocal для всех страниц во всех 4 языках
+- Canonical self-referencing
+- Hebrew: true RTL layout (dir=rtl)
+- Thai: ICU line-breaking
+- Единая структура URL, разный контент под поисковые интенты каждого языка
+- Yandex-aware для RU версии
