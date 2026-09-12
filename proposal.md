@@ -672,3 +672,11 @@ Section,Category,Item,Requirement,Detailed Specification,Acceptance Criteria,Pri
 - Thai: ICU line-breaking
 - Единая структура URL, разный контент под поисковые интенты каждого языка
 - Yandex-aware для RU версии
+
+### 8. Изображения + слайдеры
+- **Источник изображений**: использовать web.archive.org для поиска тематических фото с broservice.in.th (архив adfotoco). Проверить структуру текстов и изображений на archived версиях.
+- **Временные изображения**: тематические placeholders (реклама, съёмка, еда, виллы) из лицензированных источников или web.archive
+- **Hero слайдер**: 3-5 изображений, cinematic visual, CTA overlay
+- **Portfolio слайдер**: swipe + keyboard + arrows + pagination, lazy-load
+- **Before/After**: slider control для фото-работ
+- **Все изображения**: AVIF/WebP, srcset (5 widths), explicit w/h, lazy-load, preload только hero
