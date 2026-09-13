@@ -251,6 +251,186 @@ Brand Identity
 - Таблицы: `<table>` с `<caption>` и `<th>` (не скриншоты)
 - Формы: `<form>` с `aria-label` и `name` аттрибутами
 
+---
+
+## 📋 CREATIVELAB — SEO / IA / CONTENT MASTER SPEC
+
+> Это полная спецификация для Claude. Самостоятельно не исполнять.
+
+### 1. ПОЗИЦИОНИРОВАНИЕ
+
+CreativeLAB — premium creative advertising and digital marketing agency для бизнесов на: Koh Phangan, Koh Samui, Koh Tao.
+
+Главные направления: Advertising, Social Media, Content Creation, Photography, Video Production, Digital Marketing, Google Ads, Meta Ads, SEO, Web Design, Branding, Villas & Real Estate, Restaurants & Hospitality.
+
+CreativeLAB НЕ должен восприниматься как фотограф, SMM-менеджер, production studio или web studio.
+Главное: **Creative advertising + marketing + content production.**
+
+---
+
+### 2. ОСНОВНОЕ МЕНЮ
+
+**SERVICES**
+- **Advertising**: Advertising, Google Ads, Meta Ads, Performance Marketing
+- **Social & Content**: Social Media Management, Content Creation, Reels & Short-Form Video
+- **Photo & Video**: Commercial Photography, Commercial Video, Drone & FPV, Food Photography
+- **Digital**: Digital Marketing, SEO, Web Design, Landing Pages
+- **Creative**: Branding, Graphic Design, Creative Direction
+
+**INDUSTRIES**: Villas & Real Estate, Hotels & Resorts, Restaurants & Food, Wellness & Retreats, Tourism & Hospitality, Events, Brands & Lifestyle
+
+**LOCATIONS**: Koh Phangan, Koh Samui, Koh Tao
+
+**WORK**: Portfolio, Case Studies • **JOURNAL** • **ABOUT** • **CONTACT**
+
+---
+
+### 3. ГЛАВНАЯ СТРАНИЦА
+
+Главный H1: **Creative Advertising & Marketing Agency on Koh Phangan** (или в Thailand's Islands).
+Подзаголовок: Advertising, social media, content, photography, video, websites and digital marketing for businesses across Koh Phangan, Koh Samui and Koh Tao.
+Не делать H1: "Creative Lab", "Creative Agency", "Making Brands Matter".
+
+---
+
+### 4. P0 — ОСНОВНЫЕ SEO-СТРАНИЦЫ
+
+| URL | Primary Intent | Priority |
+|---|---|---|
+| /services/advertising/ | advertising agency | P0 |
+| /services/social-media-management/ | social media management | P0 |
+| /services/content-creation/ | content creation | P0 |
+| /services/commercial-photography/ | commercial photography | P0 |
+| /services/commercial-video/ | commercial video | P0 |
+| /services/digital-marketing/ | digital marketing agency | P0 |
+| /services/google-ads/ | Google Ads agency | P0 |
+| /services/meta-ads/ | Meta Ads agency | P0 |
+| /services/seo/ | SEO agency | P0 |
+| /services/web-design/ | web design agency | P0 |
+| /services/branding/ | branding agency | P0 |
+| /services/villas-real-estate/ | villa / real estate marketing | P0 |
+| /services/restaurant-marketing/ | restaurant marketing | P0 |
+
+---
+
+### 5-13. SERVICE KEYWORD MAPS (каждая страница с ключами)
+
+**Advertising** — Primary: `advertising agency Koh Phangan/Samui/Tao`
+**Google Ads** — Primary: `Google Ads agency`, `Google Ads Koh Phangan`
+**Meta Ads** — Primary: `Meta Ads agency`, `Facebook Ads`
+**Social Media** — Primary: `social media management Koh Phangan`
+**Content Creation** — Primary: `content creation`, `content agency`
+**Commercial Photography** — Primary: `commercial photography Koh Phangan`
+**Commercial Video** — Primary: `commercial video production Koh Phangan`
+**Digital Marketing** — Primary: `digital marketing agency Koh Phangan`
+**SEO** — Primary: `SEO agency Koh Phangan`
+**Web Design** — Primary: `web design Koh Phangan`
+**Branding** — Primary: `branding agency`, `brand identity`
+**Villas & Real Estate** — Primary: `real estate marketing`, `villa marketing`
+**Restaurant Marketing** — Primary: `restaurant marketing agency`
+
+---
+
+### 14. LOCATIONS
+
+Три страницы: /locations/koh-phangan/, /locations/koh-samui/, /locations/koh-tao/
+Каждая уникальная. Не template swap.
+
+---
+
+### 15. ГЛАВНОЕ ПРАВИЛО GEO
+
+НЕ делать: /advertising-koh-phangan/, /seo-koh-samui/ и т.д. массово.
+Вместо: Service pages + Location hubs + Industry pages.
+
+---
+
+### 16. SERVICE PAGE STRUCTURE
+
+Каждая: H1 → Direct Answer (40-60 слов) → Service Overview → Deliverables → Process → Portfolio → Industries → Locations → FAQ → CTA
+
+---
+
+### 17. СТИЛЬ ТЕКСТА
+
+Тон: creative + premium + intelligent + commercial.
+Не как SEO-агентство, фрилансер или generic marketing.
+Показывать: идея → стратегия → производство → distribution → результат.
+Запрещено: "we bring your vision to life", "we make brands unforgettable".
+
+---
+
+### 18. TITLE + META
+
+Title: `[Service] | CreativeLAB` или `[Service] in KP, KS & KT | CreativeLAB`
+Meta: service + target business + geography + value proposition
+
+---
+
+### 19. INTERNAL LINKING
+
+SERVICE ↔ INDUSTRY ↔ LOCATION ↔ CASE STUDY ↔ JOURNAL
+Пример: Restaurant Marketing → Restaurant Case Study → Koh Samui → Food Photography → Instagram Management → Meta Ads.
+
+---
+
+### 20. CASE STUDIES
+
+Hero → Client → Challenge → Strategy → Creative → Production → Advertising → Result → Gallery → Services → Location. Без выдуманных цифр.
+
+---
+
+### 21. PORTFOLIO
+
+Фильтры: Advertising, Social Media, Photography, Video, Branding, Web, Villas, Restaurants, Hospitality.
+Каждый проект ссылается на services.
+
+---
+
+### 22. JOURNAL — кластеры
+
+Social Media • Advertising • Content • Tourism / Hospitality • Local (marketing on each island)
+Journal усиливает коммерческие страницы.
+
+---
+
+### 23. КАННИБАЛИЗАЦИЯ
+
+Перед созданием страницы: проверить Intent, SERP, existing URLs, keywords. Если intent одинаковый — не создавать.
+
+---
+
+### 24. ПРИОРИТЕТЫ
+
+**P0:** Advertising, Social Media, Content, Commercial Photography, Commercial Video, Digital Marketing, Google Ads, Meta Ads, SEO, Web Design, Branding, Villas, Restaurant Marketing, KP, Samui, Tao
+**P1:** Performance Marketing, Reels, Drone & FPV, Food Photography, Hotels, Wellness, Tourism, Landing Pages, Local SEO
+**P2:** Graphic Design, Logo, Product Photography, narrow production pages
+
+---
+
+### 25. ФИНАЛЬНЫЙ KEYWORD MAPPING
+
+До контента: **Keyword Mapping → IA → Content → Links → Technical SEO. Не наоборот.**
+
+---
+
+### 🎯 ЗАДАНИЕ: ПЛАН БЕСПЛАТНЫХ БЕКЛИНКОВ (ПЕРВЫЕ 3 МЕСЯЦА)
+
+> Для Claude: план бесплатных беклинков для CreativeLAB.in.th.
+
+**Локации:** Koh Phangan, Koh Samui, Koh Tao
+
+**Каналы:**
+1. **Бизнес-директории** — GBP, Bing Places, Yelp, Thai YP, Thaivisa, KP local directories
+2. **Локальные сайты** — Phanganist, Samui sites, local blogs, island forums
+3. **Industry** — Houzz, Archilovers, Pinterest, Behance, Dribbble
+4. **Guest posts** — Thailand business blogs, tourism sites, villa rental platforms
+5. **Link bait** — Guides: "Marketing on KP", "Social Media for Thai Tourism"
+6. **Sustainability / Community** — местные сообщества
+
+**Формат:** URL → тип ссылки → сложность → приоритет (Week 1 / Month 1 / Months 2-3)
+
+
 ## 03_PAGE_TEMPLATE
 
 | Order | Block | Requirement |
