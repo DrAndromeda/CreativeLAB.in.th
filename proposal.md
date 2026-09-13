@@ -738,3 +738,32 @@
 | **Доступность** | axe-core: 0 critical/serious, клавиатурная навигация |
 
 **Правило:** ни одна страница не считается готовой, пока не прошла все проверки выше.
+
+---
+
+## 💰 ТАБЛИЦЫ ЦЕН НА КАЖДОЙ СТРАНИЦЕ УСЛУГИ
+
+### Обязательное требование
+
+На каждой странице услуги/продукта — блок с примерными ценами на популярные услуги в виде таблицы.
+
+### Пример таблицы
+
+| Услуга | Ценовой диапазон | Примечания |
+|--------|-----------------|-----------|
+| Professional photo shoot (catalogue, 10 items) | THB 5,000 – 15,000 | Per session, includes processing |
+| Social media content pack (15 photos) | THB 8,000 – 20,000 | Edited, ready to post |
+| Video production (60s commercial) | THB 25,000 – 60,000 | Filming + editing + music |
+| Food photography (per dish) | THB 1,500 – 4,000 | Styling included |
+| Brand identity (logo + guidelines) | THB 30,000 – 80,000 | Per project |
+| Website design (5-page landing) | THB 40,000 – 100,000 | Responsive + SEO-ready |
+| SMM management (per month) | THB 15,000 – 40,000 | Content + posting + analytics |
+
+> ⚠️ Цены оценочные. Дисклеймер: "Prices are indicative. Each project is unique — contact us for a detailed quote."
+
+### Куда вставить
+- После описания услуги, до FAQ
+- JSON-LD Schema markup с `estimatedPrice` для Rich Results
+
+---
+
