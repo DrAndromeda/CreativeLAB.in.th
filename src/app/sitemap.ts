@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { HUBS } from "@/content/hubs";
 import { SITE } from "@/content/site";
 
+export const dynamic = "force-static";
+
 const STATIC_PATHS = [
   "",
   "/about",
