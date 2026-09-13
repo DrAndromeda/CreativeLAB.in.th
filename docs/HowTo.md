@@ -37,11 +37,14 @@ It's a one-time fixup for right after setup.
 
 ## 1. Turning proposal work into epics
 
-This is normally done once per proposal, not per task.
+This is normally done once per proposal, not per task. **This step is
+manual** — the script only turns already-written epic files into issues,
+it doesn't read the proposal itself or decide the chunks for you.
 
-1. Write (or already have) `docs/epics/EPIC-XXX-<slug>.md` for each major
-   chunk of the proposal — the 9 that exist now came straight from
-   `PROGRESS.md`'s phases.
+1. Read the proposal, decide the logical chunks, and write one
+   `docs/epics/EPIC-XXX-<slug>.md` file per chunk — the 9 that exist now
+   came straight from `PROGRESS.md`'s phases. Exact required format (only
+   3 lines actually matter, rest is free-form): [docs/epics/README.md](./epics/README.md).
 2. Turn them into real GitHub Issues:
    ```bash
    make board-epics
