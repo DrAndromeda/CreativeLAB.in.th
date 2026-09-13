@@ -71,7 +71,20 @@ Anything else worth knowing.
 ## After the issue exists
 
 Update the file's `**GitHub Issue:**` line with the real link — this is
-manual, the script doesn't write back to the file. Everything else
-(Status, labels) lives on the issue/board from that point on, not in this
-file — see [WORKFLOW.md](../WORKFLOW.md) for why the issue is the source
-of truth.
+manual, the script doesn't write back to the file.
+
+The board is still the source of truth for status day-to-day (see
+[WORKFLOW.md](../WORKFLOW.md)) — you can always just drag the card. But
+since these epic files also double as the human-readable summary people
+actually read (linked from `PROGRESS.md`), it's easy for the two to drift
+if you only ever update one. Whenever you update a file's `**Status:**`
+line (e.g. "Not started" → "Partial"), run:
+
+```bash
+make board-sync-status
+```
+
+to push that same change to the board (`Done` → Done, anything
+containing "not started" → Backlog, anything else → In Progress). It
+matches epics to issues by title, so it only affects issues that already
+exist.

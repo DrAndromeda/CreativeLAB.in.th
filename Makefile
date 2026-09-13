@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help dev build start lint typecheck check \
-        board-setup board-epics board-backfill task-start task-new
+        board-setup board-epics board-backfill board-sync-status task-start task-new
 
 help: ## Show this list of commands
 	@echo "CreativeLAB.in.th — available commands"
@@ -40,6 +40,9 @@ board-epics: ## Create a GitHub Issue for each docs/epics/EPIC-*.md not already 
 
 board-backfill: ## Set Status on every open issue (default Backlog; STATUS=... to override)
 	./scripts/backfill-status.sh $(STATUS)
+
+board-sync-status: ## Sync each epic issue's board Status from its docs/epics/*.md "**Status:**" line
+	./scripts/sync-epic-status.sh
 
 ## --- Tasks --------------------------------------------------------------
 

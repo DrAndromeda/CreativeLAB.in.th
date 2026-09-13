@@ -13,6 +13,7 @@ lists them all):
 | `scripts/github-bootstrap.sh` | `make board-setup` |
 | `scripts/create-epic-issues.sh` | `make board-epics` |
 | `scripts/backfill-status.sh [status]` | `make board-backfill [STATUS=...]` |
+| `scripts/sync-epic-status.sh` | `make board-sync-status` |
 | `scripts/create-task.sh --title ...` | `make task-new TITLE=... [EPIC=] [PRIORITY=] [PHASE=] [BODY=]` |
 | `scripts/start-task.sh <n>` | `make task-start TASK=<n>` |
 
