@@ -38,11 +38,28 @@ echo
 gh issue list --repo "$REPO_NWO" --state open --limit 200 --json number,title,url \
   --jq '.[] | [.number, .url] | @tsv' |
 while IFS=$'\t' read -r number url; do
-  err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
-    --field "Status" --value "$STATUS_VALUE" 2>&1 >/dev/null)" || true
-  if [ -z "$err" ]; then
-    echo "✓ #$number"
-  else
+  attempt=1
+  while :; do
+    err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
+      --field "Status" --value "$STATUS_VALUE" 2>&1 >/dev/null)" || true
+
+    if [ -z "$err" ]; then
+      echo "✓ #$number"
+      break
+    fi
+
+    if echo "$err" | grep -qi "rate limit" && [ "$attempt" -lt 4 ]; then
+      wait_s=$((attempt * 5))
+      echo "  (#$number rate-limited, retrying in ${wait_s}s...)"
+      sleep "$wait_s"
+      attempt=$((attempt + 1))
+      continue
+    fi
+
     echo "! #$number: $err"
-  fi
+    break
+  done
+  # Small pacing delay so we don't trip a secondary rate limit in the
+  # first place when there are many issues.
+  sleep 1
 done
