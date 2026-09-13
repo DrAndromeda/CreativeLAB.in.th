@@ -1,0 +1,23 @@
+{
+  "name": "creativelab-bots",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Telegram + WhatsApp project-intake bots for CreativeLAB.in.th — a structured lead funnel, not a generic AI chat. See README.md.",
+  "type": "module",
+  "scripts": {
+    "telegram": "tsx watch telegram/index.ts",
+    "whatsapp": "tsx watch whatsapp/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "grammy": "^1.32.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

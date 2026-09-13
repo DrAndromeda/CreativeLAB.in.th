@@ -63,17 +63,23 @@ real client input before launch.
       static file)
 - [ ] hreflang — not applicable yet; real tags land with Phase 7 i18n
 
-## Phase 5 — Bot integration (Telegram + WhatsApp) — SCAFFOLDED, NOT LIVE
+## Phase 5 — Bot integration (Telegram + WhatsApp) — BUILT, NOT DEPLOYED
 
 - [x] `BotEntry` component + `src/lib/integrations.ts`: reads
       `NEXT_PUBLIC_WHATSAPP_NUMBER` / `NEXT_PUBLIC_TELEGRAM_BOT`; falls
       back to a "Message Us" → `/contact` link when unset, so nothing
       fake or broken ships
-- [ ] No actual Telegram Bot API / WhatsApp Business API backend exists —
-      building the real intake flow (language → service → location →
-      budget → files → contact → CRM handoff) needs real API
-      credentials/accounts, which this session doesn't have. This is the
-      next real blocker for this phase.
+- [x] `bots/` package: full intake flow (language → service → location →
+      project type → description → budget → timeline → files → contact →
+      review → submit), channel-agnostic state machine shared by both
+      adapters, EN/RU/TH/HE copy, staff notification via a shared
+      Telegram chat. Telegram (grammY) and WhatsApp (Cloud API + Express
+      webhook) adapters both implemented; `npm run typecheck` passes.
+      See `bots/README.md`.
+- [ ] Not deployed — needs a real Telegram bot token + WhatsApp Cloud API
+      account (`bots/.env.example`) and a host with a stable public URL
+      for the WhatsApp webhook. CRM handoff is currently "notify staff
+      chat", not a CRM record — see `docs/tasks/TASK-005-bot-integration.md`.
 
 ## Phase 6 — Performance pass — INITIAL CHECK DONE
 
