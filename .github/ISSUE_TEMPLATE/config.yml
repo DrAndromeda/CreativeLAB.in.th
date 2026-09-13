@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Team workflow
+    url: https://github.com/DrAndromeda/CreativeLAB.in.th/blob/main/docs/WORKFLOW.md
+    about: How epics, tasks and the Project board fit together before you file an issue.

@@ -1,0 +1,61 @@
+name: "🧩 Epic"
+description: A larger feature or phase of work, broken down into tasks.
+title: "[EPIC] "
+labels:
+  - "type: epic"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        See [docs/WORKFLOW.md](../../docs/WORKFLOW.md) for how epics,
+        tasks and the Project board fit together.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is this epic, and why does it matter?
+      placeholder: |
+        e.g. Multilingual support for RU/TH/HE per proposal.md §09_LANGUAGE.
+    validations:
+      required: true
+  - type: input
+    id: proposal
+    attributes:
+      label: Proposal reference
+      description: Link or section reference in docs/Proposals.md / the proposal doc.
+      placeholder: "proposal.md §09 LANGUAGE"
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0
+        - P1
+        - P2
+    validations:
+      required: true
+  - type: input
+    id: phase
+    attributes:
+      label: Phase
+      description: Matches the phase numbering in PROGRESS.md, if applicable.
+      placeholder: "Phase 7"
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Task checklist
+      description: >
+        List child task issues here as they're created, so GitHub tracks
+        completion automatically (`- [ ] #123`).
+      placeholder: |
+        - [ ] #123 Decide routing strategy
+        - [ ] #124 RTL layout support
+    validations:
+      required: false
+  - type: textarea
+    id: spec
+    attributes:
+      label: Detailed spec (optional)
+      description: >
+        If this needs more than fits here, link to a
+        docs/epics/EPIC-XXX-*.md file instead of writing it all below.

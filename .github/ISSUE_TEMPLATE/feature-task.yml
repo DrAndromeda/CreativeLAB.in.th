@@ -1,0 +1,53 @@
+name: "✅ Task"
+description: One concrete, PR-sized piece of implementation work.
+title: "[TASK] "
+labels:
+  - "type: task"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        See [docs/WORKFLOW.md](../../docs/WORKFLOW.md). Branch name:
+        `task/<this-issue-number>-<short-slug>`. Your PR description must
+        include `Closes #<this-issue-number>`.
+  - type: input
+    id: epic
+    attributes:
+      label: Parent epic
+      description: Link the epic issue this task belongs to, if any.
+      placeholder: "#12"
+  - type: textarea
+    id: description
+    attributes:
+      label: What needs to be done
+      placeholder: |
+        e.g. Add /ru/, /th/, /he/ route groups mirroring the existing
+        [hub]/[service] structure, with locale detected from the URL.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] Existing EN routes unaffected
+        - [ ] /ru/advertising/google-ads resolves and renders
+        - [ ] Build + lint + typecheck stay clean
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0
+        - P1
+        - P2
+    validations:
+      required: true
+  - type: input
+    id: phase
+    attributes:
+      label: Phase
+      description: Matches the phase numbering in PROGRESS.md, if applicable.
+      placeholder: "Phase 7"

@@ -1,0 +1,34 @@
+name: "🐛 Bug report"
+description: Something is broken.
+title: "[BUG] "
+labels:
+  - "type: bug"
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What's broken
+      placeholder: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: "/villas-real-estate/villa-photography"
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 — broken/blocking
+        - P1
+        - P2
+    validations:
+      required: true

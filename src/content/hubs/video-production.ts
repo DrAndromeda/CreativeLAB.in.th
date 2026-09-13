@@ -1,0 +1,263 @@
+import { images } from "@/assets/images";
+import type { HubPage } from "@/content/types";
+
+export const videoProductionHub: HubPage = {
+  slug: "video-production",
+  navLabel: "Video & Production",
+  order: 7,
+  priority: "P1",
+  h1: "Video Production on Koh Phangan",
+  primaryKeyword: "video production Koh Phangan",
+  metaTitle: "Video Production Koh Phangan | Commercial & Social",
+  metaDescription:
+    "Commercial, social, drone and FPV video production for Koh Phangan businesses — concept, filming, editing and delivery.",
+  directAnswer:
+    "CreativeLAB produces commercial, social and aerial video for businesses on Koh Phangan — from concept and filming through to editing and delivery in the formats each platform needs, for brand films, social content and property or event coverage alike.",
+  heroSupport:
+    "Commercial video, social video, drone and FPV production, concept to delivery.",
+  heroImage: images.video,
+  heroImageAlt: "Camera operator filming a commercial video production",
+  editorialTitle: "Video that earns attention, not just views",
+  editorialBody: [
+    "Video is the format most likely to actually stop someone scrolling, but only when the concept, pacing and edit are built for how people watch — not just filmed and uploaded.",
+    "Our production process treats concept and editing as seriously as the shoot itself, and every project is delivered in the specific formats — vertical, square, widescreen — the destination platform actually needs.",
+  ],
+  faqs: [
+    { q: "Do you handle both filming and editing?", a: "Yes, concept through final delivery is handled by the same team." },
+    { q: "Can you produce video for both social media and traditional advertising?", a: "Yes — commercial and social video are both core parts of this service." },
+    { q: "Do you offer drone and FPV video too?", a: "Yes, as dedicated services within this hub, including for real estate through our Villas & Real Estate hub." },
+    { q: "What's your typical turnaround time for an edited video?", a: "Most projects deliver in 5–10 business days depending on complexity." },
+    { q: "Can you write the concept and script, or do we provide it?", a: "We can develop the concept, or work from a script or brief you provide." },
+    { q: "Do you provide music and sound design?", a: "Yes, licensed music and sound design are included in production." },
+  ],
+  finalCtaLabel: "Start a Project",
+  services: [
+    {
+      slug: "commercial",
+      hubSlug: "video-production",
+      navLabel: "Commercial Video",
+      h1: "Commercial Video Production on Koh Phangan",
+      primaryKeyword: "commercial video Koh Phangan",
+      secondaryTopics: ["brand film", "advertising video"],
+      metaTitle: "Commercial Video Production Koh Phangan",
+      metaDescription:
+        "Commercial and brand video production for Koh Phangan businesses — story, creative direction and multi-format distribution.",
+      directAnswer:
+        "We produce commercial and brand videos for Koh Phangan businesses — developing the story and creative direction, filming and editing, and delivering cuts suited to advertising, your website and social distribution.",
+      heroSupport: "Story-led commercial video, produced and edited for advertising and brand use.",
+      heroImage: images.video,
+      heroImageAlt: "Commercial video shoot in progress",
+      scope: [
+        { title: "Concept & story", description: "A clear creative concept built around your business goal." },
+        { title: "Production", description: "Professional filming on location." },
+        { title: "Editing", description: "Pacing, color grading and sound design." },
+        { title: "Multi-format delivery", description: "Cuts suited to advertising, web and social use." },
+      ],
+      benefits: [
+        { title: "A stronger brand impression", description: "Well-produced video signals a serious, credible business." },
+        { title: "Works across channels", description: "One production, multiple formats for ads, web and social." },
+        { title: "Story-first approach", description: "Concept development ensures the video actually says something." },
+        { title: "Professional production value", description: "Proper lighting, sound and editing throughout." },
+      ],
+      process: [
+        { title: "Concept", description: "Develop the story and creative direction." },
+        { title: "Pre-production", description: "Plan locations, shot list and logistics." },
+        { title: "Film", description: "Production day(s) on location." },
+        { title: "Edit & deliver", description: "Post-production and final delivery in required formats." },
+      ],
+      pricing: [
+        { service: "Video production (60s commercial)", range: "THB 25,000 – 60,000", note: "Filming + editing + music" },
+        { service: "Brand film (2–3 minutes)", range: "THB 60,000 – 150,000", note: "Larger production, multiple locations" },
+      ],
+      useCases: [
+        { title: "Brand campaigns", description: "A hero video for a larger marketing campaign." },
+        { title: "Website homepage video", description: "A brand film to feature on your site." },
+        { title: "Advertising creative", description: "Video assets for paid media campaigns." },
+      ],
+      faqs: [
+        { q: "How long is a typical commercial video?", a: "Usually 30–90 seconds, though brand films can run 2–3 minutes for a fuller story." },
+        { q: "Do you provide the script and voiceover?", a: "We can develop these, or work from a script you provide." },
+        { q: "Can this be cut down into shorter social versions too?", a: "Yes, social cutdowns are typically included as part of multi-format delivery." },
+        { q: "How many locations can be covered in one shoot?", a: "Depends on the concept and timeline — we'll scope this during pre-production." },
+        { q: "Do you handle talent/actors if needed?", a: "We can coordinate this on request; most projects feature your team, space or product directly." },
+        { q: "What's the typical timeline from concept to delivery?", a: "Typically 3–6 weeks depending on production complexity." },
+      ],
+      related: [
+        { label: "Social Video", href: "/video-production/social-video", description: "Shorter-form cuts for social distribution." },
+        { label: "Creative Direction", href: "/branding-creative/creative-direction", description: "Broader creative strategy behind the video." },
+        { label: "Meta Ads", href: "/advertising/meta-ads", description: "Use the video as paid ad creative." },
+      ],
+      finalCtaLabel: "Request a Quote",
+    },
+    {
+      slug: "social-video",
+      hubSlug: "video-production",
+      navLabel: "Social Video",
+      h1: "Social Media Video Production on Koh Phangan",
+      primaryKeyword: "social media video Koh Phangan",
+      secondaryTopics: ["short-form", "Reels"],
+      metaTitle: "Social Media Video Koh Phangan | Short-Form Production",
+      metaDescription:
+        "Short-form social video production for Koh Phangan businesses — vertical formats, hooks and editing built for engagement.",
+      directAnswer:
+        "We produce short-form social video for Koh Phangan businesses — vertical, hook-led content edited specifically for how people watch on Instagram and TikTok, distinct from longer commercial production.",
+      heroSupport: "Vertical, hook-led video built specifically for social platforms.",
+      heroImage: images.video,
+      heroImageAlt: "Vertical social video being filmed",
+      scope: [
+        { title: "Hook development", description: "Opening seconds designed to stop the scroll." },
+        { title: "Vertical filming", description: "Shot specifically for phone-first viewing." },
+        { title: "Fast-paced editing", description: "Editing suited to short attention spans and platform norms." },
+        { title: "Batch production", description: "Multiple videos produced efficiently in one session." },
+      ],
+      benefits: [
+        { title: "Built for the platform", description: "Not a repurposed ad — content made specifically for social behavior." },
+        { title: "Efficient batching", description: "Multiple videos from one production day reduces cost per asset." },
+        { title: "Higher watch-through rates", description: "Pacing and hooks designed to hold attention." },
+        { title: "Consistent content supply", description: "Regular production keeps your social channels active." },
+      ],
+      process: [
+        { title: "Concept batch", description: "Plan several video concepts for one session." },
+        { title: "Film", description: "Efficient vertical-format filming." },
+        { title: "Edit", description: "Fast-paced edits with captions and sound." },
+        { title: "Deliver", description: "Platform-ready files delivered on schedule." },
+      ],
+      pricing: [
+        { service: "Social video (single, edited)", range: "THB 4,000 – 9,000", note: "Per finished video" },
+        { service: "Social video batch (6 videos)", range: "THB 18,000 – 35,000", note: "Filmed in one session" },
+      ],
+      useCases: [
+        { title: "Restaurants & hospitality", description: "Regular short-form content for Instagram and TikTok." },
+        { title: "Retail & product brands", description: "Product-focused short-form video." },
+        { title: "Service businesses", description: "Explainer and behind-the-scenes content." },
+      ],
+      faqs: [
+        { q: "How is this different from your Reels service?", a: "Reels is Instagram-specific production within Social Media; Social Video is the broader production service across platforms including TikTok." },
+        { q: "How many videos can you produce in one session?", a: "Typically 4–8, depending on complexity and locations needed." },
+        { q: "Do you edit in captions and on-screen text?", a: "Yes, this is standard for short-form social video." },
+        { q: "Can you match trending formats?", a: "Where relevant to your brand, yes — without forcing unrelated trends onto your content." },
+        { q: "What's the turnaround time?", a: "Typically 3–7 business days per batch." },
+        { q: "Can this be part of an ongoing monthly arrangement?", a: "Yes, often bundled into Monthly Packages under Social Media." },
+      ],
+      related: [
+        { label: "Reels", href: "/social-media/reels", description: "Instagram-specific short-form video." },
+        { label: "Content Creation", href: "/social-media/content-creation", description: "Photo and video content together." },
+        { label: "Monthly Packages", href: "/social-media/monthly-packages", description: "Fold video into an ongoing content plan." },
+      ],
+      finalCtaLabel: "Request a Quote",
+    },
+    {
+      slug: "drone-video",
+      hubSlug: "video-production",
+      navLabel: "Drone Video",
+      h1: "Drone Video Production on Koh Phangan",
+      primaryKeyword: "drone video Koh Phangan",
+      secondaryTopics: ["aerial video", "property video"],
+      metaTitle: "Drone Video Koh Phangan | Aerial Video Production",
+      metaDescription:
+        "Drone video production on Koh Phangan for property, landscape and brand content — captured safely within local regulations.",
+      directAnswer:
+        "We produce drone video for Koh Phangan businesses — establishing shots, landscape footage and property context flown safely and within local drone regulations, used in brand videos, property marketing and social content alike.",
+      heroSupport: "Aerial video captured safely and within local regulations, for brand and property content.",
+      heroImage: images.video,
+      heroImageAlt: "Drone capturing aerial video footage",
+      scope: [
+        { title: "Flight planning", description: "Checking regulations, weather and safety before every flight." },
+        { title: "Establishing shots", description: "Wide aerial footage that sets the scene." },
+        { title: "Smooth cinematic movement", description: "Planned flight paths for professional-looking motion." },
+        { title: "Edited delivery", description: "Color-graded footage integrated into the final video." },
+      ],
+      benefits: [
+        { title: "Scale and context", description: "Aerial footage conveys scale that ground footage can't." },
+        { title: "Cinematic production value", description: "A noticeable step up in perceived production quality." },
+        { title: "Safe and compliant", description: "Every flight planned within local regulations." },
+        { title: "Versatile across projects", description: "Works for brand films, property marketing and event coverage." },
+      ],
+      process: [
+        { title: "Plan", description: "Scout locations and confirm flight legality." },
+        { title: "Fly", description: "Capture footage across planned flight paths." },
+        { title: "Edit", description: "Integrate aerial footage into the final cut." },
+        { title: "Deliver", description: "Final video delivered in required formats." },
+      ],
+      pricing: [
+        { service: "Drone video add-on", range: "THB 5,000 – 12,000", note: "Added to an existing video production" },
+        { service: "Standalone drone video project", range: "THB 12,000 – 30,000", note: "Aerial-only production" },
+      ],
+      useCases: [
+        { title: "Brand films", description: "Establishing shots for a larger video production." },
+        { title: "Property marketing", description: "Aerial video for villas and developments." },
+        { title: "Event & landscape coverage", description: "Wide aerial context for events or locations." },
+      ],
+      faqs: [
+        { q: "Is drone video always combined with ground footage?", a: "Usually yes, though standalone aerial-only projects are also possible." },
+        { q: "What happens if weather doesn't allow flying?", a: "We reschedule rather than fly in unsafe conditions." },
+        { q: "Can you fly near the coast?", a: "Yes, subject to local regulations and any restricted areas." },
+        { q: "Is this different from your Drone photography service?", a: "Yes — this is video-specific; Drone (in Villas & Real Estate) covers still photography." },
+        { q: "Do you edit the footage, or deliver raw files?", a: "We deliver a finished, edited product; raw footage can be provided on request." },
+        { q: "How far in advance do you need to schedule a drone shoot?", a: "A few days' notice is usually enough, more during peak season or for complex flight plans." },
+      ],
+      related: [
+        { label: "Drone", href: "/villas-real-estate/drone", description: "Aerial photography for property listings." },
+        { label: "FPV Video", href: "/video-production/fpv-video", description: "A more dynamic aerial video style." },
+        { label: "Commercial Video", href: "/video-production/commercial", description: "Full production this footage often supports." },
+      ],
+      finalCtaLabel: "Request a Quote",
+    },
+    {
+      slug: "fpv-video",
+      hubSlug: "video-production",
+      navLabel: "FPV Video",
+      h1: "FPV Video Production on Koh Phangan",
+      primaryKeyword: "FPV video Koh Phangan",
+      secondaryTopics: ["FPV drone", "dynamic video"],
+      metaTitle: "FPV Video Production Koh Phangan | Dynamic Drone",
+      metaDescription:
+        "FPV drone video production on Koh Phangan for brand, event and property content — fast, dynamic motion flown safely.",
+      directAnswer:
+        "We produce FPV (first-person-view) drone video for brand, event and property projects on Koh Phangan — fast, continuous-motion footage that moves through and around a space in ways standard drones and gimbals can't replicate.",
+      heroSupport: "Fast, continuous-motion FPV footage for brand, event and property video.",
+      heroImage: images.video,
+      heroImageAlt: "FPV drone in flight capturing dynamic footage",
+      scope: [
+        { title: "Suitability check", description: "Honest assessment of whether a location suits FPV filming safely." },
+        { title: "Flight choreography", description: "Planned, rehearsed flight paths for the strongest shots." },
+        { title: "Safety planning", description: "Flights planned around people, structures and conditions." },
+        { title: "Cinematic editing", description: "Color grading and sound design suited to the footage's energy." },
+      ],
+      benefits: [
+        { title: "A distinctive visual signature", description: "FPV footage stands out from conventional video production." },
+        { title: "High energy, high impact", description: "Ideal for dynamic brand or event content." },
+        { title: "Connects spaces fluidly", description: "One continuous shot can link multiple locations or rooms." },
+        { title: "Flown safely", description: "Only recommended where conditions genuinely allow it." },
+      ],
+      process: [
+        { title: "Assess", description: "Confirm the location and shot concept suit FPV safely." },
+        { title: "Plan", description: "Choreograph and rehearse the flight path." },
+        { title: "Fly", description: "Multiple passes captured for the best take." },
+        { title: "Edit", description: "Cinematic post-production and final delivery." },
+      ],
+      pricing: [
+        { service: "FPV video production", range: "THB 20,000 – 45,000", note: "Depends on location and complexity" },
+      ],
+      useCases: [
+        { title: "Premium brand videos", description: "A standout dynamic sequence for a hero video." },
+        { title: "Event coverage", description: "Energetic aerial footage for festivals or events." },
+        { title: "Property & real estate", description: "See our dedicated FPV real estate service." },
+      ],
+      faqs: [
+        { q: "Is FPV suitable for every location?", a: "No — we assess each location honestly and won't recommend FPV where it isn't safe or visually justified." },
+        { q: "How experienced are your FPV pilots?", a: "Flights are planned and flown by an experienced pilot with a proper safety process for every shoot." },
+        { q: "Can FPV combine with standard video production?", a: "Yes, this combination is common and often produces the strongest overall result." },
+        { q: "How long does an FPV shoot take?", a: "Typically half a day including planning, multiple passes and safety checks." },
+        { q: "Is this the same as your real estate FPV service?", a: "The flying technique is the same; this version applies to brand, event and general video projects rather than property listings specifically." },
+        { q: "What's the turnaround for the final edit?", a: "Usually 5–10 business days." },
+      ],
+      related: [
+        { label: "FPV", href: "/villas-real-estate/fpv", description: "FPV specifically for real estate video." },
+        { label: "Drone Video", href: "/video-production/drone-video", description: "A calmer aerial alternative." },
+        { label: "Commercial Video", href: "/video-production/commercial", description: "Full production this footage often supports." },
+      ],
+      finalCtaLabel: "Discuss Your Project",
+    },
+  ],
+};
