@@ -49,9 +49,16 @@ bug). Board fields:
 
 - **Status** (single select, GitHub's built-in field — renamed by hand,
   see below, since the API won't let it be deleted/recreated):
-  `Backlog` → `Ready` → `In Progress` → `In Review` → `Done`
+  `Backlog` → `Ready` → `In Progress` → `In Test` → `Done`
 - **Priority**: `P0` / `P1` / `P2`
 - **Phase**: `Phase 1` … `Phase 9`
+
+`In Test` is the "there's an open PR" stage. Rather than relying on
+someone to remember to drag the card there, the cause and effect is
+flipped so it's enforced automatically: **opening the linked PR is what
+moves the card** — a task can't reach `In Test` without a real PR behind
+it. Same idea for `Done`: merging the PR is what moves it, not a manual
+drag.
 
 Set up once via `scripts/github-bootstrap.sh`, which creates the `Priority`
 and `Phase` fields (see that script's header for prerequisites). The
@@ -59,18 +66,42 @@ and `Phase` fields (see that script's header for prerequisites). The
 `Todo` / `In Progress` / `Done` — GitHub's API refuses to delete or
 recreate it ("only custom fields can be deleted"), so rename its options
 by hand once: open the project → click the `Status` column header → Edit
-→ rename `Todo` to `Backlog`, and add `Ready` and `In Review` options.
-After that, add new issues to the board manually or via the board's
-"auto-add" workflow (Project → `⋯` → Workflows → "Auto-add to project",
-filtered to this repo).
+→ rename `Todo` to `Backlog`, and add `Ready` and `In Test` options.
+**If you created epic/task issues before doing this**, their Status
+silently failed to be set — run `./scripts/backfill-status.sh` once
+afterward to fix them up.
 
-Recommended board automations (set these up once in the Project's
-**Workflows** tab — the GitHub Projects UI, not `.github/workflows/`):
+After that, add new issues to the board manually, or let
+`scripts/create-epic-issues.sh` / the board's "auto-add" workflow
+(Project → `⋯` → Workflows → "Auto-add to project", filtered to this
+repo) do it.
 
-- **Item added to project** → set Status to `Backlog`
-- **Pull request** opened, linked to an item → set Status to
-  `In Review`
-- **Issue closed** / **Pull request merged** → set Status to `Done`
+### Automating the In Progress → In Test → Done transitions
+
+Two ways to get this, pick one (or both):
+
+1. **Built-in, zero setup.** Open the project → `⋯` → Workflows, and
+   check whether your Projects UI offers a "Pull request opened" (or
+   similar) trigger alongside the standard "Issue closed" / "Pull request
+   merged" ones. If so, set:
+   - **Item added to project** → Status = `Backlog`
+   - **Pull request opened**, linked to an item → Status = `In Test`
+   - **Issue closed** / **Pull request merged** → Status = `Done`
+
+2. **Guaranteed, needs one secret.** `.github/workflows/project-status-sync.yml`
+   does the same thing via `gh` CLI calls we control directly, so it
+   doesn't depend on exactly which triggers your Projects UI happens to
+   expose. It parses `Closes #N` (or `Part of #N`) out of the PR
+   description and sets Status accordingly on open/merge. Requires a repo
+   secret `PROJECT_TOKEN` — a personal access token with `repo` +
+   `project` scopes (Settings → Secrets and variables → Actions). Without
+   it, the workflow fails loudly (not a silent no-op) so it's obvious
+   it's unconfigured.
+
+Moving a card to `In Progress` still has no automatic trigger either
+way — GitHub doesn't support "board move → create a branch." Use
+`./scripts/start-task.sh <issue-number>` instead: it creates the linked
+branch, checks it out, and sets Status to `In Progress` in one command.
 
 ## Branch naming
 
@@ -115,12 +146,13 @@ auto-close its issue or show up under the issue's Development section.
    Priority + Phase set, linked back to the epic issue via a task-list
    checkbox in the epic's body: `- [ ] #43`).
 4. Add both to the Project board (or let auto-add do it).
-5. Someone picks up a task, moves it to `In Progress`, creates
-   `task/<n>-slug`, opens a PR with `Closes #<n>`.
-6. Review, CI (`.github/workflows/ci.yml`) passes, merge.
-7. Board updates to `Done` automatically; the epic's checklist shows the
-   task as checked off automatically too (GitHub does this natively for
-   task-list references).
+5. Someone picks up a task: `./scripts/start-task.sh <issue-number>` —
+   creates and checks out `task/<n>-slug`, sets Status to `In Progress`.
+6. Open a PR with `Closes #<n>` in the description → board moves it to
+   `In Test` automatically (see "Automating the transitions" above).
+7. Review, CI (`.github/workflows/ci.yml`) passes, merge → board moves it
+   to `Done` automatically; the epic's checklist shows the task as
+   checked off too (GitHub does this natively for task-list references).
 8. When every task under an epic is done, close the epic.
 
 ## CI
@@ -139,7 +171,9 @@ failing — this is enforced by branch protection once you turn it on
    board, and its `Priority`/`Phase` fields. Safe to re-run (skips things
    that already exist).
 3. Rename the built-in `Status` field's options by hand (see
-   [above](#the-board-github-projects) — not scriptable) and set up the
-   board's Workflows automations.
-4. Turn on branch protection requiring the `ci` check on the default
+   [above](#the-board-github-projects) — not scriptable), then run
+   `./scripts/backfill-status.sh` if any issues were created beforehand.
+4. Set up the In Progress → In Test → Done automation (built-in
+   Workflows tab, and/or `project-status-sync.yml` — see above).
+5. Turn on branch protection requiring the `ci` check on the default
    branch (one-time, in repo Settings — not scriptable via this repo).

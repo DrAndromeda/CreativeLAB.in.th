@@ -11,11 +11,12 @@
 # Safe to re-run:
 #   - labels: created with --force (update in place)
 #   - project: skipped if a project with the same title already exists
-#   - fields: Priority/Phase skipped if they already exist; the built-in
-#     "Status" field (Todo/In Progress/Done, present on every new project)
-#     is replaced with our Backlog/Ready/In Progress/In Review/Done set
-#     only the first time — once it's been customized, later runs leave
-#     it alone so in-progress work isn't reset.
+#   - fields: Priority/Phase skipped if they already exist
+#   - the built-in "Status" field (Todo/In Progress/Done, present on every
+#     new project) can't be touched by this script at all — the API
+#     refuses to delete/recreate it. Rename its options by hand once (see
+#     the printed instructions at the end) to Backlog/Ready/In Progress/
+#     In Test/Done.
 
 set -euo pipefail
 
@@ -105,11 +106,15 @@ echo
 echo "Done. Remaining manual steps (not scriptable via gh CLI or the API):"
 echo "  1. Open the project (gh project view $PROJECT_NUMBER --owner $OWNER --web),"
 echo "     click the 'Status' column header -> '...' -> Edit, and rename/add"
-echo "     options so it reads: Backlog, Ready, In Progress, In Review, Done"
-echo "     (delete the leftover default 'Todo' once renamed to 'Backlog')."
-echo "  2. Set up board automations under '...' -> Workflows:"
+echo "     options so it reads: Backlog, Ready, In Progress, In Test, Done"
+echo "     (rename the default 'Todo' to 'Backlog')."
+echo "     Then run ./scripts/backfill-status.sh if any issues already exist."
+echo "  2. Set up board automations — either the Projects UI (under '...' ->"
+echo "     Workflows, if it offers a 'Pull request opened' trigger) or"
+echo "     .github/workflows/project-status-sync.yml (needs a PROJECT_TOKEN"
+echo "     secret) — see docs/WORKFLOW.md for both options:"
 echo "       - Item added to project        -> set Status = Backlog"
-echo "       - Pull request opened (linked) -> set Status = In Review"
+echo "       - Pull request opened (linked) -> set Status = In Test"
 echo "       - Issue closed / PR merged     -> set Status = Done"
 echo "  3. Repo Settings -> Branches: require the 'CI / Lint, typecheck & build'"
 echo "     check to pass before merging into main."

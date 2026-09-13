@@ -1,0 +1,84 @@
+name: Project status sync
+
+# Moves the board Status of any issue linked via "Closes #N" / "Fixes #N"
+# / "Resolves #N" (or "Part of #N", non-closing) in a PR's description:
+#   - PR opened / marked ready for review -> Status = "In Test"
+#   - PR merged                           -> Status = "Done"
+#
+# This is a stronger guarantee than the Project's built-in Workflows tab
+# (which may or may not offer a "Pull request opened" trigger depending
+# on your plan/UI) — it's plain gh CLI calls we control directly. Prefer
+# trying the built-in Workflows tab first (zero setup); use this if you
+# want it enforced regardless, or the built-in trigger isn't available.
+#
+# Requires a repo secret PROJECT_TOKEN: a personal access token with
+# `repo` + `project` scopes (classic PAT), since the default GITHUB_TOKEN
+# cannot write to Projects v2. Add it under Settings -> Secrets and
+# variables -> Actions. Without this secret set, the job below fails
+# loudly rather than silently no-op'ing, so it's obvious it needs setup.
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, closed]
+
+jobs:
+  sync-status:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Update linked issues' board Status
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          # Passed via env, not interpolated into the script body, so an
+          # untrusted PR description can't inject shell commands here.
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_ACTION: ${{ github.event.action }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+          PROJECT_TITLE: CreativeLAB Roadmap
+          REPO_NWO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::PROJECT_TOKEN secret is not set — see this workflow's header comment." >&2
+            exit 1
+          fi
+
+          OWNER="${REPO_NWO%%/*}"
+
+          ISSUE_NUMBERS="$(printf '%s' "$PR_BODY" \
+            | grep -ioE '(close[sd]?|fix(e[sd])?|resolve[sd]?|part of)[[:space:]]*:?[[:space:]]*#[0-9]+' \
+            | grep -oE '[0-9]+' || true)"
+
+          if [ -z "$ISSUE_NUMBERS" ]; then
+            echo "No linked issues found in PR description — nothing to do."
+            exit 0
+          fi
+
+          if [ "$PR_ACTION" = "closed" ] && [ "$PR_MERGED" = "true" ]; then
+            TARGET_STATUS="Done"
+          elif [ "$PR_ACTION" = "closed" ]; then
+            echo "PR closed without merging — leaving linked issues' status as-is."
+            exit 0
+          else
+            TARGET_STATUS="In Test"
+          fi
+
+          PROJECT_NUMBER="$(gh project list --owner "$OWNER" --format json --jq \
+            ".projects[] | select(.title == \"$PROJECT_TITLE\") | .number" | head -n1)"
+
+          if [ -z "$PROJECT_NUMBER" ]; then
+            echo "::error::Project \"$PROJECT_TITLE\" not found for owner $OWNER." >&2
+            exit 1
+          fi
+
+          for n in $ISSUE_NUMBERS; do
+            url="https://github.com/$REPO_NWO/issues/$n"
+            gh project item-add "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" >/dev/null 2>&1 || true
+            if gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
+                --field "Status" --value "$TARGET_STATUS" >/dev/null 2>&1; then
+              echo "✓ #$n -> $TARGET_STATUS"
+            else
+              echo "! couldn't update #$n (does the Status option \"$TARGET_STATUS\" exist yet?)"
+            fi
+          done
