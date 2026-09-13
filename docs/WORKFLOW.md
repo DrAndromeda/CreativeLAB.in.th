@@ -13,6 +13,7 @@ lists them all):
 | `scripts/github-bootstrap.sh` | `make board-setup` |
 | `scripts/create-epic-issues.sh` | `make board-epics` |
 | `scripts/backfill-status.sh [status]` | `make board-backfill [STATUS=...]` |
+| `scripts/create-task.sh --title ...` | `make task-new TITLE=... [EPIC=] [PRIORITY=] [PHASE=] [BODY=]` |
 | `scripts/start-task.sh <n>` | `make task-start TASK=<n>` |
 
 ## The three layers
@@ -20,7 +21,7 @@ lists them all):
 | Layer | Lives in | Purpose |
 |---|---|---|
 | **Proposal** | `docs/Proposals.md` + the proposal file itself (e.g. `proposal.md`) | The brief: what we're building and why. Rarely changes once approved. |
-| **Epic** | A GitHub Issue (`type: epic`) + optionally `docs/epics/EPIC-XXX-*.md` | A big chunk of a proposal (a phase, a hub, a major feature). Tracks a checklist of its child Task issues. |
+| **Epic** | A GitHub Issue (`type: epic`) + optionally `docs/epics/EPIC-XXX-*.md` | A big chunk of a proposal (a phase, a hub, a major feature). Tracks its child Task issues as native sub-issues (or a checklist). |
 | **Task** | A GitHub Issue (`type: task`) + optionally `docs/tasks/TASK-XXX-*.md` | One concrete, PR-sized piece of work. This is what a branch and PR are built against. |
 
 **The GitHub Issue is always the source of truth for status.** The
@@ -153,17 +154,20 @@ auto-close its issue or show up under the issue's Development section.
 2. Break it into one or more **epics** (GitHub Issue, `type: epic`,
    Priority + Phase set). Add a `docs/epics/EPIC-XXX-*.md` only if the
    epic needs more written context than fits in the issue.
-3. Break each epic into **tasks** (GitHub Issue, `type: task`,
-   Priority + Phase set, linked back to the epic issue via a task-list
-   checkbox in the epic's body: `- [ ] #43`).
-4. Add both to the Project board (or let auto-add do it).
+3. Break each epic into **tasks** (GitHub Issue, `type: task`, Priority +
+   Phase set), linked to the epic — either as a native GitHub sub-issue
+   (`make task-new ... EPIC=<n>`, or "Create sub-issue" from the epic's
+   UI) or, as a lighter fallback, a task-list checkbox in the epic's body
+   (`- [ ] #43`).
+4. Add both to the Project board (or let auto-add do it — `task-new`
+   does this itself).
 5. Someone picks up a task: `./scripts/start-task.sh <issue-number>` —
    creates and checks out `task/<n>-slug`, sets Status to `In Progress`.
 6. Open a PR with `Closes #<n>` in the description → board moves it to
    `In Test` automatically (see "Automating the transitions" above).
 7. Review, CI (`.github/workflows/ci.yml`) passes, merge → board moves it
-   to `Done` automatically; the epic's checklist shows the task as
-   checked off too (GitHub does this natively for task-list references).
+   to `Done` automatically; the epic's sub-issues/checklist show the task
+   as checked off too (GitHub tracks both natively).
 8. When every task under an epic is done, close the epic.
 
 ## CI

@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 #
-# One-shot fixup: sets the Status field for every open issue currently on
-# the board. Meant to be run once, right after you've renamed the
-# built-in Status field's options (see docs/WORKFLOW.md /
-# github-bootstrap.sh) — issues created before that point silently failed
-# to get a Status, since the option they needed didn't exist yet.
+# One-shot fixup: sets the Status field for every OPEN issue currently in
+# the repo. Meant to be run once, right after you've renamed the built-in
+# Status field's options (see docs/WORKFLOW.md / github-bootstrap.sh) —
+# issues created before that point silently failed to get a Status, since
+# the option they needed didn't exist yet.
+#
+# This is NOT a safe "top up only what's missing" operation: it doesn't
+# check each issue's current Status, it unconditionally overwrites it.
+# Re-running it later (once some tasks have moved to In Progress/In Test)
+# would reset all of them back to Backlog. That's why it prompts for
+# confirmation below — pass FORCE=1 to skip the prompt (e.g. from CI).
 #
 # Usage: ./scripts/backfill-status.sh [status-value]
-#   Defaults to "Backlog". Only pass a different value if you really mean
-#   to bulk-set every open issue to it — this does NOT check current
-#   status, it overwrites.
+#   Defaults to "Backlog".
 
 set -euo pipefail
 
@@ -32,12 +36,33 @@ if [ -z "${PROJECT_NUMBER:-}" ]; then
   exit 1
 fi
 
-echo "Setting Status = \"$STATUS_VALUE\" for every open issue in $REPO_NWO..."
+ISSUES_TSV="$(gh issue list --repo "$REPO_NWO" --state open --limit 200 \
+  --json number,title,url --jq '.[] | [.number, .title, .url] | @tsv')"
+
+if [ -z "$ISSUES_TSV" ]; then
+  echo "No open issues found."
+  exit 0
+fi
+
+COUNT="$(printf '%s\n' "$ISSUES_TSV" | wc -l | tr -d ' ')"
+
+echo "This will set Status = \"$STATUS_VALUE\" for ALL $COUNT open issue(s) below,"
+echo "overwriting whatever Status they currently have (e.g. In Progress, In Test):"
+echo
+printf '%s\n' "$ISSUES_TSV" | awk -F'\t' '{printf "  #%-4s %s\n", $1, $2}'
 echo
 
-gh issue list --repo "$REPO_NWO" --state open --limit 200 --json number,title,url \
-  --jq '.[] | [.number, .url] | @tsv' |
-while IFS=$'\t' read -r number url; do
+if [ "${FORCE:-}" != "1" ]; then
+  read -r -p "Continue? [y/N] " reply
+  case "$reply" in
+    y|Y|yes|YES) ;;
+    *) echo "Aborted."; exit 1 ;;
+  esac
+fi
+echo
+
+printf '%s\n' "$ISSUES_TSV" |
+while IFS=$'\t' read -r number title url; do
   attempt=1
   while :; do
     err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \

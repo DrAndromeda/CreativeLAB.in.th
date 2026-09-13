@@ -29,6 +29,12 @@ If any issues already existed before you did the rename:
 make board-backfill                 # sets Status=Backlog on every open issue
 ```
 
+This asks for confirmation and lists every issue it's about to touch
+first — it's a blunt "set everyone to X" tool, not a "top up only what's
+missing" one, so don't reach for it as routine maintenance later (it
+would reset anything already `In Progress`/`In Test` back to `Backlog`).
+It's a one-time fixup for right after setup.
+
 ## 1. Turning proposal work into epics
 
 This is normally done once per proposal, not per task.
@@ -49,22 +55,33 @@ You now have epics on the board in the `Backlog` column.
 
 ## 2. Breaking an epic into tasks
 
-For each concrete piece of work under an epic:
+For each concrete piece of work under an epic, two ways to create the
+task issue — same result either way:
 
-1. Open the epic issue on GitHub.
-2. File a new issue using the **✅ Task** template (Issues → New issue →
-   Task). Fill in:
-   - **Parent epic**: link the epic issue number
-   - **What needs to be done** / **Acceptance criteria**
-   - **Priority**, **Phase**
-3. Add a checklist line to the epic issue's body referencing it, e.g.:
-   ```
-   - [ ] #43
-   ```
-   GitHub automatically checks this off when #43 closes — no manual
-   bookkeeping needed later.
-4. Add the new task issue to the Project board if "Auto-add to project"
-   isn't already turned on.
+**A. From the GitHub UI** — Issues → New issue → **✅ Task** template.
+Fill in the parent epic, description, acceptance criteria, priority,
+phase. Link it to the epic either by pasting the epic's number in the
+**Parent epic** field and creating the link yourself via the epic's
+"Create sub-issue" button (in the epic's Sub-issues section), or by
+adding a checklist line to the epic's body (`- [ ] #43`) as a lighter
+fallback if you don't want to use sub-issues.
+
+**B. From the CLI:**
+
+```bash
+make task-new TITLE="Add /ru/ routes" EPIC=12 PRIORITY=P0 PHASE=7 \
+  BODY="Mirror the existing [hub]/[service] structure under /ru/."
+```
+
+This creates the issue, links it as a **native GitHub sub-issue** of
+`EPIC=12` (shown as "Sub-issues progress" on the epic, better than the
+checklist approach — it's a real parent/child relationship GitHub
+tracks), adds it to the Project board, and sets Priority/Phase/Status.
+Only `TITLE` is required — `EPIC`, `PRIORITY`, `PHASE`, `BODY` are all
+optional.
+
+Whichever way you create it, add it to the Project board if "Auto-add to
+project" isn't already turned on.
 
 Only write a `docs/tasks/TASK-XXX-*.md` file if the task genuinely needs
 more spec than fits in the issue body (see `docs/tasks/README.md`) — most
@@ -129,7 +146,7 @@ done).
 
 ```bash
 make board-epics                    # (once per new proposal) file epic issues
-#  ... file task issues by hand under each epic, using the Task template ...
+make task-new TITLE="..." EPIC=<n>  # file a task under an epic (or use the GitHub UI)
 make task-start TASK=<n>            # branch + checkout + Status=In Progress
 #  ... write code, commit ...
 git push -u origin task/<n>-<slug>

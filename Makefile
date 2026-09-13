@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help dev build start lint typecheck check \
-        board-setup board-epics board-backfill task-start
+        board-setup board-epics board-backfill task-start task-new
 
 help: ## Show this list of commands
 	@echo "CreativeLAB.in.th — available commands"
@@ -42,6 +42,17 @@ board-backfill: ## Set Status on every open issue (default Backlog; STATUS=... t
 	./scripts/backfill-status.sh $(STATUS)
 
 ## --- Tasks --------------------------------------------------------------
+
+task-new: ## File a new task issue. Usage: make task-new TITLE="..." [EPIC=12] [PRIORITY=P0] [PHASE=3] [BODY="..."]
+	@if [ -z "$(TITLE)" ]; then \
+		echo 'Usage: make task-new TITLE="..." [EPIC=<n>] [PRIORITY=P0|P1|P2] [PHASE=1-9] [BODY="..."]' >&2; \
+		exit 1; \
+	fi
+	./scripts/create-task.sh --title "$(TITLE)" \
+		$(if $(EPIC),--epic $(EPIC)) \
+		$(if $(PRIORITY),--priority $(PRIORITY)) \
+		$(if $(PHASE),--phase $(PHASE)) \
+		$(if $(BODY),--body "$(BODY)")
 
 task-start: ## Start work on an issue: creates+checks out its branch, sets Status=In Progress. Usage: make task-start TASK=42
 	@if [ -z "$(TASK)" ]; then \
