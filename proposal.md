@@ -143,6 +143,114 @@
 Для десктопа — hover mega-menu.
 Для мобилы — аккордеон.
 
+---
+
+## 🤖 PREMIUM ARCHITECTURE: ORGANIC SEO + GEO (AI NEURAL SEARCH)
+
+> Архитектура должна быть одинаково понятна Google и нейросетям (SearchGPT, Gemini, Perplexity, Claude, Google AI Overviews).
+
+### 1. Entity Hub-and-Spoke
+
+| Entity (Topic Cluster) | Pillar Page | Spoke Pages |
+|---|---|---|
+| Photography | `/photography/` | Commercial, Product, Food, Menu, Villa, Architecture, Drone, FPV |
+| Social Media | `/social-media/` | Instagram Management, Content Creation, Influencer, Monthly Retainers |
+| Video Production | `/video-production/` | Commercial Video, Reels, Property Tours, Aerial |
+| Web & Digital | `/websites-digital/` | Web Design, SEO, Google Business Profile, Reputation, Listings |
+| Branding | `/branding-creative/` | Brand Identity, Logo, Brand Book, Packaging, Naming |
+| Advertising | `/advertising/` | Google Ads, Meta Ads, Display, Programmatic, Retargeting |
+| Food & Hospitality | `/food-restaurants/` | Restaurant Social, Restaurant Ads, Restaurant Website, Food Styling |
+| Koh Phangan | `/locations/koh-phangan/` | creative agencies, studios, production |
+
+Каждая spoke page — самостоятельный интент, а не тонкая дверь.
+
+### 2. Direct Answer Architecture
+
+Каждая страница начинается с **Direct Answer** (50–80 слов):
+- Точный ответ на главный поисковый запрос
+- Без воды, без маркетинга
+- Нейросеть может взять этот абзац как сниппет
+
+Формат: `## H1 → Direct Answer → подробности`
+
+### 3. Semantic HTML + Schema
+
+```
+<main itemscope itemtype="https://schema.org/Service">
+  <h1 itemprop="name">Brand Identity Design Koh Phangan</h1>
+  <p itemprop="description">Direct answer text here.</p>
+  <section itemscope itemtype="https://schema.org/FAQPage">...</section>
+</main>
+```
+
+### 4. Вложенный FAQ
+
+Каждая страница услуги — 6–10 реальных FAQ с FAQPage schema.
+Вопросы = то что реально спрашивают клиенты.
+
+### 5. LLMs.txt
+
+Создать `llms.txt` в корне:
+```
+# CreativeLAB — Creative Agency on Koh Phangan
+
+## About
+CreativeLAB is a premium creative agency...
+
+## Services
+- Brand Identity: https://creativelab.in.th/brand-identity/
+- Commercial Photography: https://creativelab.in.th/commercial-photography/
+...
+
+## FAQ
+- Q: How much does a branding project cost?
+  A: Branding projects start at $X depending on...
+```
+
+Плюс `llms-full.txt` с полным контентом для AI crawlers.
+
+### 6. Entity Consistency (GEO)
+
+| Entity | Поле | Значение |
+|---|---|---|
+| Organization | name | CreativeLAB |
+| Organization | location | Koh Phangan, Surat Thani, Thailand |
+| LocalBusiness | geo | 9.75°N, 100.03°E |
+
+### 7. AI-Optimized Internal Linking (Entity Graph)
+
+```
+Brand Identity
+  ├── Logo Design → `/logo-design/`
+  ├── Brand Book → `/brand-book/`
+  ├── Packaging Design → `/packaging-design/`
+  └── Commercial Photography → `/commercial-photography/`
+```
+
+### 8. Content Depth Rule
+
+| Тип страницы | Мин. слов | FAQ | Schema |
+|---|---|---|---|
+| Pillar (hub) | 1500+ | 8–12 | Service + FAQ |
+| Spoke (под-услуга) | 800+ | 6–10 | Service + FAQ |
+| Portfolio/Case | 500+ | 3–5 | CreativeWork |
+| Location | 500+ | 4–6 | LocalBusiness |
+
+### 9. Crawl Budget Optimization
+
+- robots.txt: разрешить всё важное
+- Sitemap: все страницы, приоритет P0–P2
+- hreflang: каждая страница × 4 языка
+- canonical: всегда указан
+- 404: кастомная страница с навигацией
+
+### 10. Premium Visual + AI Readability
+
+- Каждая страница: Hero + Direct Answer → блоки → FAQ → CTA
+- Изображения: alt с описанием (нейросети читают alt)
+- Таблицы: `<table>` с `<caption>` и `<th>` (не скриншоты)
+- Формы: `<form>` с `aria-label` и `name` аттрибутами
+
 ## 03_PAGE_TEMPLATE
 
 | Order | Block | Requirement |
