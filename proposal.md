@@ -122,6 +122,27 @@
 | P1 | /contact/ | Contact | Lead conversion | contact creative agency Koh Phangan |
 | P2 | /journal/ | Journal | Editorial/supporting SEO content | Koh Phangan creative marketing |
 
+## 🧭 МЕНЮ — ПРИНЦИП AdFoto/4-20
+
+**Правило:** без тривиальных страниц («Главная», «О нас», «Услуги»). Только конкретные названия услуг.
+
+### Меню CreativeLAB
+
+| Категория | Страницы в меню |
+|---|---|
+| **Advertising** | `Google Ads` • `Meta Ads` • `Display` • `Programmatic` • `Retargeting` |
+| **Branding** | `Brand Identity` • `Logo Design` • `Brand Book` • `Packaging` • `Naming` |
+| **Photography** | `Commercial` • `Product` • `Food` • `Menu` • `Villa` • `Architecture` • `Drone` • `FPV` |
+| **Video** | `Commercial Video` • `Reels` • `Property Tours` • `Aerial` |
+| **Social Media** | `Instagram Management` • `Content Creation` • `Influencer` • `Monthly Retainers` |
+| **Digital** | `Web Design` • `SEO` • `Google Business Profile` • `Reputation` • `Listings` |
+| **Hospitality** | `Restaurant Social` • `Restaurant Ads` • `Restaurant Website` • `Food Styling` |
+
+### Mega-menu или кастомный дропдаун
+Каждая категория раскрывается в подменю со списком страниц.
+Для десктопа — hover mega-menu.
+Для мобилы — аккордеон.
+
 ## 03_PAGE_TEMPLATE
 
 | Order | Block | Requirement |
