@@ -12,10 +12,13 @@ follow-up before launch.
 Start at [`docs/Index.md`](./docs/Index.md). In short: proposals live in
 [`docs/Proposals.md`](./docs/Proposals.md), work is broken into Epics and
 Tasks as GitHub Issues tracked on the team's GitHub Project board, and
-`docs/epics/` / `docs/tasks/` hold specs too long for an issue body. Full
-process — branch naming, PR/issue linking, board setup — is in
-[`docs/WORKFLOW.md`](./docs/WORKFLOW.md). First-time repo setup for the
-board: `./scripts/github-bootstrap.sh` (after `gh auth login`).
+`docs/epics/` / `docs/tasks/` hold specs too long for an issue body.
+
+- **Day-to-day sequence** (add a task, start it, ship it): [`docs/HowTo.md`](./docs/HowTo.md)
+- **Why each rule exists** (branch naming, board design, automation): [`docs/WORKFLOW.md`](./docs/WORKFLOW.md)
+- **Commands**: `make help` lists every shortcut (`make task-start TASK=42`,
+  `make board-epics`, `make check`, etc.) — first-time repo setup is
+  `make board-setup` (after `gh auth login`).
 
 ## Requirements
 

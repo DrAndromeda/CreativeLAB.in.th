@@ -2,7 +2,18 @@
 
 How we plan, track and ship work on CreativeLAB.in.th. This is the single
 process document — link everything else to it rather than re-explaining
-the process elsewhere.
+the process elsewhere. For the step-by-step "what do I actually type"
+version, see [HowTo.md](./HowTo.md) instead.
+
+Every `scripts/*.sh` command below has a `make` shortcut (`make help`
+lists them all):
+
+| Script | Make target |
+|---|---|
+| `scripts/github-bootstrap.sh` | `make board-setup` |
+| `scripts/create-epic-issues.sh` | `make board-epics` |
+| `scripts/backfill-status.sh [status]` | `make board-backfill [STATUS=...]` |
+| `scripts/start-task.sh <n>` | `make task-start TASK=<n>` |
 
 ## The three layers
 

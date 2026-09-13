@@ -12,11 +12,15 @@ updating something, update it in one place.
 
 ## Team workflow
 
-- [Workflow](./WORKFLOW.md) — how proposals become epics, epics become tasks,
-  and tasks become branches/PRs, tracked on the GitHub Project board
+- [**How To**](./HowTo.md) — start here for day-to-day use: the exact
+  command sequence to add and execute a task
+- [Workflow](./WORKFLOW.md) — the reference doc: *why* each rule exists
+  (branch naming, board field design, automation options)
 - [Epics](./epics/) — written specs for larger chunks of work, one file per epic
 - [Tasks](./tasks/) — written specs for individual tasks, only when a task
   needs more detail than fits in its GitHub Issue
+- `make help` (from the repo root) — every workflow command as a
+  shortcut (`make task-start TASK=42`, etc.)
 
 ## Where things actually get tracked
 
