@@ -38,8 +38,11 @@ echo
 gh issue list --repo "$REPO_NWO" --state open --limit 200 --json number,title,url \
   --jq '.[] | [.number, .url] | @tsv' |
 while IFS=$'\t' read -r number url; do
-  gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
-    --field "Status" --value "$STATUS_VALUE" >/dev/null 2>&1 \
-    && echo "✓ #$number" \
-    || echo "! #$number (couldn't set — is it on the board? does the option exist?)"
+  err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
+    --field "Status" --value "$STATUS_VALUE" 2>&1 >/dev/null)" || true
+  if [ -z "$err" ]; then
+    echo "✓ #$number"
+  else
+    echo "! #$number: $err"
+  fi
 done
