@@ -7,46 +7,46 @@ help: ## Show this list of commands
 	@echo "CreativeLAB.in.th — available commands"
 	@echo
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 	@echo
 	@echo "See docs/HowTo.md for the full step-by-step process."
 
 ## --- App -------------------------------------------------------------
 
-dev: ## Run the Next.js dev server
+dev: ## Run the Next.js dev server — runs: npm run dev
 	npm run dev
 
-build: ## Production build
+build: ## Production build — runs: npm run build
 	npm run build
 
-start: ## Serve the production build (run 'make build' first)
+start: ## Serve the production build (run 'make build' first) — runs: npm run start
 	npm run start
 
-lint: ## Run ESLint
+lint: ## Run ESLint — runs: npm run lint
 	npm run lint
 
-typecheck: ## Run the TypeScript compiler in check-only mode
+typecheck: ## Run the TypeScript compiler in check-only mode — runs: npx tsc --noEmit
 	npx tsc --noEmit
 
-check: lint typecheck build ## Run lint + typecheck + build (mirrors CI)
+check: lint typecheck build ## Mirrors CI — runs: make lint, typecheck, build in order
 
 ## --- GitHub Project board ---------------------------------------------
 
-board-setup: ## One-time: create labels + the Project board (needs gh auth login -s project)
+board-setup: ## One-time board setup (needs gh auth login -s project) — runs: scripts/github-bootstrap.sh
 	./scripts/github-bootstrap.sh
 
-board-epics: ## Create a GitHub Issue for each docs/epics/EPIC-*.md not already filed
+board-epics: ## File an issue per docs/epics/EPIC-*.md not already created — runs: scripts/create-epic-issues.sh
 	./scripts/create-epic-issues.sh
 
-board-backfill: ## Set Status on every open issue (default Backlog; STATUS=... to override)
+board-backfill: ## Set Status on every open issue (STATUS=... to override "Backlog") — runs: scripts/backfill-status.sh
 	./scripts/backfill-status.sh $(STATUS)
 
-board-sync-status: ## Sync each epic issue's board Status from its docs/epics/*.md "**Status:**" line
+board-sync-status: ## Push each epic .md file's Status line onto its board card — runs: scripts/sync-epic-status.sh
 	./scripts/sync-epic-status.sh
 
 ## --- Tasks --------------------------------------------------------------
 
-task-new: ## File a new task issue. Usage: make task-new TITLE="..." [EPIC=12] [PRIORITY=P0] [PHASE=3] [BODY="..."]
+task-new: ## File a task issue: TITLE="..." [EPIC=] [PRIORITY=] [PHASE=] [BODY=] — runs: scripts/create-task.sh
 	@if [ -z "$(TITLE)" ]; then \
 		echo 'Usage: make task-new TITLE="..." [EPIC=<n>] [PRIORITY=P0|P1|P2] [PHASE=1-9] [BODY="..."]' >&2; \
 		exit 1; \
@@ -57,7 +57,7 @@ task-new: ## File a new task issue. Usage: make task-new TITLE="..." [EPIC=12] [
 		$(if $(PHASE),--phase $(PHASE)) \
 		$(if $(BODY),--body "$(BODY)")
 
-task-start: ## Start work on an issue: creates+checks out its branch, sets Status=In Progress. Usage: make task-start TASK=42
+task-start: ## Branch+checkout+Status=In Progress for TASK=<issue-number> — runs: scripts/start-task.sh
 	@if [ -z "$(TASK)" ]; then \
 		echo "Usage: make task-start TASK=<issue-number>" >&2; \
 		exit 1; \
