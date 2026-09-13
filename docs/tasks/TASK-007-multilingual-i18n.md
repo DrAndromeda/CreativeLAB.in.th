@@ -1,11 +1,8 @@
-# EPIC-007: Multilingual (EN/RU/TH/HE)
+# Multilingual (EN/RU/TH/HE)
 
-- **Status:** Not started
-- **Priority:** P0
-- **Phase:** Phase 7 (`PROGRESS.md`)
-- **Proposal:** [proposal.md](../../proposal.md) — §09 LANGUAGE, §04_COPY_RULES
-
-## Summary
+**Priority:** P0
+**Phase:** 7
+**Status:** Not started
 
 EN is the master copy; RU, TH and HE need **native, professionally
 adapted** translations per page — the proposal explicitly rules out
@@ -22,7 +19,7 @@ rule in spirit. This needs either:
 - an explicit client decision to accept LLM-drafted copy as a starting
   point pending human review (documented as such, not shipped as final).
 
-## Suggested tasks
+## Scope
 
 - [ ] Decide the routing strategy (`/ru/...`, `/th/...`, `/he/...` per
       `proposal.md` §09) and implement the routing/locale infrastructure
@@ -33,4 +30,5 @@ rule in spirit. This needs either:
 - [ ] Translate/adapt Homepage (RU, TH, HE) — pilot page to validate the
       process before scaling to all 56
 - [ ] Translate/adapt remaining hub + service pages
-- [ ] hreflang tags once more than one locale exists (depends on EPIC-004)
+- [ ] hreflang tags once more than one locale exists (depends on
+      `TASK-004-seo-schema-sitemap.md`)

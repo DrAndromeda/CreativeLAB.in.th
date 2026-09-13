@@ -1,90 +1,53 @@
-# Epics
+# Epic files
 
-This folder holds one file per epic. `scripts/create-epic-issues.sh`
-(`make board-epics`) turns each of these files into a GitHub Issue — but
-writing the file in the first place is a manual step, not scripted:
-**turning a proposal into epics means reading the proposal and deciding
-the chunks yourself.** The script only does the second half (file →
-issue), and only for files that already exist here.
+**One proposal = one epic.** This repo used to split the single
+`proposal.md` into 9 separate epic issues (one per `PROGRESS.md` phase) —
+that turned out to be pure overhead: more issues to open, more links to
+keep straight, for work that's all one brief built by the same team in the
+same sessions. Break the work into **large tasks** instead (see
+`../tasks/README.md`) — each task should represent a real work session's
+worth of doing, not a five-minute step.
 
-```
-Proposal (proposal.md / docs/Proposals.md)
-        │  you read it, decide the logical chunks  (manual)
-        ▼
-docs/epics/EPIC-XXX-<slug>.md   (you write this)
-        │  ./scripts/create-epic-issues.sh  (make board-epics)
-        ▼
-GitHub Issue, type: epic, on the Project board
-```
+If this repo ever takes on a genuinely separate second proposal later,
+that's a second epic — but a single proposal should map to exactly one
+epic file here, however big the proposal is.
 
-## Adding a new epic
-
-1. Pick the next number (`EPIC-010`, `EPIC-011`, …) and a short slug.
-2. Create `docs/epics/EPIC-XXX-<slug>.md` using the template below.
-3. Run `make board-epics` — it creates an issue for this file (and skips
-   every epic that already has one, matched by title, so it's always
-   safe to re-run after adding a new file).
-
-## Required format
-
-Only three things matter to the script — everything else in the file is
-just carried into the issue body verbatim, so write as much or as little
-extra context as you want below them.
+## Format `scripts/create-epic-issues.sh` parses
 
 ```markdown
-# EPIC-XXX: Title Goes Here
+# Epic Title Here
 
-- **Status:** Not started
-- **Priority:** P0
-- **Phase:** Phase N
-- **Proposal:** [proposal.md](../../proposal.md) — §section reference
-- **GitHub Issue:** _link once created_
+**Priority:** P0
+**Status:** In progress — see task breakdown below
 
-## Summary
-
-What this epic is and why it matters.
-
-## Tasks
-
-- [ ] High-level suggested tasks (optional — real tasks are filed as
-      their own issues via `make task-new ... EPIC=<n>` once this epic
-      has an issue number)
-
-## Notes
-
-Anything else worth knowing.
+Free-form spec content from here down — as long as you need. This is what
+gets copied into the created issue's body, plus a link back to this file.
 ```
 
-- **`# EPIC-XXX: Title`** — the first line starting with `# ` becomes
-  the issue title, verbatim. This is also the duplicate check: if an
-  issue with this exact title already exists, the script skips it. Don't
-  reuse a title, and don't rename an epic file's title after its issue
-  exists (the file and issue will just drift apart — edit the issue
-  directly instead).
-- **`**Priority:** P0`** (or P1/P2) — becomes a `priority: Pn` label and
-  sets the board's Priority field. Optional; omit the line if you don't
-  want it labeled yet.
-- **`**Phase:** Phase N`** — the script pulls the first digit(s) it finds
-  on this line, so `Phase 7`, `Phase 7 (see PROGRESS.md)`, etc. all work.
-  Becomes a `phase: N` label and sets the board's Phase field. Optional.
+- **Line 1** (`# Title`) is **required** and is the exact-match key used for
+  duplicate detection — `create-epic-issues.sh` skips creating an issue if one
+  already exists with this exact title. Don't change an epic file's title
+  after its issue has been created, or you'll get a duplicate on the next
+  run.
+- **`**Priority:**`** is optional. Must be exactly `P0`, `P1`, or `P2`.
+- **`**Status:**`** is optional but is what `make board-sync-status` reads.
+  Write it in plain English — the script maps it onto the board loosely:
+  contains "not started" → Backlog; is (or contains) "Done" → Done;
+  anything else ("Partial", "In progress", "Mostly done", ...) → In Progress.
+  For the one epic, this is usually a summary/rollup — the real per-task
+  status lives on each task.
+- Everything else is free-form — write the actual spec, or (more likely,
+  since it's one epic covering everything) a summary plus a table linking
+  out to the task breakdown, same shape as `EPIC-001-creativelab-website.md`.
 
-## After the issue exists
+There's no `**Phase:**` field for epics anymore — with one epic per
+proposal, "phase" doesn't distinguish anything at the epic level. Tasks can
+still carry a `**Phase:**` line, matching `PROGRESS.md`'s phase numbering
+(see `../tasks/README.md`).
 
-Update the file's `**GitHub Issue:**` line with the real link — this is
-manual, the script doesn't write back to the file.
+## Turning a proposal into an epic is a manual, human step
 
-The board is still the source of truth for status day-to-day (see
-[WORKFLOW.md](../WORKFLOW.md)) — you can always just drag the card. But
-since these epic files also double as the human-readable summary people
-actually read (linked from `PROGRESS.md`), it's easy for the two to drift
-if you only ever update one. Whenever you update a file's `**Status:**`
-line (e.g. "Not started" → "Partial"), run:
-
-```bash
-make board-sync-status
-```
-
-to push that same change to the board (`Done` → Done, anything
-containing "not started" → Backlog, anything else → In Progress). It
-matches epics to issues by title, so it only affects issues that already
-exist.
+`scripts/create-epic-issues.sh` only turns an **already-written** file in
+this directory into a GitHub Issue — it does not read the proposal itself,
+and it does not decide how to summarize it. Write the epic file first (one
+per proposal, using the template above), then run `make board-epics`.

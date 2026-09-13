@@ -1,17 +1,14 @@
-# EPIC-008: QA
+# QA
 
-- **Status:** Partial
-- **Priority:** P0
-- **Phase:** Phase 8 (`PROGRESS.md`)
-- **Proposal:** [proposal.md](../../proposal.md) — §15_QA_DEFINITION_DONE, §20 TESTS
-
-## Summary
+**Priority:** P0
+**Phase:** 8
+**Status:** Partial
 
 Full QA pass per `proposal.md`'s definition of done — accessibility,
 cross-browser, visual regression, and functional testing across every
 page, breakpoint and (eventually) language.
 
-## Tasks
+## Scope
 
 - [x] `npm run build`, `npx tsc --noEmit`, `npm run lint` all clean
 - [x] Every internal link crawled and verified (0 broken links)
@@ -22,7 +19,7 @@ page, breakpoint and (eventually) language.
 - [x] Homepage + several hub/service pages visually checked in Chrome
       (desktop viewport)
 - [ ] axe-core accessibility pass (0 critical/serious target)
-- [ ] Lighthouse pass (see EPIC-006)
+- [ ] Lighthouse pass (see `TASK-006-performance-pass.md`)
 - [ ] Cross-browser check (Chrome, Safari, Firefox, Edge, iOS Safari,
       Android Chrome)
 - [ ] Visual regression across breakpoints (320/360/375/390/414/430,
@@ -30,4 +27,4 @@ page, breakpoint and (eventually) language.
       correctly through the browser automation tool used so far; the
       responsive Tailwind classes are in place but visually unverified
       below desktop width
-- [ ] Repeat once EPIC-007 (multilingual) ships, per language
+- [ ] Repeat once `TASK-007` (multilingual) ships, per language

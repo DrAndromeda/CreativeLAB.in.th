@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: help dev build start lint typecheck check \
-        board-setup board-epics board-backfill board-sync-status task-start task-new
+        board-setup board-epics board-tasks board-backfill board-sync-status board-sync-tasks task-start task-new
 
 help: ## Show this list of commands
 	@echo "CreativeLAB.in.th — available commands"
@@ -38,11 +38,17 @@ board-setup: ## One-time board setup (needs gh auth login -s project) — runs: 
 board-epics: ## File an issue per docs/epics/EPIC-*.md not already created — runs: scripts/create-epic-issues.sh
 	./scripts/create-epic-issues.sh
 
+board-tasks: ## File an issue per docs/tasks/TASK-*.md, linked as sub-issues of the epic — runs: scripts/create-task-issues.sh
+	./scripts/create-task-issues.sh
+
 board-backfill: ## Set Status on every open issue (STATUS=... to override "Backlog") — runs: scripts/backfill-status.sh
 	./scripts/backfill-status.sh $(STATUS)
 
 board-sync-status: ## Push each epic .md file's Status line onto its board card — runs: scripts/sync-epic-status.sh
 	./scripts/sync-epic-status.sh
+
+board-sync-tasks: ## Push each task .md file's Status line onto its board card — runs: scripts/sync-task-status.sh
+	./scripts/sync-task-status.sh
 
 ## --- Tasks --------------------------------------------------------------
 

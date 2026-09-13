@@ -12,37 +12,53 @@ lists them all):
 |---|---|
 | `scripts/github-bootstrap.sh` | `make board-setup` |
 | `scripts/create-epic-issues.sh` | `make board-epics` |
+| `scripts/create-task-issues.sh` | `make board-tasks` |
 | `scripts/backfill-status.sh [status]` | `make board-backfill [STATUS=...]` |
 | `scripts/sync-epic-status.sh` | `make board-sync-status` |
-| `scripts/create-task.sh --title ...` | `make task-new TITLE=... [EPIC=] [PRIORITY=] [PHASE=] [BODY=]` |
+| `scripts/sync-task-status.sh` | `make board-sync-tasks` |
+| `scripts/create-task.sh --title ...` (ad-hoc task, no committed file) | `make task-new TITLE=... [EPIC=] [PRIORITY=] [PHASE=] [BODY=]` |
 | `scripts/start-task.sh <n>` | `make task-start TASK=<n>` |
 
 ## The three layers
 
 | Layer | Lives in | Purpose |
 |---|---|---|
-| **Proposal** | `docs/Proposals.md` + the proposal file itself (e.g. `proposal.md`) | The brief: what we're building and why. Rarely changes once approved. |
-| **Epic** | A GitHub Issue (`type: epic`) + optionally `docs/epics/EPIC-XXX-*.md` | A big chunk of a proposal (a phase, a hub, a major feature). Tracks its child Task issues as native sub-issues (or a checklist). |
-| **Task** | A GitHub Issue (`type: task`) + optionally `docs/tasks/TASK-XXX-*.md` | One concrete, PR-sized piece of work. This is what a branch and PR are built against. |
+| **Proposal** | `docs/Proposals.md` + the proposal file itself (`proposal.md`) | The brief: what we're building and why. Rarely changes once approved. |
+| **Epic** — **ONE per proposal** | A GitHub Issue (`type: epic`) backed by one `docs/epics/EPIC-XXX-*.md` | The whole proposal. Tracks its large tasks as native sub-issues. |
+| **Task** — as many as needed, but each **large** | A GitHub Issue (`type: task`), usually backed by a pre-written `docs/tasks/TASK-XXX-*.md` | A real work session's worth of doing — not a five-minute step. This is what a branch and PR are built against. |
+
+**One proposal = one epic.** This repo used to split `proposal.md` into 9
+separate epic issues, one per `PROGRESS.md` phase — that turned out to be
+pure overhead: more issues to open, more links to keep straight, for work
+that's all one brief built by the same team in the same sessions. It's now
+one epic; what used to be 9 epics are now 9 large tasks under it. Don't
+re-introduce multiple epics per proposal.
 
 **The GitHub Issue is always the source of truth for status.** The
 `docs/epics/` and `docs/tasks/` markdown files are an optional second
 layer for specs too long or too detailed for an issue body (architecture
 notes, content requirements, acceptance criteria with a lot of nuance).
 When one exists, the issue links to it and the doc links back to the
-issue — never duplicate a status/checkbox in both places.
+issue — never duplicate a status/checkbox in both places. If a file's
+`**Status:**` line and the board disagree, run `make board-sync-status`
+(epics) or `make board-sync-tasks` (tasks) to push the file's status onto
+the board — never the other direction.
 
-Small tasks don't need a doc file at all. Write the whole spec directly
-in the issue body using the task template.
+Small, unplanned tasks don't need a doc file at all — file the issue
+directly using the task template (see `docs/tasks/README.md` for this
+ad-hoc path vs. the pre-written large-task path, which should be most of
+your work).
 
 ## Issue types
 
 Three issue templates, all plain GitHub Issues distinguished by a `type`
 label:
 
-- **`type: epic`** — a feature or phase big enough to need several tasks.
-- **`type: task`** — one concrete unit of implementation work, sized to
-  land in a single PR.
+- **`type: epic`** — the whole proposal. Exactly one open epic at a time.
+- **`type: task`** — a large chunk of implementation work (a real work
+  session, not necessarily a single PR — it's fine for a big task to span
+  several PRs, each referencing it with `Part of #<n>` until the final one
+  closes it).
 - **`type: bug`** — something broken in production or in an existing
   feature. Anyone (including external reporters) can file one.
 
@@ -152,24 +168,22 @@ auto-close its issue or show up under the issue's Development section.
 ## Lifecycle, end to end
 
 1. A proposal is approved → linked from `docs/Proposals.md`.
-2. Break it into one or more **epics** (GitHub Issue, `type: epic`,
-   Priority + Phase set). Add a `docs/epics/EPIC-XXX-*.md` only if the
-   epic needs more written context than fits in the issue.
-3. Break each epic into **tasks** (GitHub Issue, `type: task`, Priority +
-   Phase set), linked to the epic — either as a native GitHub sub-issue
-   (`make task-new ... EPIC=<n>`, or "Create sub-issue" from the epic's
-   UI) or, as a lighter fallback, a task-list checkbox in the epic's body
-   (`- [ ] #43`).
-4. Add both to the Project board (or let auto-add do it — `task-new`
-   does this itself).
+2. Write **the one epic** for it (`docs/epics/EPIC-XXX-*.md`, Priority
+   set), then `make board-epics`.
+3. Break it into **large tasks** (`docs/tasks/TASK-XXX-*.md`, Priority +
+   Phase set — see `docs/tasks/README.md`), then `make board-tasks`, which
+   links each as a native GitHub sub-issue of the epic automatically.
+4. Both land on the Project board automatically (the scripts add them).
 5. Someone picks up a task: `./scripts/start-task.sh <issue-number>` —
    creates and checks out `task/<n>-slug`, sets Status to `In Progress`.
-6. Open a PR with `Closes #<n>` in the description → board moves it to
-   `In Test` automatically (see "Automating the transitions" above).
+6. Open a PR with `Closes #<n>` in the description (or `Part of #<n>` if
+   the task needs more than one PR) → board moves it to `In Test`
+   automatically on the closing PR (see "Automating the transitions"
+   above).
 7. Review, CI (`.github/workflows/ci.yml`) passes, merge → board moves it
-   to `Done` automatically; the epic's sub-issues/checklist show the task
-   as checked off too (GitHub tracks both natively).
-8. When every task under an epic is done, close the epic.
+   to `Done` automatically; the epic's sub-issues list shows the task as
+   done too (GitHub tracks this natively).
+8. When every task under the epic is done, close the epic.
 
 ## CI
 
@@ -191,5 +205,9 @@ failing — this is enforced by branch protection once you turn it on
    `./scripts/backfill-status.sh` if any issues were created beforehand.
 4. Set up the In Progress → In Test → Done automation (built-in
    Workflows tab, and/or `project-status-sync.yml` — see above).
-5. Turn on branch protection requiring the `ci` check on the default
+5. Write the one epic (`make board-epics`) and its large tasks
+   (`make board-tasks`), then `make board-sync-status` /
+   `make board-sync-tasks` to correct any that aren't starting from
+   Backlog.
+6. Turn on branch protection requiring the `ci` check on the default
    branch (one-time, in repo Settings — not scriptable via this repo).

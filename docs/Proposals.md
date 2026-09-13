@@ -14,4 +14,11 @@ separately (see the linked epics/progress doc for each).
    the first one, `proposal.md` stays at the repo root for now — new ones
    go in the subfolder to keep the root clean).
 2. Add a row to the table above.
-3. Break it into epics — see [Workflow](./WORKFLOW.md).
+3. Write it as **one epic** — see [docs/epics/README.md](./epics/README.md).
+
+**One proposal, one file.** If a later brief adds to or tightens an
+earlier one, edit that proposal's file directly (or add a clearly dated
+addendum section inside it) rather than creating a second file like
+`proposal-v2.md` — a sibling project made exactly that mistake and it
+meant half its requirements were invisible to everything built from its
+docs. Don't repeat it here.
