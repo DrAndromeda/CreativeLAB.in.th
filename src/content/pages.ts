@@ -54,6 +54,9 @@ export const CONTACT_PAGE = {
   optionsTitle: "Other ways to reach us",
   location: SITE.location,
   email: SITE.email,
+  phone: SITE.phone,
+  whatsapp: SITE.whatsapp,
+  telegram: SITE.telegram,
 } as const;
 
 export const PORTFOLIO_PAGE = {

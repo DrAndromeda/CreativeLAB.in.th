@@ -74,6 +74,30 @@ export default async function ContactPage(props: PageProps<"/[locale]/contact">)
                   </dd>
                 </div>
                 <div>
+                  <dt className="text-text-secondary">Phone</dt>
+                  <dd className="mt-1 text-base text-text">
+                    <a href={`tel:${CONTACT_PAGE.phone}`} className="hover:text-accent">
+                      {CONTACT_PAGE.phone}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-text-secondary">WhatsApp</dt>
+                  <dd className="mt-1 text-base text-text">
+                    <a href={`https://wa.me/${CONTACT_PAGE.whatsapp.replace(/[^0-9]/g, "")}`} className="hover:text-accent">
+                      {CONTACT_PAGE.whatsapp}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-text-secondary">Telegram</dt>
+                  <dd className="mt-1 text-base text-text">
+                    <a href={CONTACT_PAGE.telegram} className="hover:text-accent">
+                      @creativelab1_bot
+                    </a>
+                  </dd>
+                </div>
+                <div>
                   <dt className="text-text-secondary">Based in</dt>
                   <dd className="mt-1 text-base text-text">{CONTACT_PAGE.location}</dd>
                 </div>
