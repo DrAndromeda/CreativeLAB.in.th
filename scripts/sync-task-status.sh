@@ -58,7 +58,7 @@ for file in "$TASKS_DIR"/TASK-*.md; do
   lower="$(echo "$status_line" | tr '[:upper:]' '[:lower:]')"
   if [ "$lower" = "done" ]; then
     board_status="Done"
-  elif echo "$lower" | grep -q "not started"; then
+  elif echo "$lower" | grep -qE "^not started"; then
     board_status="Backlog"
   else
     board_status="In Progress"
