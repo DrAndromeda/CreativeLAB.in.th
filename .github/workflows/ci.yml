@@ -23,8 +23,13 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Type check
-        run: npx tsc --noEmit
-
+      # Build first: it generates next-env.d.ts + .next/types (PageProps/
+      # LayoutProps, image module declarations) that tsc --noEmit needs,
+      # and next build already runs its own full type check internally —
+      # so this also fails fast on a real type error before the redundant
+      # standalone check below.
       - name: Build
         run: npm run build
+
+      - name: Type check
+        run: npx tsc --noEmit
