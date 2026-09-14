@@ -16,7 +16,7 @@ export function Footer() {
               </h3>
               <ul className="mt-4 space-y-2.5">
                 {column.links?.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-sm text-text-inverse-secondary hover:text-text-inverse"
