@@ -27,17 +27,16 @@ jobs:
               mkdir -p "out/${locale}"
               cp "out/${locale}.html" "out/${locale}/index.html"
             fi
-            # Fix menu links — add locale prefix to internal page links
-            if [ -f "out/${locale}.html" ]; then
-              sed -i -E "s|href=\"/CreativeLAB\.in\.th/([a-z][a-z0-9_-]+)\"|href=\"/CreativeLAB.in.th/${locale}/\1\"|g" "out/${locale}.html"
-              echo "Fixed locale links in ${locale}.html"
-            fi
-            # Also fix locale/index.html if it exists
-            if [ -f "out/${locale}/index.html" ]; then
-              sed -i -E "s|href=\"/CreativeLAB\.in\.th/([a-z][a-z0-9_-]+)\"|href=\"/CreativeLAB.in.th/${locale}/\1\"|g" "out/${locale}/index.html"
+          done
+          # Also copy EN service pages to root (so menu links without locale work)
+          en_services="advertising social-media villas-real-estate food-restaurants business-local-presence websites-digital video-production branding-creative about contact portfolio case-studies journal privacy terms"
+          for service in $en_services; do
+            if [ -f "out/en/${service}.html" ]; then
+              cp "out/en/${service}.html" "out/${service}.html"
+              echo "Copied: ${service}.html"
             fi
           done
-          echo "Added locale index.html files and fixed links"
+          echo "Added locale index.html files and EN fallback services"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
