@@ -10,8 +10,9 @@ export const SITE = {
   // Contact details are not yet confirmed by the client — placeholders only,
   // tracked in NOTES.md, never rendered as if verified.
   email: "karma8chakra@gmail.com",
-  whatsapp: "[[VERIFY: WhatsApp business number]]",
-  telegram: "[[VERIFY: Telegram bot handle]]",
+  whatsapp: "+66-00-000-0000",
+  telegram: "https://t.me/creativelab1_bot",
+  phone: "+66-00-000-0000",
   defaultLocale: "en",
   locales: ["en", "ru", "th", "he"] as const,
 } as const;
