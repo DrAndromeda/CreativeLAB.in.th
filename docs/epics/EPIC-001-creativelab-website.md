@@ -27,11 +27,11 @@ sync with each task's own `**Status:**` line — see `docs/tasks/README.md`):
 | Brand Shell + Design System | Done |
 | Homepage + 8 Service Hubs | Done |
 | Portfolio / Case Studies / About / Contact / Journal | Done |
-| SEO / Schema / Sitemap / llms.txt | Mostly done |
+| SEO / Schema / Sitemap / llms.txt | Done |
+| Bot Integration (Telegram + WhatsApp) | Partial — built and type-checked, not deployed |
 | Performance Pass | Initial check done, no formal audit yet |
+| Multilingual (EN/RU/TH/HE) | Infrastructure done, translated content not started |
 | QA | Partial |
-| Bot Integration (Telegram + WhatsApp) | Not started |
-| Multilingual (EN/RU/TH/HE) | Not started |
 | Launch Checklist | Not started |
 
 ## Notes
@@ -40,4 +40,6 @@ The former per-phase epics' full detail wasn't lost — it's preserved in
 each corresponding `docs/tasks/TASK-*.md` file, just recategorized as a
 task instead of a separate epic. See `NOTES.md` for placeholder data and
 flagged assumptions that affect several of these tasks (contact details,
-bot credentials, legal review, translations).
+bot credentials, legal review, translations), and `docs/OpenQuestions.md`
+for decisions pending a person's input (hosting/deployment target,
+translation process).

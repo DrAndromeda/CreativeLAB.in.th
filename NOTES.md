@@ -80,3 +80,15 @@ merging pages the IA explicitly asked for.
 - All current imagery is placeholder/reference (per proposal's own
   "temporary images" allowance) — swap for licensed or client photography
   before launch, per proposal's image sourcing priority order.
+
+## Technical debt
+
+- `robots.txt` / `llms.txt` are currently static files under `public/`
+  rather than generated from `src/content/**` (a teammate's GitHub Pages
+  experiment swapped the generated route handlers for one-time static
+  files). Correct today, will drift as hubs/services are added. See
+  `docs/OpenQuestions.md` #3.
+- Hosting/deployment target: see `docs/OpenQuestions.md` #1–#2 —
+  `.github/workflows/deploy.yml` (GitHub Pages static export) is
+  incompatible with this site's locale routing and contact form, and
+  still needs reconciling before launch.

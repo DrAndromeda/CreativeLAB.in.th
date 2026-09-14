@@ -2,16 +2,21 @@
 
 Tracking document for implementing `proposal.md`. Updated as work proceeds.
 See `NOTES.md` for flagged assumptions, placeholders, and things that need
-real client input before launch.
+real client input before launch, and `docs/OpenQuestions.md` for decisions
+(hosting, translations) that need a person, not more code.
 
 ## Stack
 
 - Next.js 16 (App Router, Turbopack, TypeScript, `src/` dir)
 - Tailwind CSS v4 (CSS-based theme in `src/app/globals.css`)
 - Content is data-driven: `src/content/**` feeds shared page templates in
-  `src/app/[hub]/page.tsx` and `src/app/[hub]/[service]/page.tsx`, so adding
-  a service is a data change, not a new React file (CMS-ready per proposal
+  `src/app/[locale]/[hub]/page.tsx` and
+  `src/app/[locale]/[hub]/[service]/page.tsx`, so adding a service is a
+  data change, not a new React file (CMS-ready per proposal
   §14_TECHNICAL_SITE_BUILD).
+- Locale routing (`src/proxy.ts`) and the contact form
+  (`src/app/api/contact/route.ts`) require a Node-capable host — see
+  "Deployment target" below.
 
 ## Phase 1 — Brand shell + design system + reusable components — DONE
 
@@ -40,7 +45,8 @@ real client input before launch.
 - [x] Video & Production hub + 4 sub-services
 - [x] Branding & Creative hub + 4 sub-services
 
-48 sub-service pages total, all sharing `src/app/[hub]/[service]/page.tsx`.
+48 sub-service pages total, all sharing
+`src/app/[locale]/[hub]/[service]/page.tsx`.
 
 ## Phase 3 — Portfolio / Case Studies / About / Contact / Journal — DONE
 
@@ -55,15 +61,20 @@ real client input before launch.
 
 ## Phase 4 — SEO/schema/hreflang/sitemap/llms.txt — DONE
 
-- [x] `sitemap.ts`, `robots.ts` (allows GPTBot/ClaudeBot/PerplexityBot/
-      Google-Extended/CCBot per the GEO requirement)
+- [x] `sitemap.ts` (per-locale entries, reciprocal hreflang alternates)
 - [x] JSON-LD per page: Organization (global), WebPage + BreadcrumbList on
       every page, Service + FAQPage on hub/service pages
-- [x] `/llms.txt` (generated from the same content data, not a stale
-      static file)
 - [x] hreflang — `alternates.languages` on every page + reciprocal
       `<xhtml:link>` entries in `sitemap.ts` for all 4 locales + x-default,
       now that Phase 7's routing infrastructure is in
+- ⚠️ `robots.txt` / `llms.txt` are currently **static files**
+      (`public/robots.txt`, `public/llms.txt`, allowing
+      GPTBot/ClaudeBot/PerplexityBot/Google-Extended/CCBot per the GEO
+      requirement) rather than generated from `src/content/**` — a
+      teammate's GitHub Pages experiment replaced the generated
+      `src/app/robots.ts` / `src/app/llms.txt/route.ts` route handlers.
+      Correct today, will drift as hubs/services are added. See
+      `docs/OpenQuestions.md` #3.
 
 ## Phase 5 — Bot integration (Telegram + WhatsApp) — BUILT, NOT DEPLOYED
 
@@ -85,9 +96,10 @@ real client input before launch.
 
 ## Phase 6 — Performance pass — INITIAL CHECK DONE
 
-- [x] Production build inspected: 71 pages, mostly static/SSG, minimal
-      client JS (Header/mobile-nav, ContactForm, AnnouncementBar, and the
-      `<details>`-based FAQ accordion are the only client components)
+- [x] Production build inspected: 263 pages (71 canonical routes × 4
+      locales), mostly static/SSG, minimal client JS (Header/mobile-nav,
+      ContactForm, AnnouncementBar, and the `<details>`-based FAQ
+      accordion are the only client components)
 - [ ] No Lighthouse/CrUX run yet (needs a deployed or otherwise reachable
       URL, or local Lighthouse CLI, to measure LCP/INP/CLS meaningfully)
 - [ ] Real photography/video will affect LCP more than anything else at
@@ -119,6 +131,19 @@ real client input before launch.
       loop, or an explicit decision from the client to accept
       LLM-translated copy as a starting draft pending human review.
 
+### Deployment target (resolved for local dev, still open for CI)
+
+On 2026-09-14 a teammate configured the repo for GitHub Pages static
+export (`output: "export"`, `.github/workflows/deploy.yml`) the same day
+this locale routing landed. Static export disables Next.js
+middleware/API routes entirely — it broke `next dev` outright and would
+have shipped a build with no working unprefixed-EN routes and a
+non-functional contact form (verified by inspecting the exported `out/`
+directly). Confirmed with the team: production is Vercel/Node, not
+GitHub Pages — `next.config.ts` is back to plain, unblocking local dev.
+`deploy.yml` itself and the stale-but-currently-working live Pages site
+are still unresolved — see `docs/OpenQuestions.md` #1 and #2.
+
 ## Phase 8 — QA — PARTIAL
 
 - [x] `npm run build`, `npx tsc --noEmit`, `npm run lint` all clean
@@ -138,8 +163,9 @@ real client input before launch.
 
 ## Phase 9 — Launch checklist — NOT STARTED
 
-Blocked on real content inputs — see NOTES.md for the full list (contact
-details, real photography, bot credentials, legal review, translations).
+Blocked on real content inputs — see `NOTES.md` for the full list (contact
+details, real photography, bot credentials, legal review, translations)
+and `docs/OpenQuestions.md` for hosting/deployment decisions.
 
 ## How to continue
 

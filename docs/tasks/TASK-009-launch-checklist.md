@@ -18,7 +18,15 @@ Final pre-launch checklist. Blocked on real content inputs — see
       styled after `proposal.md`'s own example table)
 - [ ] Analytics + conversion tracking configured (no invented tracking
       IDs shipped)
-- [ ] Domain, hosting and deployment pipeline finalized
+- [ ] Domain, hosting and deployment pipeline finalized — see
+      `docs/OpenQuestions.md`: a GitHub Pages static-export pipeline
+      (`.github/workflows/deploy.yml`) exists but is incompatible with
+      this site's locale routing and contact form (both need
+      middleware/API routes, which static export disables); confirmed
+      the real target is Vercel/Node, but `deploy.yml` still auto-runs on
+      every push to `main` and needs to be reconciled or disabled before
+      it overwrites the (currently stale but working) live Pages site
+      with a broken build
 - [ ] `TASK-005` (bots), `TASK-006` (performance), `TASK-007` (i18n) and
       `TASK-008` (QA) all closed
 - [ ] Sitemap submitted to Google Search Console / Yandex Webmaster

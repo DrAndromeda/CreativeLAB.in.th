@@ -64,3 +64,21 @@ rule in spirit. This needs either:
       auto-generated" rule above; needs a native reviewer/copywriter or
       an explicit client sign-off to proceed with LLM-drafted copy).
 - [ ] Translate/adapt remaining hub + service pages
+
+## ⚠️ Hosting constraint discovered (2026-09-14)
+
+This routing depends on `src/proxy.ts` (Next middleware) and
+`src/app/api/contact/route.ts` — both require a Node-capable host.
+A teammate independently configured the repo for GitHub Pages static
+export (`output: "export"`) the same day; static export **disables
+middleware and API routes entirely** (confirmed via Next.js's own build
+warning and by inspecting the `out/` output — no unprefixed EN routes or
+`/api/contact` existed in it). It also broke `next dev` outright
+(`⨯ Middleware cannot be used with "output: export"`, every route 404s).
+
+Reverted `next.config.ts` to plain (no `output`/`basePath`/`assetPrefix`)
+to unblock local dev and match the real deployment target (Vercel/Node —
+confirmed with the team, not GitHub Pages). See `docs/OpenQuestions.md`
+for the still-open GitHub Pages / `deploy.yml` reconciliation and the
+`SITE.url` vs. actual Pages URL mismatch — neither touched here since
+they're the teammate's call to make.
