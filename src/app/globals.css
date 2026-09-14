@@ -13,7 +13,12 @@
   --color-text-inverse-secondary: #b9b3a9;
 
   /* Accents */
-  --color-accent: #b8714a;
+  /* #b8714a only reached a 3.48:1 contrast ratio against --color-base /
+     --color-text-inverse — below WCAG AA's 4.5:1 for normal text (caught
+     by a Lighthouse accessibility audit against "Start a Project" and
+     the eyebrow/"Explore" labels). Darkened to keep the same warm
+     terracotta hue at a passing ratio (5.08:1). */
+  --color-accent: #935a3b;
   --color-accent-soft: #e8d5c4;
   --color-olive: #5a5f45;
   --color-line: #e5ded4;

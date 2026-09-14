@@ -8,12 +8,12 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-accent text-text-inverse hover:bg-[#a15f3d] focus-visible:outline-accent",
+    "bg-accent text-text-inverse hover:bg-[#804e33] focus-visible:outline-accent",
   secondary:
     "border border-text bg-transparent text-text hover:bg-text hover:text-text-inverse focus-visible:outline-text",
   ghost:
     "border border-line-inverse bg-transparent text-text-inverse hover:border-accent hover:text-accent focus-visible:outline-accent",
-  text: "px-0 py-0 text-accent underline underline-offset-4 hover:text-[#a15f3d]",
+  text: "px-0 py-0 text-accent underline underline-offset-4 hover:text-[#804e33]",
 };
 
 export function Button({

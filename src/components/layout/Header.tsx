@@ -117,7 +117,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden bg-accent px-5 py-2.5 text-sm font-medium text-text-inverse hover:bg-[#a15f3d] sm:inline-flex"
+            className="hidden bg-accent px-5 py-2.5 text-sm font-medium text-text-inverse hover:bg-[#804e33] sm:inline-flex"
           >
             {MAIN_CTAS.startProject}
           </Link>

@@ -154,7 +154,7 @@ export function ContactForm({ serviceContext }: { serviceContext?: string }) {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="bg-accent px-6 py-3 text-sm font-medium text-text-inverse hover:bg-[#a15f3d] disabled:opacity-60"
+        className="bg-accent px-6 py-3 text-sm font-medium text-text-inverse hover:bg-[#804e33] disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send Message"}
       </button>
