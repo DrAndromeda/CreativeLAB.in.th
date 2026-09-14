@@ -13,21 +13,21 @@ export function PricingGuidance({ rows }: { rows: PricingRow[] }) {
           description="A starting reference so you can plan your budget before we scope your project."
         />
         <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+          <table className="w-full min-w-[560px] border-collapse text-start text-sm">
             <thead>
               <tr className="border-b border-line text-xs tracking-wide text-text-secondary uppercase">
-                <th className="py-3 pr-4 font-medium">Service</th>
-                <th className="py-3 pr-4 font-medium">Price range (THB)</th>
+                <th className="py-3 pe-4 font-medium">Service</th>
+                <th className="py-3 pe-4 font-medium">Price range (THB)</th>
                 <th className="py-3 font-medium">Notes</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row) => (
                 <tr key={row.service} className="border-b border-line">
-                  <td className="py-4 pr-4 font-medium text-text">
+                  <td className="py-4 pe-4 font-medium text-text">
                     {row.service}
                   </td>
-                  <td className="py-4 pr-4 whitespace-nowrap text-text">
+                  <td className="py-4 pe-4 whitespace-nowrap text-text">
                     {row.range}
                   </td>
                   <td className="py-4 text-text-secondary">{row.note}</td>

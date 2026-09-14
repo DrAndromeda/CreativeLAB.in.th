@@ -9,18 +9,29 @@ import { HOMEPAGE_PORTFOLIO } from "@/content/homepage";
 import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
-export const metadata: Metadata = buildMetadata({
-  title: PORTFOLIO_PAGE.metaTitle,
-  description: PORTFOLIO_PAGE.metaDescription,
-  path: "/portfolio",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]/portfolio">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: PORTFOLIO_PAGE.metaTitle,
+    description: PORTFOLIO_PAGE.metaDescription,
+    path: "/portfolio",
+    locale,
+  });
+}
 
-export default function PortfolioPage() {
-  const url = `${SITE.url}/portfolio`;
+export default async function PortfolioPage(props: PageProps<"/[locale]/portfolio">) {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  const url = `${SITE.url}${localePath(locale, "/portfolio")}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
-    webPageSchema({ name: PORTFOLIO_PAGE.metaTitle, description: PORTFOLIO_PAGE.metaDescription, url }),
-    breadcrumbSchema([{ name: "Home", url: SITE.url }, { name: "Portfolio", url }]),
+    webPageSchema({ name: PORTFOLIO_PAGE.metaTitle, description: PORTFOLIO_PAGE.metaDescription, url, inLanguage: locale }),
+    breadcrumbSchema([{ name: "Home", url: homeUrl }, { name: "Portfolio", url }]),
   ]);
 
   return (

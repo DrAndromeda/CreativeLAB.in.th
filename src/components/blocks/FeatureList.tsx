@@ -15,7 +15,7 @@ export function FeatureList({
         <SectionHeading title={title} />
         <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
           {items.map((item) => (
-            <li key={item.title} className="border-l-2 border-accent-soft pl-5">
+            <li key={item.title} className="border-s-2 border-accent-soft ps-5">
               <h3 className="text-base font-medium text-text">{item.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-text-secondary">
                 {item.description}

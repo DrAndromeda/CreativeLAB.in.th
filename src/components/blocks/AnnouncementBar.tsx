@@ -26,7 +26,7 @@ export function AnnouncementBar({ text }: { text: string }) {
       <button
         type="button"
         aria-label="Dismiss announcement"
-        className="absolute right-4 text-text-inverse-secondary hover:text-text-inverse"
+        className="absolute end-4 text-text-inverse-secondary hover:text-text-inverse"
         onClick={() => {
           setVisible(false);
           try {

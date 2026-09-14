@@ -2,7 +2,7 @@
 
 **Priority:** P0
 **Phase:** 4
-**Status:** Mostly done
+**Status:** Done
 
 Technical SEO and AI-search (GEO) foundations: sitemap, robots, JSON-LD
 schema on every page, and a generated `llms.txt`.
@@ -13,10 +13,13 @@ schema on every page, and a generated `llms.txt`.
 - JSON-LD: Organization (global), WebPage + BreadcrumbList everywhere,
   Service + FAQPage on hub/service pages
 - `src/app/llms.txt/route.ts` (generated from content, not static)
-- [ ] hreflang tags — blocked on `TASK-007-multilingual-i18n.md` actually
-      shipping more than one locale
+- [x] hreflang tags — `TASK-007`'s locale routing landed; `buildMetadata()`
+      emits `alternates.languages` (4 locales + x-default) on every page,
+      and `sitemap.ts` emits one entry per locale per canonical path with
+      reciprocal `<xhtml:link rel="alternate">` tags.
 
 ## Outcome
 
-Functionally complete for a single-locale (EN) site. Revisit once
-`TASK-007` lands to add hreflang + per-locale sitemaps.
+Complete. Per-locale canonical URLs, hreflang alternates and sitemap
+entries are live for all 4 locales (RU/TH/HE currently serve the same EN
+copy pending real translations — see `TASK-007`).

@@ -53,7 +53,7 @@ real client input before launch.
 - [x] `/privacy/`, `/terms/` — drafted, explicitly marked pending legal
       review, so footer links aren't dead ends
 
-## Phase 4 — SEO/schema/hreflang/sitemap/llms.txt (EN pass) — MOSTLY DONE
+## Phase 4 — SEO/schema/hreflang/sitemap/llms.txt — DONE
 
 - [x] `sitemap.ts`, `robots.ts` (allows GPTBot/ClaudeBot/PerplexityBot/
       Google-Extended/CCBot per the GEO requirement)
@@ -61,7 +61,9 @@ real client input before launch.
       every page, Service + FAQPage on hub/service pages
 - [x] `/llms.txt` (generated from the same content data, not a stale
       static file)
-- [ ] hreflang — not applicable yet; real tags land with Phase 7 i18n
+- [x] hreflang — `alternates.languages` on every page + reciprocal
+      `<xhtml:link>` entries in `sitemap.ts` for all 4 locales + x-default,
+      now that Phase 7's routing infrastructure is in
 
 ## Phase 5 — Bot integration (Telegram + WhatsApp) — BUILT, NOT DEPLOYED
 
@@ -91,15 +93,31 @@ real client input before launch.
 - [ ] Real photography/video will affect LCP more than anything else at
       this stage — current images are placeholder JPEGs
 
-## Phase 7 — 4 languages (EN/RU/TH/HE) — NOT STARTED
+## Phase 7 — 4 languages (EN/RU/TH/HE) — ROUTING INFRASTRUCTURE DONE, CONTENT NOT STARTED
 
-Deliberately not auto-translated: the proposal explicitly requires native,
-professionally-adapted copy per language ("never do literal machine
-translation"). Machine-translating all 56 pages in this session would
-violate that rule in spirit even if done by an LLM rather than Google
-Translate. This needs either a native RU/TH/HE copywriter/reviewer in the
-loop, or an explicit decision from the client to accept LLM-translated
-copy as a starting draft pending human review.
+- [x] Routing: EN canonical/unprefixed, RU/TH/HE prefixed (`/ru/`, `/th/`,
+      `/he/`) per `proposal.md` §09. Every route moved under
+      `src/app/[locale]/`; `src/proxy.ts` handles the unprefixed-EN
+      rewrite + `/en/*` redirect-away; all 263 pages (4 locales × every
+      route) prerender at build time.
+- [x] Internal links auto-localize via `src/components/ui/LocalizedLink.tsx`
+      (detects locale from the real request URL) — no content file needed
+      to change.
+- [x] RTL: `dir`/`lang` set server-side per locale; hardcoded physical
+      Tailwind utilities swapped for logical ones across shared
+      components; directional arrow mirrors via `rtl:`; emails wrapped in
+      `<bdi>`. Structurally verified (`curl` + `dir="rtl"` on a live page);
+      not yet eyeballed against real Hebrew copy.
+- [x] Thai font stack (`Noto_Sans_Thai` via `next/font/google`, applied
+      for `locale==="th"`); ICU line-breaking unverified (no Thai copy to
+      test against yet).
+- [ ] Translated content — deliberately not auto-translated: the proposal
+      explicitly requires native, professionally-adapted copy per
+      language ("never do literal machine translation"). Every locale
+      currently serves the same English copy through the new routing.
+      This needs either a native RU/TH/HE copywriter/reviewer in the
+      loop, or an explicit decision from the client to accept
+      LLM-translated copy as a starting draft pending human review.
 
 ## Phase 8 — QA — PARTIAL
 

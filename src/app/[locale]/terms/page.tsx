@@ -3,12 +3,20 @@ import { Breadcrumbs } from "@/components/blocks/Breadcrumbs";
 import { Container } from "@/components/ui/Container";
 import { buildMetadata } from "@/lib/metadata";
 import { SITE } from "@/content/site";
+import { toLocale } from "@/content/i18n";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Terms of Service",
-  description: "Terms governing the use of CreativeLAB's website and services.",
-  path: "/terms",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]/terms">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: "Terms of Service",
+    description: "Terms governing the use of CreativeLAB's website and services.",
+    path: "/terms",
+    locale,
+  });
+}
 
 export default function TermsPage() {
   return (
@@ -57,7 +65,7 @@ export default function TermsPage() {
             <p>
               Questions about these terms can be sent to{" "}
               <a href={`mailto:${SITE.email}`} className="text-accent hover:underline">
-                {SITE.email}
+                <bdi>{SITE.email}</bdi>
               </a>
               .
             </p>

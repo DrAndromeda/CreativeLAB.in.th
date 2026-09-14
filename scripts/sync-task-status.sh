@@ -20,6 +20,9 @@
 
 set -euo pipefail
 
+# shellcheck source=lib/gh-retry.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/gh-retry.sh"
+
 PROJECT_TITLE="${PROJECT_TITLE:-CreativeLAB Roadmap}"
 TASKS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docs/tasks"
 
@@ -69,13 +72,11 @@ for file in "$TASKS_DIR"/TASK-*.md; do
     continue
   fi
 
-  err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
-    --field "Status" --value "$board_status" 2>&1 >/dev/null)" || true
-
-  if [ -z "$err" ]; then
+  if gh_retry "$title: Status" project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
+    --field "Status" --value "$board_status"; then
     echo "✓ $title -> $board_status  (file says: \"$status_line\")"
   else
-    echo "! $title: $err"
+    echo "! $title: couldn't set Status"
   fi
-  sleep 1
+  sleep 2
 done

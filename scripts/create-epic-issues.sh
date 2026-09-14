@@ -12,6 +12,9 @@
 
 set -euo pipefail
 
+# shellcheck source=lib/gh-retry.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/gh-retry.sh"
+
 PROJECT_TITLE="${PROJECT_TITLE:-CreativeLAB Roadmap}"
 EPICS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docs/epics"
 
@@ -47,7 +50,7 @@ for file in "$EPICS_DIR"/EPIC-*.md; do
   fi
 
   priority="$(grep -m1 '\*\*Priority:\*\*' "$file" | sed -E 's/.*Priority:\*\* *//' | tr -d '\r')"
-  phase_num="$(grep -m1 '\*\*Phase:\*\*' "$file" | grep -oE '[0-9]+' | head -n1)"
+  phase_num="$(grep -m1 '\*\*Phase:\*\*' "$file" | grep -oE '[0-9]+' | head -n1 || true)"
 
   existing="$(gh issue list --repo "$REPO_NWO" --state all --search "\"$title\" in:title" \
     --json title --jq ".[] | select(.title == \"$title\") | .title" 2>/dev/null | head -n1 || true)"
@@ -80,30 +83,35 @@ Full spec: https://github.com/$REPO_NWO/blob/main/docs/epics/$epic_file_name"
   echo "+ $title"
   echo "  $issue_url"
 
-  gh project item-add "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" >/dev/null
-  echo "  ✓ added to project"
+  gh_retry "$title: add to project" project item-add "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
+    && echo "  ✓ added to project" \
+    || echo "  ! couldn't add to project"
+  sleep 2
 
   if [ -n "$priority" ]; then
-    gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
-      --field "Priority" --value "$priority" >/dev/null 2>&1 \
+    gh_retry "$title: Priority" project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
+      --field "Priority" --value "$priority" \
       && echo "  ✓ Priority = $priority" \
       || echo "  ! couldn't set Priority (does the field/option exist on the board?)"
+    sleep 2
   fi
 
   if [ -n "${phase_num:-}" ]; then
-    gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
-      --field "Phase" --value "Phase $phase_num" >/dev/null 2>&1 \
+    gh_retry "$title: Phase" project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
+      --field "Phase" --value "Phase $phase_num" \
       && echo "  ✓ Phase = Phase $phase_num" \
       || echo "  ! couldn't set Phase (does the field/option exist on the board?)"
+    sleep 2
   fi
 
   # Only attempt this if you've already done the manual Status-field
   # rename step in scripts/github-bootstrap.sh's printed instructions —
   # otherwise "Backlog" won't exist as an option yet, and this no-ops.
-  gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
-    --field "Status" --value "Backlog" >/dev/null 2>&1 \
+  gh_retry "$title: Status" project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$issue_url" \
+    --field "Status" --value "Backlog" \
     && echo "  ✓ Status = Backlog" \
     || echo "  ! couldn't set Status to Backlog (rename the board's Status options first — see github-bootstrap.sh)"
+  sleep 2
 done
 
 echo

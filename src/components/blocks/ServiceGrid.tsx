@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -39,7 +39,7 @@ export function ServiceGrid({
                 </p>
               </div>
               <span className="mt-6 text-xs font-medium tracking-wide text-accent uppercase">
-                Explore →
+                Explore <span className="inline-block rtl:rotate-180" aria-hidden>→</span>
               </span>
             </Link>
           ))}

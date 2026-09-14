@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { Container } from "@/components/ui/Container";
 import type { RelatedLink } from "@/content/types";
 

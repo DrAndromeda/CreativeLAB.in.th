@@ -97,3 +97,14 @@ body {
 .font-feature-editorial {
   font-feature-settings: "liga" 1, "kern" 1;
 }
+
+/*
+ * Thai locale: Fraunces (the display serif) has no Thai glyphs at all, so
+ * both display and body text fall back to the Thai font stack rather than
+ * silently dropping to a system default. Applied via the `font-thai`
+ * class on <html> (see app/[locale]/layout.tsx) only for locale="th".
+ */
+.font-thai {
+  --font-display: var(--font-thai), "Noto Sans Thai", "Segoe UI", sans-serif;
+  --font-body: var(--font-thai), "Noto Sans Thai", "Segoe UI", sans-serif;
+}

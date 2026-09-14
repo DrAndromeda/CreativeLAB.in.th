@@ -77,12 +77,15 @@ export function webPageSchema(params: {
   name: string;
   description: string;
   url: string;
+  /** BCP 47 tag, e.g. "en", "ru", "th", "he" — defaults to "en". */
+  inLanguage?: string;
 }) {
   return {
     "@type": "WebPage",
     name: params.name,
     description: params.description,
     url: params.url,
+    inLanguage: params.inLanguage ?? "en",
     isPartOf: {
       "@type": "WebSite",
       name: SITE.name,

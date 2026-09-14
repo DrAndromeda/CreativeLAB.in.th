@@ -19,34 +19,44 @@ import {
   webPageSchema,
 } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
 export function generateStaticParams() {
   return allHubParams();
 }
 
 export async function generateMetadata(
-  props: PageProps<"/[hub]">
+  props: PageProps<"/[locale]/[hub]">
 ): Promise<Metadata> {
-  const { hub: hubSlug } = await props.params;
+  const { hub: hubSlug, locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
   const hub = getHub(hubSlug);
   if (!hub) return {};
   return buildMetadata({
     title: hub.metaTitle,
     description: hub.metaDescription,
     path: `/${hub.slug}`,
+    locale,
   });
 }
 
-export default async function HubPage(props: PageProps<"/[hub]">) {
-  const { hub: hubSlug } = await props.params;
+export default async function HubPage(props: PageProps<"/[locale]/[hub]">) {
+  const { hub: hubSlug, locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
   const hub = getHub(hubSlug);
   if (!hub) notFound();
 
-  const url = `${SITE.url}/${hub.slug}`;
+  const url = `${SITE.url}${localePath(locale, `/${hub.slug}`)}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
-    webPageSchema({ name: hub.metaTitle, description: hub.metaDescription, url }),
+    webPageSchema({
+      name: hub.metaTitle,
+      description: hub.metaDescription,
+      url,
+      inLanguage: locale,
+    }),
     breadcrumbSchema([
-      { name: "Home", url: SITE.url },
+      { name: "Home", url: homeUrl },
       { name: hub.navLabel, url },
     ]),
     faqSchema(hub.faqs),

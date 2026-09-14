@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localePath, toLocale } from "@/content/i18n";
 import { images } from "@/assets/images";
 import { AnnouncementBar } from "@/components/blocks/AnnouncementBar";
 import { Hero } from "@/components/blocks/Hero";
@@ -18,20 +19,31 @@ import { buildMetadata } from "@/lib/metadata";
 import { jsonLdGraph, webPageSchema, breadcrumbSchema } from "@/lib/schema";
 import { SITE } from "@/content/site";
 
-export const metadata: Metadata = buildMetadata({
-  title: HOMEPAGE.metaTitle,
-  description: HOMEPAGE.metaDescription,
-  path: "/",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: HOMEPAGE.metaTitle,
+    description: HOMEPAGE.metaDescription,
+    path: "/",
+    locale,
+  });
+}
 
-export default function Home() {
+export default async function Home(props: PageProps<"/[locale]">) {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  const url = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
     webPageSchema({
       name: HOMEPAGE.metaTitle,
       description: HOMEPAGE.metaDescription,
-      url: SITE.url,
+      url,
+      inLanguage: locale,
     }),
-    breadcrumbSchema([{ name: "Home", url: SITE.url }]),
+    breadcrumbSchema([{ name: "Home", url }]),
   ]);
 
   return (

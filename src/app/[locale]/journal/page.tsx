@@ -8,18 +8,29 @@ import { JOURNAL_PAGE } from "@/content/pages";
 import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
-export const metadata: Metadata = buildMetadata({
-  title: JOURNAL_PAGE.metaTitle,
-  description: JOURNAL_PAGE.metaDescription,
-  path: "/journal",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]/journal">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: JOURNAL_PAGE.metaTitle,
+    description: JOURNAL_PAGE.metaDescription,
+    path: "/journal",
+    locale,
+  });
+}
 
-export default function JournalPage() {
-  const url = `${SITE.url}/journal`;
+export default async function JournalPage(props: PageProps<"/[locale]/journal">) {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  const url = `${SITE.url}${localePath(locale, "/journal")}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
-    webPageSchema({ name: JOURNAL_PAGE.metaTitle, description: JOURNAL_PAGE.metaDescription, url }),
-    breadcrumbSchema([{ name: "Home", url: SITE.url }, { name: "Journal", url }]),
+    webPageSchema({ name: JOURNAL_PAGE.metaTitle, description: JOURNAL_PAGE.metaDescription, url, inLanguage: locale }),
+    breadcrumbSchema([{ name: "Home", url: homeUrl }, { name: "Journal", url }]),
   ]);
 
   return (

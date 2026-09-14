@@ -22,38 +22,45 @@ import {
   webPageSchema,
 } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
 export function generateStaticParams() {
   return allServiceParams();
 }
 
 export async function generateMetadata(
-  props: PageProps<"/[hub]/[service]">
+  props: PageProps<"/[locale]/[hub]/[service]">
 ): Promise<Metadata> {
-  const { hub: hubSlug, service: serviceSlug } = await props.params;
+  const { hub: hubSlug, service: serviceSlug, locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
   const match = getService(hubSlug, serviceSlug);
   if (!match) return {};
   return buildMetadata({
     title: match.service.metaTitle,
     description: match.service.metaDescription,
     path: `/${hubSlug}/${serviceSlug}`,
+    locale,
   });
 }
 
 export default async function ServicePageRoute(
-  props: PageProps<"/[hub]/[service]">
+  props: PageProps<"/[locale]/[hub]/[service]">
 ) {
-  const { hub: hubSlug, service: serviceSlug } = await props.params;
+  const { hub: hubSlug, service: serviceSlug, locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
   const match = getService(hubSlug, serviceSlug);
   if (!match) notFound();
   const { hub, service } = match;
 
-  const url = `${SITE.url}/${hub.slug}/${service.slug}`;
+  const url = `${SITE.url}${localePath(locale, `/${hub.slug}/${service.slug}`)}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
+  const hubUrl = `${SITE.url}${localePath(locale, `/${hub.slug}`)}`;
   const graph = jsonLdGraph([
     webPageSchema({
       name: service.metaTitle,
       description: service.metaDescription,
       url,
+      inLanguage: locale,
     }),
     serviceSchema({
       name: service.h1,
@@ -62,8 +69,8 @@ export default async function ServicePageRoute(
       serviceType: service.primaryKeyword,
     }),
     breadcrumbSchema([
-      { name: "Home", url: SITE.url },
-      { name: hub.navLabel, url: `${SITE.url}/${hub.slug}` },
+      { name: "Home", url: homeUrl },
+      { name: hub.navLabel, url: hubUrl },
       { name: service.navLabel, url },
     ]),
     faqSchema(service.faqs),

@@ -8,18 +8,29 @@ import { CASE_STUDIES_PAGE } from "@/content/pages";
 import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
-export const metadata: Metadata = buildMetadata({
-  title: CASE_STUDIES_PAGE.metaTitle,
-  description: CASE_STUDIES_PAGE.metaDescription,
-  path: "/case-studies",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]/case-studies">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: CASE_STUDIES_PAGE.metaTitle,
+    description: CASE_STUDIES_PAGE.metaDescription,
+    path: "/case-studies",
+    locale,
+  });
+}
 
-export default function CaseStudiesPage() {
-  const url = `${SITE.url}/case-studies`;
+export default async function CaseStudiesPage(props: PageProps<"/[locale]/case-studies">) {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  const url = `${SITE.url}${localePath(locale, "/case-studies")}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
-    webPageSchema({ name: CASE_STUDIES_PAGE.metaTitle, description: CASE_STUDIES_PAGE.metaDescription, url }),
-    breadcrumbSchema([{ name: "Home", url: SITE.url }, { name: "Case Studies", url }]),
+    webPageSchema({ name: CASE_STUDIES_PAGE.metaTitle, description: CASE_STUDIES_PAGE.metaDescription, url, inLanguage: locale }),
+    breadcrumbSchema([{ name: "Home", url: homeUrl }, { name: "Case Studies", url }]),
   ]);
 
   return (

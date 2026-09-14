@@ -2,7 +2,7 @@
 
 **Priority:** P0
 **Phase:** 7
-**Status:** Not started
+**Status:** Infrastructure done, translated content not started
 
 EN is the master copy; RU, TH and HE need **native, professionally
 adapted** translations per page — the proposal explicitly rules out
@@ -21,14 +21,46 @@ rule in spirit. This needs either:
 
 ## Scope
 
-- [ ] Decide the routing strategy (`/ru/...`, `/th/...`, `/he/...` per
-      `proposal.md` §09) and implement the routing/locale infrastructure
-      (this part *can* be built now, ahead of translated content)
-- [ ] RTL layout support (CSS logical properties, icon mirroring, `bdi`)
-      — infrastructure work, doesn't need translated content to build
-- [ ] Thai font stack + ICU line-breaking verification
+- [x] Routing strategy implemented per `proposal.md` §09: EN stays
+      canonical/unprefixed (`/`, `/contact`), RU/TH/HE are prefixed
+      (`/ru/...`, `/th/...`, `/he/...`). Every route moved under
+      `src/app/[locale]/`; `src/proxy.ts` rewrites unprefixed requests to
+      `locale=en` under the hood (visible URL unchanged) and redirects
+      away any literal `/en/*` URL (single canonical URL per page). All
+      263 pages (4 locales × every static/hub/service route) prerender
+      at build time (`generateStaticParams` in
+      `src/app/[locale]/layout.tsx`, `dynamicParams = false`).
+- [x] Internal linking: every content-authored href stays canonical
+      (EN-relative, e.g. `/contact`) — `src/components/ui/LocalizedLink.tsx`
+      auto-prefixes it to the current locale by reading the real request
+      URL, so no page or content file needs to know about locales. Swapped
+      in wherever `next/link` was used directly (`Header`, `Footer`,
+      `Button`, `Breadcrumbs`, `ServiceGrid`, `RelatedServices`).
+- [x] RTL layout support: `dir="rtl"`/`lang` set server-side per locale
+      on `<html>` (`src/app/[locale]/layout.tsx`); hardcoded physical
+      Tailwind classes (`pl-`/`pr-`/`ml-`/`mr-`/`text-left`/`left-`/`right-`)
+      swapped for logical equivalents (`ps-`/`pe-`/`ms-`/`me-`/`text-start`/
+      `start-`/`end-`) across `Header`, `Footer`, `AnnouncementBar`,
+      `FeatureList`, `LocationBlock`, `PricingGuidance`, the skip-link; the
+      `ServiceGrid` "Explore →" arrow mirrors via `rtl:rotate-180`; emails
+      wrapped in `<bdi>` (Footer, Contact, Privacy, Terms) per §09's `bdi`
+      rule. **Not yet done**: a full component-by-component RTL visual QA
+      pass — verified structurally and via `dir=rtl` on a running page,
+      but not eyeballed against real Hebrew copy (no translated content
+      exists yet to check line-wrapping/mirroring against).
+- [x] Thai font stack: `Noto_Sans_Thai` loaded via `next/font/google`,
+      applied through a `.font-thai` class on `<html>` for `locale==="th"`
+      (overrides both `--font-display` and `--font-body`, since Fraunces
+      has no Thai glyphs at all). ICU line-breaking not separately
+      verified — no Thai copy exists yet to test wrapping against.
+- [x] hreflang: `buildMetadata()` now emits `alternates.languages` (all 4
+      locales + `x-default`) on every page, and `sitemap.ts` emits one
+      entry per locale per canonical path with the same reciprocal
+      alternates — this also closes `TASK-004`'s blocked hreflang item.
 - [ ] Translate/adapt Homepage (RU, TH, HE) — pilot page to validate the
-      process before scaling to all 56
+      process before scaling to all 56. **Not started** — every locale
+      currently serves the same English copy through the new routing
+      (infrastructure-only, per this task's own "deliberately not
+      auto-generated" rule above; needs a native reviewer/copywriter or
+      an explicit client sign-off to proceed with LLM-drafted copy).
 - [ ] Translate/adapt remaining hub + service pages
-- [ ] hreflang tags once more than one locale exists (depends on
-      `TASK-004-seo-schema-sitemap.md`)

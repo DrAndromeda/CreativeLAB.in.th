@@ -19,6 +19,9 @@
 
 set -euo pipefail
 
+# shellcheck source=lib/gh-retry.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/gh-retry.sh"
+
 PROJECT_TITLE="${PROJECT_TITLE:-CreativeLAB Roadmap}"
 EPICS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/docs/epics"
 
@@ -67,13 +70,11 @@ for file in "$EPICS_DIR"/EPIC-*.md; do
     continue
   fi
 
-  err="$(gh project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
-    --field "Status" --value "$board_status" 2>&1 >/dev/null)" || true
-
-  if [ -z "$err" ]; then
+  if gh_retry "$title: Status" project item-edit "$PROJECT_NUMBER" --owner "$OWNER" --url "$url" \
+    --field "Status" --value "$board_status"; then
     echo "✓ $title -> $board_status  (file says: \"$status_line\")"
   else
-    echo "! $title: $err"
+    echo "! $title: couldn't set Status"
   fi
-  sleep 1
+  sleep 2
 done

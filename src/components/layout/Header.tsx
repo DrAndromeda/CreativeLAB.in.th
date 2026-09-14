@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { useEffect, useRef, useState } from "react";
 import { PRIMARY_NAV } from "@/content/navigation";
 import { MAIN_CTAS } from "@/content/site";
@@ -88,7 +88,7 @@ export function Header() {
                 {item.label}
               </button>
               {item.children && openMenu === item.label && (
-                <div className="absolute top-full left-0 z-50 mt-2 w-72 border border-line bg-surface py-3 shadow-[0_12px_32px_rgba(20,18,16,0.08)]">
+                <div className="absolute top-full start-0 z-50 mt-2 w-72 border border-line bg-surface py-3 shadow-[0_12px_32px_rgba(20,18,16,0.08)]">
                   <Link
                     href={item.href}
                     className="block px-5 py-2 text-sm font-medium text-accent hover:underline"
@@ -171,7 +171,7 @@ export function Header() {
                     {item.label}
                   </Link>
                 </summary>
-                <div className="flex flex-col gap-1 pt-2 pb-1 pl-3">
+                <div className="flex flex-col gap-1 pt-2 pb-1 ps-3">
                   {item.children?.map((child) => (
                     <Link
                       key={child.href}

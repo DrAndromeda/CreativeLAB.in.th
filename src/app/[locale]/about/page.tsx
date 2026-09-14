@@ -11,18 +11,29 @@ import { images } from "@/assets/images";
 import { buildMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/lib/schema";
 import { SITE } from "@/content/site";
+import { localePath, toLocale } from "@/content/i18n";
 
-export const metadata: Metadata = buildMetadata({
-  title: ABOUT_PAGE.metaTitle,
-  description: ABOUT_PAGE.metaDescription,
-  path: "/about",
-});
+export async function generateMetadata(
+  props: PageProps<"/[locale]/about">
+): Promise<Metadata> {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  return buildMetadata({
+    title: ABOUT_PAGE.metaTitle,
+    description: ABOUT_PAGE.metaDescription,
+    path: "/about",
+    locale,
+  });
+}
 
-export default function AboutPage() {
-  const url = `${SITE.url}/about`;
+export default async function AboutPage(props: PageProps<"/[locale]/about">) {
+  const { locale: rawLocale } = await props.params;
+  const locale = toLocale(rawLocale);
+  const url = `${SITE.url}${localePath(locale, "/about")}`;
+  const homeUrl = `${SITE.url}${localePath(locale, "/")}`;
   const graph = jsonLdGraph([
-    webPageSchema({ name: ABOUT_PAGE.metaTitle, description: ABOUT_PAGE.metaDescription, url }),
-    breadcrumbSchema([{ name: "Home", url: SITE.url }, { name: "About", url }]),
+    webPageSchema({ name: ABOUT_PAGE.metaTitle, description: ABOUT_PAGE.metaDescription, url, inLanguage: locale }),
+    breadcrumbSchema([{ name: "Home", url: homeUrl }, { name: "About", url }]),
   ]);
 
   return (

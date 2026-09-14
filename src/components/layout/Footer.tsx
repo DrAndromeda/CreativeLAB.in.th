@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { FOOTER_COLUMNS } from "@/content/navigation";
 import { SITE } from "@/content/site";
 import { Container } from "@/components/ui/Container";
@@ -36,7 +36,7 @@ export function Footer() {
           </p>
           <p>
             <a href={`mailto:${SITE.email}`} className="hover:text-text-inverse">
-              {SITE.email}
+              <bdi>{SITE.email}</bdi>
             </a>
           </p>
         </div>
