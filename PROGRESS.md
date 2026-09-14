@@ -1,9 +1,8 @@
 # CreativeLAB.in.th — Build Progress
 
 Tracking document for implementing `proposal.md`. Updated as work proceeds.
-See `NOTES.md` for flagged assumptions, placeholders, and things that need
-real client input before launch, and `docs/OpenQuestions.md` for decisions
-(hosting, translations) that need a person, not more code.
+See `NOTES.md` for everything that needs a person — a client answer, a
+teammate decision, or external credentials — rather than more code.
 
 ## Stack
 
@@ -74,7 +73,7 @@ real client input before launch, and `docs/OpenQuestions.md` for decisions
       teammate's GitHub Pages experiment replaced the generated
       `src/app/robots.ts` / `src/app/llms.txt/route.ts` route handlers.
       Correct today, will drift as hubs/services are added. See
-      `docs/OpenQuestions.md` #3.
+      `NOTES.md` ("Technical debt").
 
 ## Phase 5 — Bot integration (Telegram + WhatsApp) — BUILT, NOT DEPLOYED
 
@@ -142,7 +141,7 @@ non-functional contact form (verified by inspecting the exported `out/`
 directly). Confirmed with the team: production is Vercel/Node, not
 GitHub Pages — `next.config.ts` is back to plain, unblocking local dev.
 `deploy.yml` itself and the stale-but-currently-working live Pages site
-are still unresolved — see `docs/OpenQuestions.md` #1 and #2.
+are still unresolved — see `NOTES.md` ("Needs a team/teammate decision").
 
 ## Phase 8 — QA — PARTIAL
 
@@ -165,7 +164,7 @@ are still unresolved — see `docs/OpenQuestions.md` #1 and #2.
 
 Blocked on real content inputs — see `NOTES.md` for the full list (contact
 details, real photography, bot credentials, legal review, translations)
-and `docs/OpenQuestions.md` for hosting/deployment decisions.
+including the hosting/deployment decision.
 
 ## How to continue
 

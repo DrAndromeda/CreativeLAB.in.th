@@ -79,8 +79,8 @@ locale routing (`src/proxy.ts`) and the contact form
 (`src/app/api/contact/route.ts`) both need middleware and API routes,
 which static export disables entirely — this was tried on 2026-09-14 and
 reverted after it broke `next dev` and would have shipped a build with no
-working `/`, `/contact`, etc. See `docs/OpenQuestions.md` for the
-still-open `.github/workflows/deploy.yml` cleanup. If you deploy behind a
+working `/`, `/contact`, etc. See `NOTES.md` for the still-open
+`.github/workflows/deploy.yml` cleanup. If you deploy behind a
 platform that needs a `Dockerfile` or specific build adapter, that isn't
 set up yet — ask before assuming a target platform.
 

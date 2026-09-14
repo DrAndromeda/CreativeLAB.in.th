@@ -40,6 +40,4 @@ The former per-phase epics' full detail wasn't lost — it's preserved in
 each corresponding `docs/tasks/TASK-*.md` file, just recategorized as a
 task instead of a separate epic. See `NOTES.md` for placeholder data and
 flagged assumptions that affect several of these tasks (contact details,
-bot credentials, legal review, translations), and `docs/OpenQuestions.md`
-for decisions pending a person's input (hosting/deployment target,
-translation process).
+bot credentials, legal review, translations, hosting/deployment target).

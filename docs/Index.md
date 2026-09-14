@@ -8,8 +8,7 @@ updating something, update it in one place.
 - [Proposals](./Proposals.md) — links to every proposal/brief and its status
 - [../README.md](../README.md) — how to run the project locally and in production
 - [../PROGRESS.md](../PROGRESS.md) — build progress against the current proposal, phase by phase
-- [../NOTES.md](../NOTES.md) — placeholder data, flagged assumptions and decisions pending client/real-world input
-- [Open Questions](./OpenQuestions.md) — decisions that need a person (client/teammate), not code
+- [../NOTES.md](../NOTES.md) — everything that needs a person (client answer, teammate decision, external credentials), not more code
 
 ## Team workflow
 
