@@ -27,16 +27,19 @@ export function ContactForm({ serviceContext }: { serviceContext?: string }) {
 
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", {
+      const text = `📦 Новая заявка с CreativeLAB
+━━━━━━━━━━━━━━━━━━━━━
+👤 Имя: ${name}
+📧 Email: ${email}
+💬 Сообщение: ${message}
+🔧 Услуга: ${serviceContext || (form.get("service") as string) || "—"}
+━━━━━━━━━━━━━━━━━━━━━
+🌐 creativelab.in.th`;
+
+      const res = await fetch("https://api.telegram.org/bot" + "8529286378:AAEdZhNDVH6CWiTMI2JVvX7XnLK3IT6-6ZI" + "/sendMessage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          service: serviceContext ?? form.get("service"),
-          website: form.get("website"),
-        }),
+        body: JSON.stringify({ chat_id: "237228075", text }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
