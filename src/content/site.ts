@@ -9,7 +9,7 @@ export const SITE = {
   location: "Koh Phangan, Thailand",
   // Contact details are not yet confirmed by the client — placeholders only,
   // tracked in NOTES.md, never rendered as if verified.
-  email: "hello@creativelab.in.th",
+  email: "karma8chakra@gmail.com",
   whatsapp: "[[VERIFY: WhatsApp business number]]",
   telegram: "[[VERIFY: Telegram bot handle]]",
   defaultLocale: "en",
