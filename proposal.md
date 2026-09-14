@@ -122,6 +122,315 @@
 | P1 | /contact/ | Contact | Lead conversion | contact creative agency Koh Phangan |
 | P2 | /journal/ | Journal | Editorial/supporting SEO content | Koh Phangan creative marketing |
 
+## 🧭 МЕНЮ — ПРИНЦИП AdFoto/4-20
+
+**Правило:** без тривиальных страниц («Главная», «О нас», «Услуги»). Только конкретные названия услуг.
+
+### Меню CreativeLAB
+
+| Категория | Страницы в меню |
+|---|---|
+| **Advertising** | `Google Ads` • `Meta Ads` • `Display` • `Programmatic` • `Retargeting` |
+| **Branding** | `Brand Identity` • `Logo Design` • `Brand Book` • `Packaging` • `Naming` |
+| **Photography** | `Commercial` • `Product` • `Food` • `Menu` • `Villa` • `Architecture` • `Drone` • `FPV` |
+| **Video** | `Commercial Video` • `Reels` • `Property Tours` • `Aerial` |
+| **Social Media** | `Instagram Management` • `Content Creation` • `Influencer` • `Monthly Retainers` |
+| **Digital** | `Web Design` • `SEO` • `Google Business Profile` • `Reputation` • `Listings` |
+| **Hospitality** | `Restaurant Social` • `Restaurant Ads` • `Restaurant Website` • `Food Styling` |
+
+### Mega-menu или кастомный дропдаун
+Каждая категория раскрывается в подменю со списком страниц.
+Для десктопа — hover mega-menu.
+Для мобилы — аккордеон.
+
+---
+
+## 🤖 PREMIUM ARCHITECTURE: ORGANIC SEO + GEO (AI NEURAL SEARCH)
+
+> Архитектура должна быть одинаково понятна Google и нейросетям (SearchGPT, Gemini, Perplexity, Claude, Google AI Overviews).
+
+### 1. Entity Hub-and-Spoke
+
+| Entity (Topic Cluster) | Pillar Page | Spoke Pages |
+|---|---|---|
+| Photography | `/photography/` | Commercial, Product, Food, Menu, Villa, Architecture, Drone, FPV |
+| Social Media | `/social-media/` | Instagram Management, Content Creation, Influencer, Monthly Retainers |
+| Video Production | `/video-production/` | Commercial Video, Reels, Property Tours, Aerial |
+| Web & Digital | `/websites-digital/` | Web Design, SEO, Google Business Profile, Reputation, Listings |
+| Branding | `/branding-creative/` | Brand Identity, Logo, Brand Book, Packaging, Naming |
+| Advertising | `/advertising/` | Google Ads, Meta Ads, Display, Programmatic, Retargeting |
+| Food & Hospitality | `/food-restaurants/` | Restaurant Social, Restaurant Ads, Restaurant Website, Food Styling |
+| Koh Phangan | `/locations/koh-phangan/` | creative agencies, studios, production |
+
+Каждая spoke page — самостоятельный интент, а не тонкая дверь.
+
+### 2. Direct Answer Architecture
+
+Каждая страница начинается с **Direct Answer** (50–80 слов):
+- Точный ответ на главный поисковый запрос
+- Без воды, без маркетинга
+- Нейросеть может взять этот абзац как сниппет
+
+Формат: `## H1 → Direct Answer → подробности`
+
+### 3. Semantic HTML + Schema
+
+```
+<main itemscope itemtype="https://schema.org/Service">
+  <h1 itemprop="name">Brand Identity Design Koh Phangan</h1>
+  <p itemprop="description">Direct answer text here.</p>
+  <section itemscope itemtype="https://schema.org/FAQPage">...</section>
+</main>
+```
+
+### 4. Вложенный FAQ
+
+Каждая страница услуги — 6–10 реальных FAQ с FAQPage schema.
+Вопросы = то что реально спрашивают клиенты.
+
+### 5. LLMs.txt
+
+Создать `llms.txt` в корне:
+```
+# CreativeLAB — Creative Agency on Koh Phangan
+
+## About
+CreativeLAB is a premium creative agency...
+
+## Services
+- Brand Identity: https://creativelab.in.th/brand-identity/
+- Commercial Photography: https://creativelab.in.th/commercial-photography/
+...
+
+## FAQ
+- Q: How much does a branding project cost?
+  A: Branding projects start at $X depending on...
+```
+
+Плюс `llms-full.txt` с полным контентом для AI crawlers.
+
+### 6. Entity Consistency (GEO)
+
+| Entity | Поле | Значение |
+|---|---|---|
+| Organization | name | CreativeLAB |
+| Organization | location | Koh Phangan, Surat Thani, Thailand |
+| LocalBusiness | geo | 9.75°N, 100.03°E |
+
+### 7. AI-Optimized Internal Linking (Entity Graph)
+
+```
+Brand Identity
+  ├── Logo Design → `/logo-design/`
+  ├── Brand Book → `/brand-book/`
+  ├── Packaging Design → `/packaging-design/`
+  └── Commercial Photography → `/commercial-photography/`
+```
+
+### 8. Content Depth Rule
+
+| Тип страницы | Мин. слов | FAQ | Schema |
+|---|---|---|---|
+| Pillar (hub) | 1500+ | 8–12 | Service + FAQ |
+| Spoke (под-услуга) | 800+ | 6–10 | Service + FAQ |
+| Portfolio/Case | 500+ | 3–5 | CreativeWork |
+| Location | 500+ | 4–6 | LocalBusiness |
+
+### 9. Crawl Budget Optimization
+
+- robots.txt: разрешить всё важное
+- Sitemap: все страницы, приоритет P0–P2
+- hreflang: каждая страница × 4 языка
+- canonical: всегда указан
+- 404: кастомная страница с навигацией
+
+### 10. Premium Visual + AI Readability
+
+- Каждая страница: Hero + Direct Answer → блоки → FAQ → CTA
+- Изображения: alt с описанием (нейросети читают alt)
+- Таблицы: `<table>` с `<caption>` и `<th>` (не скриншоты)
+- Формы: `<form>` с `aria-label` и `name` аттрибутами
+
+---
+
+## 📋 CREATIVELAB — SEO / IA / CONTENT MASTER SPEC
+
+> Это полная спецификация для Claude. Самостоятельно не исполнять.
+
+### 1. ПОЗИЦИОНИРОВАНИЕ
+
+CreativeLAB — premium creative advertising and digital marketing agency для бизнесов на: Koh Phangan, Koh Samui, Koh Tao.
+
+Главные направления: Advertising, Social Media, Content Creation, Photography, Video Production, Digital Marketing, Google Ads, Meta Ads, SEO, Web Design, Branding, Villas & Real Estate, Restaurants & Hospitality.
+
+CreativeLAB НЕ должен восприниматься как фотограф, SMM-менеджер, production studio или web studio.
+Главное: **Creative advertising + marketing + content production.**
+
+---
+
+### 2. ОСНОВНОЕ МЕНЮ
+
+**SERVICES**
+- **Advertising**: Advertising, Google Ads, Meta Ads, Performance Marketing
+- **Social & Content**: Social Media Management, Content Creation, Reels & Short-Form Video
+- **Photo & Video**: Commercial Photography, Commercial Video, Drone & FPV, Food Photography
+- **Digital**: Digital Marketing, SEO, Web Design, Landing Pages
+- **Creative**: Branding, Graphic Design, Creative Direction
+
+**INDUSTRIES**: Villas & Real Estate, Hotels & Resorts, Restaurants & Food, Wellness & Retreats, Tourism & Hospitality, Events, Brands & Lifestyle
+
+**LOCATIONS**: Koh Phangan, Koh Samui, Koh Tao
+
+**WORK**: Portfolio, Case Studies • **JOURNAL** • **ABOUT** • **CONTACT**
+
+---
+
+### 3. ГЛАВНАЯ СТРАНИЦА
+
+Главный H1: **Creative Advertising & Marketing Agency on Koh Phangan** (или в Thailand's Islands).
+Подзаголовок: Advertising, social media, content, photography, video, websites and digital marketing for businesses across Koh Phangan, Koh Samui and Koh Tao.
+Не делать H1: "Creative Lab", "Creative Agency", "Making Brands Matter".
+
+---
+
+### 4. P0 — ОСНОВНЫЕ SEO-СТРАНИЦЫ
+
+| URL | Primary Intent | Priority |
+|---|---|---|
+| /services/advertising/ | advertising agency | P0 |
+| /services/social-media-management/ | social media management | P0 |
+| /services/content-creation/ | content creation | P0 |
+| /services/commercial-photography/ | commercial photography | P0 |
+| /services/commercial-video/ | commercial video | P0 |
+| /services/digital-marketing/ | digital marketing agency | P0 |
+| /services/google-ads/ | Google Ads agency | P0 |
+| /services/meta-ads/ | Meta Ads agency | P0 |
+| /services/seo/ | SEO agency | P0 |
+| /services/web-design/ | web design agency | P0 |
+| /services/branding/ | branding agency | P0 |
+| /services/villas-real-estate/ | villa / real estate marketing | P0 |
+| /services/restaurant-marketing/ | restaurant marketing | P0 |
+
+---
+
+### 5-13. SERVICE KEYWORD MAPS (каждая страница с ключами)
+
+**Advertising** — Primary: `advertising agency Koh Phangan/Samui/Tao`
+**Google Ads** — Primary: `Google Ads agency`, `Google Ads Koh Phangan`
+**Meta Ads** — Primary: `Meta Ads agency`, `Facebook Ads`
+**Social Media** — Primary: `social media management Koh Phangan`
+**Content Creation** — Primary: `content creation`, `content agency`
+**Commercial Photography** — Primary: `commercial photography Koh Phangan`
+**Commercial Video** — Primary: `commercial video production Koh Phangan`
+**Digital Marketing** — Primary: `digital marketing agency Koh Phangan`
+**SEO** — Primary: `SEO agency Koh Phangan`
+**Web Design** — Primary: `web design Koh Phangan`
+**Branding** — Primary: `branding agency`, `brand identity`
+**Villas & Real Estate** — Primary: `real estate marketing`, `villa marketing`
+**Restaurant Marketing** — Primary: `restaurant marketing agency`
+
+---
+
+### 14. LOCATIONS
+
+Три страницы: /locations/koh-phangan/, /locations/koh-samui/, /locations/koh-tao/
+Каждая уникальная. Не template swap.
+
+---
+
+### 15. ГЛАВНОЕ ПРАВИЛО GEO
+
+НЕ делать: /advertising-koh-phangan/, /seo-koh-samui/ и т.д. массово.
+Вместо: Service pages + Location hubs + Industry pages.
+
+---
+
+### 16. SERVICE PAGE STRUCTURE
+
+Каждая: H1 → Direct Answer (40-60 слов) → Service Overview → Deliverables → Process → Portfolio → Industries → Locations → FAQ → CTA
+
+---
+
+### 17. СТИЛЬ ТЕКСТА
+
+Тон: creative + premium + intelligent + commercial.
+Не как SEO-агентство, фрилансер или generic marketing.
+Показывать: идея → стратегия → производство → distribution → результат.
+Запрещено: "we bring your vision to life", "we make brands unforgettable".
+
+---
+
+### 18. TITLE + META
+
+Title: `[Service] | CreativeLAB` или `[Service] in KP, KS & KT | CreativeLAB`
+Meta: service + target business + geography + value proposition
+
+---
+
+### 19. INTERNAL LINKING
+
+SERVICE ↔ INDUSTRY ↔ LOCATION ↔ CASE STUDY ↔ JOURNAL
+Пример: Restaurant Marketing → Restaurant Case Study → Koh Samui → Food Photography → Instagram Management → Meta Ads.
+
+---
+
+### 20. CASE STUDIES
+
+Hero → Client → Challenge → Strategy → Creative → Production → Advertising → Result → Gallery → Services → Location. Без выдуманных цифр.
+
+---
+
+### 21. PORTFOLIO
+
+Фильтры: Advertising, Social Media, Photography, Video, Branding, Web, Villas, Restaurants, Hospitality.
+Каждый проект ссылается на services.
+
+---
+
+### 22. JOURNAL — кластеры
+
+Social Media • Advertising • Content • Tourism / Hospitality • Local (marketing on each island)
+Journal усиливает коммерческие страницы.
+
+---
+
+### 23. КАННИБАЛИЗАЦИЯ
+
+Перед созданием страницы: проверить Intent, SERP, existing URLs, keywords. Если intent одинаковый — не создавать.
+
+---
+
+### 24. ПРИОРИТЕТЫ
+
+**P0:** Advertising, Social Media, Content, Commercial Photography, Commercial Video, Digital Marketing, Google Ads, Meta Ads, SEO, Web Design, Branding, Villas, Restaurant Marketing, KP, Samui, Tao
+**P1:** Performance Marketing, Reels, Drone & FPV, Food Photography, Hotels, Wellness, Tourism, Landing Pages, Local SEO
+**P2:** Graphic Design, Logo, Product Photography, narrow production pages
+
+---
+
+### 25. ФИНАЛЬНЫЙ KEYWORD MAPPING
+
+До контента: **Keyword Mapping → IA → Content → Links → Technical SEO. Не наоборот.**
+
+---
+
+### 🎯 ЗАДАНИЕ: ПЛАН БЕСПЛАТНЫХ БЕКЛИНКОВ (ПЕРВЫЕ 3 МЕСЯЦА)
+
+> Для Claude: план бесплатных беклинков для CreativeLAB.in.th.
+
+**Локации:** Koh Phangan, Koh Samui, Koh Tao
+
+**Каналы:**
+1. **Бизнес-директории** — GBP, Bing Places, Yelp, Thai YP, Thaivisa, KP local directories
+2. **Локальные сайты** — Phanganist, Samui sites, local blogs, island forums
+3. **Industry** — Houzz, Archilovers, Pinterest, Behance, Dribbble
+4. **Guest posts** — Thailand business blogs, tourism sites, villa rental platforms
+5. **Link bait** — Guides: "Marketing on KP", "Social Media for Thai Tourism"
+6. **Sustainability / Community** — местные сообщества
+
+**Формат:** URL → тип ссылки → сложность → приоритет (Week 1 / Month 1 / Months 2-3)
+
+
 ## 03_PAGE_TEMPLATE
 
 | Order | Block | Requirement |
@@ -745,6 +1054,74 @@
 ---
 
 
+
+
+---
+
+## 🤖 TELEGRAM БОТЫ — PREMIUM INTAKE FUNNEL
+
+> Задача для Claude: разработать Telegram ботов для FORMA.in.th и CreativeLAB.in.th.
+
+### Концепция
+Бот — первое впечатление о компании. Premium дизайн, эмоции, логика, 4 языка.
+
+### Flow
+```
+Start → Выбор языка → Приветствие (атмосферное, визуальное, с медиа)
+→ Выбор услуги → Локация → Бюджет (деликатно, диапазоны, опционально)
+→ Файлы/референсы (фото, документы, голосовые)
+→ Контактные данные → Confirmation → Ссылка на сайт
+```
+
+### Дизайн
+- Приветствие — не сухое, а с эмодзи, фото, атмосферой
+- Inline кнопки с иконками, не просто текст
+- Превью портфолио (фото/видео) по ходу диалога
+- Typing/loading indicators
+- Брендовые цвета (CreativeLAB: #121212/#fff/акцент; FORMA: #0f5f96/#1e88c7)
+
+### 4 языка
+| Язык | Переключатель | Особенности |
+|---|---|---|
+| 🇬🇧 EN | Start → English | Default |
+| 🇷🇺 RU | Start → Русский | |
+| 🇹🇭 TH | Start → ภาษาไทย | Thai текст |
+| 🇮🇱 HE | Start → עברית | RTL поддержка |
+
+Язык сохраняется в сессии. Переключение в любой момент без потери прогресса.
+
+### Логика
+- 0 dead ends — каждый путь ведёт к контакту
+- Back button на каждом шаге
+- Сохранение прогресса (вышел → вернулся → продолжил)
+- Smart fallback: услуги нет в локации → предложить похожую
+- Auto-response: "Мы получили запрос, ответим в течение 24ч"
+
+### Услуги
+**FORMA:** Architecture, Villa Design, Interior, Construction, Renovation, Turnkey, PM, Supervision + под
+**CreativeLAB:** Advertising, Social Media, Photography, Video, Branding, Web, SEO, Digital + под
+
+Каждая услуга → описание → пример работы (фото) → CTA
+
+### Локации
+**FORMA:** Koh Phangan, Koh Samui, Koh Tao, Bali
+**CreativeLAB:** Koh Phangan, Koh Samui, Koh Tao
+
+### Тестирование
+- Все услуги × все локации × 4 языка = 0 dead ends
+- Back button на каждом шаге
+- Переключение языка без потери прогресса
+- Голосовые сообщения, файлы, фото
+- Edge cases: пустой бюджет, незнакомый запрос
+
+### Технология
+Node.js/Telegraf или Python/python-telegram-bot. Webhook. Google Sheets/Airtable для заявок.
+
+### Delivery
+Полный код в репозиторий, README, тестовый бот @username, миграция на production.
+
+
+
 ## 🧪 ФИНАЛЬНОЕ ТЕСТИРОВАНИЕ — ОБЯЗАТЕЛЬНО
 
 После того как любой элемент сайта готов (страница, блок, компонент, бот, форма) — **он должен быть протестирован**, прежде чем считаться завершённым.
@@ -843,30 +1220,98 @@
 
 ---
 
-## 🗿 ИСПОЛЬЗОВАНИЕ КОНТЕНТА С AdFoto (архив)
+## 🗿 AdFoto.com.ua — РЕФЕРЕНС ДЛЯ CREATIVELAB
+
+Для CreativeLAB.in.th **AdFoto.com.ua** — референс.
+Нужно использовать историческую версию AdFoto именно через Web Archive / Wayback Machine и найти максимально полную сохранённую версию сайта.
+Нас интересует не только структура сайта, а буквально весь полезный материал, который можно использовать при создании и расширении CreativeLAB.
 
 ### Источник
-https://web.archive.org/web/20220408023113/https://adfoto.com.ua/predmetnaya-semka.html
+https://web.archive.org/web/20220408023113/https://adfoto.com.ua/
 
-И другие страницы adfoto.com.ua — старый рекламный сайт с предметной съёмкой, рекламными услугами, production.
+### Что изучить в AdFoto
 
-### Что использовать
-- **Тексты**: описания услуг, портфолио, преимущества — как контент-референс (перевести/адаптировать на EN)
-- **Фото**: тематические изображения предметной съёмки, food-фотографии, портфолио — как временные placeholders
-- **Структура услуг**: как AdFoto описывал рекламные услуги — взять за основу структуру для CreativeLAB
-- **Кейсы/примеры**: описания проектов (клиенты, задачи, результаты)
+Из AdFoto нужно изучить и при возможности сохранить:
 
-### Услуги AdFoto которые подходят CreativeLAB
-- Предметная съёмка (subject photography)
-- Food-фотография
-- Fashion-съёмка
-- Рекламные услуги (ATL/BTL)
-- SMM и digital маркетинг
-- Видеопродакшн
-- Дизайн полиграфии
-- Брендинг и фирменный стиль
+- структуру сайта;
+- структуру каждой страницы;
+- размер и объём текстов;
+- заголовки H1/H2/H3;
+- Title и Description;
+- структуру блоков;
+- порядок блоков;
+- услуги и их группировку;
+- отдельные страницы услуг;
+- коммерческие формулировки;
+- преимущества;
+- описания процессов;
+- FAQ;
+- CTA;
+- формы;
+- портфолио и кейсы;
+- фотографии;
+- подписи к фотографиям;
+- alt;
+- внутренние ссылки;
+- меню;
+- SEO-структуру;
+- любые другие элементы, которые могут быть полезны CreativeLAB.
 
-> Все тексты — контент-референс. Не копировать дословно. Адаптировать под премиум-сегмент Koh Phangan.
+Особенно важно посмотреть **объём текстов на страницах**. Нам нужен реальный ориентир: насколько подробно AdFoto раскрывал каждую услугу, сколько было блоков и какой объём контента использовался для коммерческой SEO-страницы.
+
+### Контент
+
+Если текст AdFoto релевантен CreativeLAB, его можно использовать как исходный материал.
+Не обязательно переписывать всё с нуля.
+Можно:
+
+- взять релевантную часть текста;
+- адаптировать под CreativeLAB;
+- изменить географию и контекст на Koh Phangan;
+- объединить с нашим ТЗ;
+- дополнить современными SEO-требованиями;
+- затем профессионально перевести на русский, тайский и другие необходимые языки.
+
+То есть **AdFoto может быть источником исходного контента**, если конкретный материал действительно подходит CreativeLAB.
+
+### Фотографии
+
+Фотографии AdFoto также исследовать максимально полно.
+Если изображения доступны из Web Archive, зафиксировать:
+
+- оригинальный архивный URL;
+- страницу, где изображение использовалось;
+- назначение изображения;
+- размер/формат, если доступен;
+- к какому разделу или услуге оно относится.
+
+Если технически возможно и допустимо сохранить изображения из архива — сохранить их отдельно.
+Не нужно автоматически отбрасывать фотографии только потому, что это старый сайт. Нам важно понять, какие визуальные материалы использовались для продажи конкретных услуг и какие из них потенциально можно использовать как референс или исходный материал.
+
+### Главный принцип
+
+Не делать простое:
+**«Посмотрели AdFoto → написали похожий сайт».**
+
+Нужно сделать:
+**AdFoto Web Archive → полностью разобрали → сохранили структуру, контент, услуги, тексты, объём, блоки и визуальные материалы → сравнили с нашим ТЗ → адаптировали лучшее под CreativeLAB.**
+
+CreativeLAB уже существует, поэтому ничего хорошего из текущей версии не удалять.
+
+Нужно определить:
+
+- Что из AdFoto стоит добавить в CreativeLAB.
+- Что из AdFoto стоит расширить в уже существующих страницах.
+- Какие страницы CreativeLAB стоит создать.
+- Какие тексты можно адаптировать.
+- Какие фотографии можно использовать или взять за референс.
+- Какой объём текста нужен для каждой страницы.
+- Какие SEO-элементы можно улучшить на основе AdFoto.
+- Какие решения AdFoto устарели и использовать их не нужно.
+
+В финале подготовить **подробную карту AdFoto → CreativeLAB** с конкретными рекомендациями по каждой странице.
+
+**Главное:** не потерять ни структуру, ни тексты, ни фотографии, ни услуги, ни объём контента оригинального AdFoto. Сначала максимально полно собрать материал, потом принимать решения, что именно переносить и адаптировать.
 
 ---
 

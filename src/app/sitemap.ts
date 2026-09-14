@@ -3,6 +3,8 @@ import { HUBS } from "@/content/hubs";
 import { SITE } from "@/content/site";
 import { DEFAULT_LOCALE, LOCALES, localeAlternates, localePath } from "@/content/i18n";
 
+export const dynamic = "force-static";
+
 const STATIC_PATHS = [
   "/",
   "/about",

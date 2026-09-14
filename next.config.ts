@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  images: { unoptimized: true },
+  basePath: "/CreativeLAB.in.th",
+  assetPrefix: "/CreativeLAB.in.th/",
 };
 
 export default nextConfig;
