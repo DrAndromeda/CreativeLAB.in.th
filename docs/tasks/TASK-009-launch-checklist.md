@@ -5,7 +5,8 @@
 **Status:** Not started
 
 Final pre-launch checklist. Blocked on real content inputs — see
-`NOTES.md` for the running list of what's still a placeholder.
+`PROGRESS.md`'s "Open Questions & Blockers" for the running list of
+what's still a placeholder.
 
 ## Scope
 
@@ -19,7 +20,7 @@ Final pre-launch checklist. Blocked on real content inputs — see
 - [ ] Analytics + conversion tracking configured (no invented tracking
       IDs shipped)
 - [ ] Domain, hosting and deployment pipeline finalized — see
-      `NOTES.md`: a GitHub Pages static-export pipeline
+      `PROGRESS.md`'s "Open Questions & Blockers": a GitHub Pages static-export pipeline
       (`.github/workflows/deploy.yml`) exists but is incompatible with
       this site's locale routing and contact form (both need
       middleware/API routes, which static export disables); confirmed

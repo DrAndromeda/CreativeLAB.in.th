@@ -38,6 +38,7 @@ sync with each task's own `**Status:**` line — see `docs/tasks/README.md`):
 
 The former per-phase epics' full detail wasn't lost — it's preserved in
 each corresponding `docs/tasks/TASK-*.md` file, just recategorized as a
-task instead of a separate epic. See `NOTES.md` for placeholder data and
+task instead of a separate epic. See `PROGRESS.md`'s "Open Questions &
+Blockers" for placeholder data and
 flagged assumptions that affect several of these tasks (contact details,
 bot credentials, legal review, translations, hosting/deployment target).

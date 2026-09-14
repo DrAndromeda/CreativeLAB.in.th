@@ -4,8 +4,8 @@ Premium creative content & advertising agency website for Koh Phangan,
 Thailand. Built with Next.js (App Router) + TypeScript + Tailwind CSS.
 
 See `proposal.md` for the full brief, `PROGRESS.md` for what's built so
-far, and `NOTES.md` for placeholder data / decisions flagged for client
-follow-up before launch.
+far, including its "Open Questions & Blockers" section for placeholder
+data / decisions flagged for client follow-up before launch.
 
 ## Project docs & team workflow
 
@@ -40,7 +40,7 @@ Turbopack and hot-reloads on file changes.
 
 Copy `.env.example` to `.env.local` and fill in values as they become
 available. Nothing is required to run the site locally — features that
-depend on these fall back gracefully (see `NOTES.md`):
+depend on these fall back gracefully (see `PROGRESS.md`):
 
 | Variable | Purpose | Fallback when unset |
 |---|---|---|
@@ -79,14 +79,14 @@ locale routing (`src/proxy.ts`) and the contact form
 (`src/app/api/contact/route.ts`) both need middleware and API routes,
 which static export disables entirely — this was tried on 2026-09-14 and
 reverted after it broke `next dev` and would have shipped a build with no
-working `/`, `/contact`, etc. See `NOTES.md` for the still-open
-`.github/workflows/deploy.yml` cleanup. If you deploy behind a
+working `/`, `/contact`, etc. See `PROGRESS.md`'s "Open Questions &
+Blockers" for the still-open `.github/workflows/deploy.yml` cleanup. If you deploy behind a
 platform that needs a `Dockerfile` or specific build adapter, that isn't
 set up yet — ask before assuming a target platform.
 
-Before a real launch, see the outstanding items in `NOTES.md` (contact
-details, bot credentials, email/CRM delivery for the contact form) and
-the phase checklist in `PROGRESS.md`.
+Before a real launch, see the outstanding items in `PROGRESS.md`'s
+"Open Questions & Blockers" section (contact details, bot credentials,
+email/CRM delivery for the contact form) and its phase checklist.
 
 ## Project structure
 
