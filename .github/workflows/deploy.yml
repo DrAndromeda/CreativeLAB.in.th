@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Add root index.html and locale directories
+      - name: Add root index.html, locale dirs, and EN fallback pages
         run: |
           cp out/en.html out/index.html
           for locale in en ru th he; do
@@ -28,15 +28,15 @@ jobs:
               cp "out/${locale}.html" "out/${locale}/index.html"
             fi
           done
-          # Also copy EN service pages to root (so menu links without locale work)
-          en_services="advertising social-media villas-real-estate food-restaurants business-local-presence websites-digital video-production branding-creative about contact portfolio case-studies journal privacy terms"
-          for service in $en_services; do
-            if [ -f "out/en/${service}.html" ]; then
-              cp "out/en/${service}.html" "out/${service}.html"
-              echo "Copied: ${service}.html"
-            fi
+          # Recursively copy ALL EN files to root (covers sub-pages too)
+          cd out/en
+          find . -type f -name '*.html' | while read f; do
+            dir="$(dirname "$f")"
+            mkdir -p "../$dir"
+            cp "$f" "../$f"
+            echo "Copied: $f"
           done
-          echo "Added locale index.html files and EN fallback services"
+          echo "Added locale index.html files and EN fallback pages"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
