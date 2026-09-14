@@ -19,6 +19,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Add root index.html and locale directories
+        run: |
+          cp out/en.html out/index.html
+          for locale in en ru th he; do
+            if [ -f "out/${locale}.html" ] && [ ! -f "out/${locale}/index.html" ]; then
+              mkdir -p "out/${locale}"
+              cp "out/${locale}.html" "out/${locale}/index.html"
+            fi
+          done
+          echo "Added locale index.html files"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
