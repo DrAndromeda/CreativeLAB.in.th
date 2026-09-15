@@ -1,0 +1,7 @@
+:HL["/CreativeLAB.in.th/_next/static/chunks/0m3ejv8axv5py.css","style"]
+:HL["/CreativeLAB.in.th/_next/static/media/03bda585a99c6450-s.p.32sris142tqlb.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/CreativeLAB.in.th/_next/static/media/3c7c6164b2587822-s.p.16u3vygyjnhr0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/CreativeLAB.in.th/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/CreativeLAB.in.th/_next/static/media/bfd813093b8ca1bb-s.p.3ok2djvs6w93k.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/CreativeLAB.in.th/_next/static/media/f304c3cf3765fb5f-s.p.0h0-3wqrkgcb1.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"locale","param":{"type":"d","key":"he","siblings":["api"]},"prefetchHints":4208,"slots":{"children":{"name":"hub","param":{"type":"d","key":"branding-creative","siblings":["about","case-studies","contact","journal","portfolio","privacy","terms"]},"prefetchHints":4192,"slots":{"children":{"name":"service","param":{"type":"d","key":"creative-direction","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"uMSn85q-H4CwyQwlmcEbQ"}
