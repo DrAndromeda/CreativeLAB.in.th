@@ -1,19 +1,29 @@
-# Improvements.md — CreativeLAB.in.th
+# Improvements.md — FORMA.in.th
 
 > **ПРИОРИТЕТ №1: ДИЗАЙН.**
-> Этот сайт — в первую очередь дизайн-продукт, а не текстовый блог.
+> Сайт — в первую очередь дизайн-продукт, а не текстовый блог.
 > Визуальный язык: **петроглифы** (высеченные изображения на камне)
 > + сакральная геометрия + люкс-палитра + анимация высекания.
 > **НЕ** наскальная живопись, **НЕ** иероглифы, **НЕ** руны, **НЕ** клипарт,
 > **НЕ** эзотерика. Каждая страница начинается с визуальной идеи (глиф,
-> схема, анимация). Текст подстраивается под дизайн-сетку.
+> blueprint). Текст подстраивается под дизайн-сетку.
 > **Дизайн ведёт, контент подтверждает.**
 
+> **ПРИОРИТЕТ №2: LIVE AUDIT.**
+> Сайт уже работает и имеет реальный контент. Прежде чем строить новое —
+> **починить сломанное**. Раздел 0.10 содержит 9 конкретных задач из
+> последнего аудита живого сайта. `[P0]` — блокеры, чинятся первыми.
+
 > **РЕЖИМ: PRODUCTION-READY.**
-> Сайт должен быть 100% готовым с первого коммита. Не заглушки, а готовый
-> продукт. Если данных нет — Claude Code генерирует их в премиум-качестве,
-> близко к реальности, и продолжает сборку. Блокировка — только для внешних
-> API-ключей (токен бота, платёжка).
+> Не заглушки, а готовый продукт. Если данных нет — Claude Code генерирует
+> их в премиум-качестве, близко к реальности, и продолжает сборку.
+> Блокировка — только для внешних API-ключей (токен бота, платёжка).
+
+> **ОСОБЕННОСТЬ FORMA:**
+> Static-first / no CMS. Никакой БД и админки в первом релизе.
+> 13 услуг, 11 локаций, 4 языка. Обязательный `NOTES.md`.
+> Редакционное примечание: аудит развертывания от 13.09.2026 живёт в
+> `NOTES.md`, не здесь. Правки от 18.09.2026 — в разделе 0.10 этого файла.
 
 > **Читать первым:** раздел 22 «Claude Code Instructions».
 
@@ -24,87 +34,369 @@
 Легенда: `[DONE]` / `[PARTIAL]` / `[TODO]` / `[IN PROGRESS]` / `[BLOCKED]`.
 
 ### 0.1. Документация
-- [DONE] `proposal.md` — оригинальное ТЗ.
+- [DONE] `proposal.md` — объединённое ТЗ (Part 1 + Part 2).
 - [DONE] `Improvements.md` — этот файл.
-- [DONE] Контакты с реального сайта: `+66 80 870 5704` (WhatsApp),
-  `Koh Phangan, Surat Thani, Thailand`.
-- [TODO] `README.md` — обзор репозитория.
+- [DONE] `NOTES.md` — журнал решений, ассумпций и багов.
+- [TODO] `README.md` — обзор репозитория (см. задачу 10).
+- [TODO] `URL_INTENT_MAP.md` — таблица по каждой странице (см. задачу 3).
+- [TODO] `INTERNAL_LINKING_MAP.md` — карта перелинковки (см. задачу 3).
+- [TODO] `.env.example` — плейсхолдеры секретов.
 
 ### 0.2. Дизайн
-- [TODO] Design tokens.
-- [TODO] Логотип, favicon.
-- [TODO] Design system.
-- [TODO] Luxury blocks.
+- [DONE] Brand shell + design system (Astro).
+- [PARTIAL] Luxury blocks (компоненты есть, но не все).
 - [TODO] Petroglyph-глифы.
 - [TODO] Анимации высекания.
 - [TODO] Схема на каждую страницу.
+- [TODO] Логотип, favicon.
 
 ### 0.3. Контент
-- [TODO] Уникальный текст 10/10 на 4 языках.
+- [DONE] 13 услуг (EN) — включая Eco Construction и Concrete Construction
+  Turnkey (см. задачу 9 — проверить полноту лендингов).
+- [DONE] 11 локаций (EN).
+- [DONE] 6 концепт-проектов.
+- [PARTIAL] Журнал — 3 статьи из 12 требуемых категорий (см. задачу 7).
+- [DONE] About, Process, Contact, Legal.
+- [PARTIAL] Переводы RU / TH — полные (по аудиту). HE — частично.
 - [TODO] Direct Answer на каждой странице.
-- [TODO] 8 hubs + 50+ подуслуг.
-- [TODO] Кейсы / портфолио.
-- [TODO] Журнал.
-- [TODO] FAQ.
+- [TODO] Проверка объёмов по таблице Content Depth (см. задачу 6).
 
 ### 0.4. Функционал
-- [TODO] Header / footer / nav / lang switcher.
-- [TODO] Внутренний поиск.
-- [TODO] Формы.
-- [TODO] Telegram bot.
-- [TODO] WhatsApp bot.
-- [TODO] Price tables.
-- [TODO] Process schemas / Work plans.
+- [DONE] Header / footer / nav / lang switcher.
+- [BROKEN] Форма контакта — Cloudflare Pages Function не работает на
+  GitHub Pages (см. задачу 5, P1).
+- [DONE] Telegram bot `@formaisland_bot` (запущен через long polling).
+- [PARTIAL] WhatsApp bot — webhook требует публичный HTTPS.
+- [UNKNOWN] Bot intake funnel (язык → услуга → локация → бюджет → контакт) —
+  не подтверждено, что реализован (см. задачу 8, P1).
+- [TODO] Price tables — есть в базовом виде, но не на всех страницах.
+- [TODO] Process schemas / Work plans — анимированные.
 - [TODO] Featured snippets blocks.
+- [TODO] Внутренний поиск.
 
 ### 0.5. Технический слой
-- [TODO] Next.js App Router + TS strict.
-- [TODO] i18n (next-intl).
-- [TODO] JSON-LD.
+- [DONE] Astro (static-first).
+- [DONE] i18n (routing).
+- [DONE] JSON-LD (LocalBusiness / ProfessionalService).
+- [DONE] `sitemap.xml` + `robots.txt`.
+- [DONE] Деплой на GitHub Pages (peaceiris/actions-gh-pages@v4).
+- [DONE] Canonical + hreflang (проверено в head).
+- [DONE] Хлебные крошки (исправлены).
+- [BROKEN] Base path bug — ссылки на проекты ведут на 404 (см. задачу 1, P0).
 - [TODO] `llms.txt` + `llms-full.txt`.
-- [TODO] `robots.txt` + `sitemap.xml`.
 - [TODO] OG / Twitter cards.
 - [TODO] Аналитика (GA4 + Umami).
-- [TODO] CI / CD.
-- [TODO] Деплой на прод.
+- [TODO] CI / CD (стабильность).
 
 ### 0.6. Локализация
-- [TODO] en / ru / th / he.
-- [TODO] RTL для `he`.
+- [DONE] EN — полный.
+- [DONE] RU — полный (не только UI).
+- [DONE] TH — полный.
+- [PARTIAL] HE — есть, но требует проверки RTL (см. задачу 6).
 - [TODO] Вычитка носителями.
-- [TODO] hreflang + x-default.
+- [TODO] hreflang + x-default — проверить полноту.
 
 ### 0.7. Производительность и качество
-- [TODO] Core Web Vitals.
-- [TODO] Lighthouse.
-- [TODO] axe-core.
+- [TODO] Core Web Vitals (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1).
+- [TODO] Lighthouse (Perf ≥ 90, SEO 100, A11y ≥ 95).
+- [TODO] axe-core (0 critical / 0 serious).
 - [TODO] `prefers-reduced-motion`.
+- [TODO] Ручное тестирование (см. задачу 6, P2).
 
 ### 0.8. Соответствие Google 2026
-- [TODO] Search Essentials.
+- [PARTIAL] Search Essentials — базовая база есть.
 - [TODO] Core Web Vitals (пороги 2026).
-- [TODO] Структурированные данные.
+- [PARTIAL] Структурированные данные.
 - [TODO] E-E-A-T.
 - [TODO] Helpful Content.
-- [TODO] Mobile-first.
+- [PARTIAL] Mobile-first — проверить breakpoints.
 - [TODO] HTTPS + HSTS.
 - [TODO] Доступность (accessibility tree).
+
+### 0.9. Блокеры
+- [BLOCKED] Токен Telegram-бота — только локально в `.env`.
+- [BLOCKED] WhatsApp webhook — нужен публичный HTTPS URL.
+- [BLOCKED] 3 из 13 услуг не названы (уточнить у владельца).
+- [BLOCKED] Реальные проекты и фото (сейчас концепт-стадии).
+- [BLOCKED] Юридические данные (PUBLIC_LEGAL_*).
+- [BLOCKED] Аналитика (GA4_ID, UMAMI_ID).
+
+---
+
+## 0.10. LIVE AUDIT FINDINGS (18.09.2026)
+
+> Результаты проверки живого сайта
+> `https://drandromeda.github.io/FORMA.in.th/` против `proposal.md`.
+> **Claude Code: эти задачи в приоритете над всем, что ниже.**
+> Сначала `[P0]`, потом `[P1]`, потом `[P2]`.
+
+### ЗАДАЧА 1 — `[P0]` `[BLOCKER]` Base path bug: все ссылки на проекты ведут на 404
+
+**Что не так:** на главной странице всех языковых версий (EN/RU/TH/HE)
+карточки в блоке "Selected work" ведут на неправильный URL:
+- EN: `drandromeda.github.io/projects/ridge-house-sri-thanu/`
+  (должно быть `.../FORMA.in.th/projects/ridge-house-sri-thanu/`)
+- RU: `drandromeda.github.io/ru/projects/...`
+  (должно быть `.../FORMA.in.th/ru/projects/...`)
+- TH: аналогично, потерян сегмент `/FORMA.in.th/`
+- HE: проверить.
+
+Переход по такой ссылке → 404.
+
+**Что сделать:**
+1. Найти компонент генерации project-карточек (`ProjectCard` / `ProjectGrid`).
+2. Найти, где формируется href — скорее всего относительный путь без учёта
+   `base: '/FORMA.in.th/'` из конфига, либо захардкожен без префикса.
+3. Исправить так, чтобы href всегда шёл через helper, учитывающий base path
+   и текущую локаль. Свериться с подходом в CreativeLAB.in.th — там баг
+   не воспроизводится.
+4. Проверить **все** места с project-карточками: главную, блок
+   "Related Projects" на страницах услуг (`/services/architecture/` показывала
+   1 related project — проверить его ссылку).
+5. Проверить все 4 языка × все breakpoints.
+6. После фикса — прогнать полный краулинг (`linkinator` или аналог) на
+   предмет других 404.
+
+**Приёмка:**
+- [ ] Ни одна project-ссылка не ведёт на 404.
+- [ ] Краулинг показал 0 битых ссылок.
+- [ ] Проверено на 4 языках.
+- [ ] Проверено на mobile / tablet / desktop.
+
+---
+
+### ЗАДАЧА 2 — `[WONTFIX]` Отдельная страница `/services/` НЕ нужна
+
+**Статус:** закрыто как **не-баг**.
+
+**Обоснование:** реальное ТЗ требует:
+> "Do not use Home as the primary visible navigation label. The root URL `/`
+> is the master Services landing page that explains everything the company does."
+
+То, что пункт меню "Services" и "View all services →" ведут на `/` — это
+**правильное поведение по спеке**, а не баг.
+
+**Что реально нужно проверить:** главная должна быть **развёрнутой**
+(не thin directory page). По структуре из 14 блоков она уже развёрнутая —
+пункт закрыт. Отметить в `NOTES.md`.
+
+---
+
+### ЗАДАЧА 3 — `[P1]` Создать служебные файлы: URL_INTENT_MAP.md + INTERNAL_LINKING_MAP.md
+
+**Что в ТЗ:** §43 требует пакет документов для контроля качества.
+
+**Что сделать минимум два самых полезных:**
+
+1. **`URL_INTENT_MAP.md`** — таблица по каждой из ~44 страниц (EN) с
+   колонками:
+   URL / Page type / Primary intent / Primary keyword / Secondary keywords /
+   Entity / Location / Internal links in/out / Schema / Canonical / Hreflang /
+   Indexability / Status.
+
+2. **`INTERNAL_LINKING_MAP.md`** — с явным разведением пересекающихся по
+   смыслу услуг:
+   - **Construction** vs **Construction Supervision** vs
+     **Technical Supervision**.
+   - Прописать: какой primary keyword / intent у каждой из трёх.
+   - Куда они перелинкованы друг на друга, чтобы не конкурировать в поиске.
+
+**Остальные файлы из §43** (`AUDIT.md`, `CONTENT_QA.md`, `SEO_GEO_AUDIT.md`,
+`PROJECT_CONTENT_MATRIX.md`, `FINAL_QA.md`, `RELEASE_CHECKLIST.md`) —
+по желанию, не блокер.
+
+**Приёмка:**
+- [ ] Оба файла созданы в корне.
+- [ ] Все ~44 страницы покрыты.
+- [ ] Разведение intent для Construction/Supervision зафиксировано.
+
+---
+
+### ЗАДАЧА 4 — `[P1]` Anti-AI copy pass
+
+**Что не так:** в текстах встречается слово **"bespoke"** (например "Bespoke
+villas planned around view, breeze and privacy"). ТЗ §18 прямо просит
+избегать штампов: **bespoke / seamless / tailored / timeless** — они выдают
+AI-генерацию.
+
+**Что сделать:**
+1. Пройтись по всем 13 страницам услуг (EN).
+2. Заменить / убрать штампованные слова, сохранив смысл.
+3. Синхронизировать переводы RU / TH / HE.
+4. Проверить остальной список клише из §18:
+   - repetitive sentence structure,
+   - generic claims,
+   - generic architecture clichés ("we bring your vision to life",
+     "we make brands unforgettable", "unparalleled", "one-stop solution").
+
+**Приёмка:**
+- [ ] Слово "bespoke" отсутствует на сайте.
+- [ ] Слова "seamless / tailored / timeless" — отсутствуют или оправданы.
+- [ ] Проверено на EN/RU/TH/HE.
+- [ ] Отчёт в `NOTES.md`: список замен.
+
+---
+
+### ЗАДАЧА 5 — `[P1]` Починить форму контактов
+
+**Контекст:** аудит 13.09 показал, что форма зависит от Cloudflare Pages
+Function, которая не работает на GitHub Pages.
+
+**Что сделать:**
+1. Проверить `/contact/` — реально ли форма отправляет данные (тестовая
+   отправка).
+2. Если нет — подключить внешний сервис форм: **Formspree / Getform / webhook
+   на свой backend**.
+3. Убедиться, что есть:
+   - валидация полей,
+   - доступные лейблы (a11y),
+   - понятные ошибки,
+   - success / loading state,
+   - спам-защита (honeypot / reCAPTCHA),
+   - данные пользователя не теряются при ошибке валидации.
+
+**Приёмка:**
+- [ ] Тестовая заявка доходит до получателя.
+- [ ] Валидация работает.
+- [ ] a11y — labels, ошибки читаемы скринридером.
+- [ ] Спам-защита на месте.
+- [ ] Данные не теряются.
+
+---
+
+### ЗАДАЧА 6 — `[P2]` Ручное тестирование
+
+Прогнать и зафиксировать результат по каждому пункту:
+
+1. Мобильное бургер-меню — реальное устройство / эмулятор.
+2. Dropdown-меню (Services, Locations) на touch-устройствах.
+3. HE-версия — отображение и работа RTL.
+4. Breakpoints: 320 / 360 / 375 / 390 / 412 / 430 / 768 / 1024 / 1280 /
+   1440 / 1728 / 1920 — нет горизонтального скролла, нет обрезанного текста.
+5. Lighthouse: Performance ≥ 90, SEO 100, A11y ≥ 95.
+6. axe-core: 0 critical / 0 serious.
+7. Keyboard navigation: Tab через всё меню, focus visible, skip-to-content.
+
+**Приёмка:**
+- [ ] Отчёт в `NOTES.md` с скриншотами и метриками.
+- [ ] Все проблемы заведены как отдельные задачи.
+
+---
+
+### ЗАДАЧА 7 — `[P2]` Расширить Journal
+
+**Что не так:** сейчас 3 статьи, покрывают 2–3 темы из 12 категорий,
+заданных в ТЗ:
+Architecture, Villa Design, Interior Design, Construction, Renovation,
+Materials, Tropical Architecture, Koh Phangan, Project Management, Planning,
+Technical, Sustainability, Design Process.
+
+**Что сделать:** добавить статьи, закрывающие оставшиеся темы, по той же
+схеме: author, date, category, related services / projects / locations,
+internal links.
+
+**Приёмка:**
+- [ ] Минимум 1 статья на каждую из 12 категорий.
+- [ ] Все статьи с корректной схемой и перелинковкой.
+
+---
+
+### ЗАДАЧА 8 — `[P1]` Проверить Telegram / WhatsApp бота (intake funnel)
+
+**Что в ТЗ:** боты — отдельный обязательный этап roadmap (шаг 5 из 10) как
+воронка сбора заявок. Требование: "**13 услуг × 5 локаций × 4 языка —
+0 dead ends**".
+
+**Что не так:** сейчас на сайте есть только прямые ссылки WhatsApp / Telegram
+в футере (`wa.me/...`, `t.me/formaisland_bot`). Непонятно, реализован ли
+у бота сценарий intake funnel (язык → услуга → локация → контакт) или это
+просто ссылки на чат.
+
+**Что сделать:**
+1. Уточнить у бота `@formaisland_bot` — есть ли эта логика.
+2. Если нет — это отдельный крупный этап, не просто контент-правка.
+3. Реализовать по разделу 13 этого файла.
+
+**Приёмка:**
+- [ ] Подтверждено наличие / отсутствие funnel.
+- [ ] Если funnel нет — заведена отдельная задача.
+- [ ] Тест: 13 услуг × 5 локаций × 4 языка = 0 dead ends.
+
+---
+
+### ЗАДАЧА 9 — `[P0]` Проверить Eco Construction и Concrete Construction Turnkey
+
+**Что в ТЗ:** прямо указано как обязательный пункт (P0):
+> "Include Eco Construction and Concrete Construction Turnkey as dedicated
+> services with full landing pages in all four languages."
+
+**Статус:** обе услуги присутствуют в меню на EN/RU/TH (подтверждено).
+
+**Что проверить:**
+1. Есть ли полноценная landing-структура как у `/services/architecture/`:
+   - Direct Answer,
+   - Scope,
+   - Process,
+   - Deliverables,
+   - Pricing,
+   - FAQ,
+   - Related.
+2. Переведены ли на все 4 языка, включая HE.
+
+**Приёмка:**
+- [ ] Обе услуги имеют полный landing-шаблон.
+- [ ] Переведены на 4 языка.
+- [ ] Есть в `sitemap.xml`.
+- [ ] Есть в навигации на 4 языках.
+
+---
+
+### ЗАДАЧА 10 — `[P0]` Static-first, без CMS — подтвердить и задокументировать
+
+**Что в ТЗ:** первая продакшн-версия должна быть статическим сайтом без
+CMS / admin / БД. Стек любой статический (Astro, Vite и т.п.), но SEO-контент
+обязан быть в **crawlable HTML**, не зависеть от client-side JS. Архитектурное
+решение должно быть задокументировано в README.
+
+**Что сделать:**
+1. Проверить, что README объясняет выбор стека.
+2. Проверить, что ключевой SEO-контент (особенно §5 "Direct Answer" блоки)
+   присутствует в исходном HTML, а не подгружается JS.
+
+**Приёмка:**
+- [ ] README описывает стек и почему static-first.
+- [ ] Direct Answer-блоки видны в View Source.
+- [ ] Нет зависимости SEO-контента от JS.
+
+---
+
+### Что уже сделано (не трогать)
+
+Подтверждено аудитом:
+- [DONE] Позиционирование бренда, единое написание "FORMA".
+- [DONE] Структура и наполнение `/services/architecture/` — эталон.
+- [DONE] Хлебные крошки — исправлены.
+- [DONE] Таблицы цен — с диапазонами и дисклеймером.
+- [DONE] Реальные контакты (email / WhatsApp / Telegram) вместо заглушек.
+- [DONE] RU и TH переводы — полные.
+- [DONE] Canonical / hreflang в head.
 
 ---
 
 ## 1. Миссия, позиционирование, цели
 
-- Премиум-сайт креативного / рекламного агентства с фотосъёмкой и production.
-- Уровень: editorial creative agency класса Pentagram.
-- Реклама — первый коммерческий столп. Остальные направления — вторичные,
-  но полноценные.
+- Премиум-сайт архитектурного бюро проектирования и строительства вилл
+  на Koh Phangan (Таиланд).
+- Уровень: дорогой editorial архитектурный журнал.
+- Позиционирование выше обычных подрядчиков: полный цикл — архитектура,
+  дизайн, строительство, надзор.
+- Тон: экспертный, спокойный, архитектурный.
 - Цели: лиды, органический трафик, цитируемость в AI.
-- Тон: премиальный, экспертный, спокойный.
 
 ### 1.1. Метрики
-- Лиды: ≥ 20 в месяц.
-- Органический трафик: рост +20% месяц к месяцу.
-- Featured snippets: ≥ 30 запросов.
+- Лиды: ≥ 15 в месяц.
+- Органический трафик: рост +15% месяц к месяцу.
+- Featured snippets: ≥ 20 запросов.
 - Цитируемость в AI: ≥ 10 запросов/месяц.
 - Core Web Vitals: зелёные.
 - Lighthouse: Perf ≥ 90, SEO 100, A11y ≥ 95.
@@ -117,36 +409,44 @@
 Этот проект — **в первую очередь дизайн-продукт**, а не текстовый блог.
 Дизайн, визуальный язык, анимация и петроглифическая графика — **первичны**.
 Контент — **вторичен по форме**, но обязателен по качеству (раздел 7).
+**Для FORMA — сдержаннее, чем для CreativeLAB:** архитектурный журнал,
+а не креативное агентство.
 
 ### 2.2. Формула визуального языка
 ```
 Петроглиф (высеченная линия на камне)
-+ Сакральная геометрия (пропорции, символы)
-+ Люкс-палитра (охра, уголь, кость, песок, медь)
++ Сакральная геометрия (пропорции, планы, разрезы, солнечные пути)
++ Люкс-палитра (охра, уголь, кость, песок, известняк, медь)
 + Анимация высекания (scroll-driven SVG)
 + Лёгкое зерно (film grain)
-= Дорогой editorial-дизайн
+= Дорогой editorial архитектурный дизайн
 ```
 
 ### 2.3. Терминология
 - **Петроглифы** (petroglyphs) — выбитые / процарапанные / высеченные
   изображения на камне. **Основной визуальный язык проекта.**
-- **НЕ** наскальная живопись (cave painting) — это краска в пещерах.
+- **НЕ** наскальная живопись (cave painting).
 - **НЕ** иероглифы, **НЕ** руны, **НЕ** клипарт, **НЕ** эзотерика.
 - **Сакральная геометрия** — golden ratio, Vesica Piscis, Flower of Life,
-  Metatron’s Cube, платоновы тела — как система пропорций.
-- **Чашечные углубления** (cupules), **спирали**, **лабиринты**, **сетки**,
+  Metatron’s Cube, платоновы тела — как система пропорций и планов.
+- **Чашечные углубления**, **спирали**, **лабиринты**, **сетки**,
   **отпечатки рук**, **звёздные карты** — допустимые мотивы.
 - **Геоглифы** (Наска) — как вдохновение для крупных схем.
 
-### 2.4. Что это значит на практике
+### 2.4. Специфика FORMA
+- Сильнее акцент на **геометрии пропорций** (планы, разрезы, солнечные пути,
+  стратиграфия), слабее — на антропоморфных силуэтах.
+- Сдержанность: линии на полях, едва заметная текстура камня.
+- Роскошь = сдержанность + точность.
+
+### 2.5. Что это значит на практике
 - `MUST` — каждая страница начинается с визуальной идеи (глиф, схема,
-  анимация), а не с текста.
+  blueprint), а не с текста.
 - `MUST` — текст подстраивается под дизайн-сетку.
 - `MUST` — визуальный язык единый на всех страницах и языках.
-- `MUST` — анимация — часть дизайна, а не украшение.
-- `MUST NOT` — дизайн не жертвуется ради «побольше текста».
-- `MUST NOT` — текст не жертвуется ради «побольше анимации».
+- `MUST` — анимация — часть дизайна.
+- `MUST NOT` — дизайн не жертвуется ради текста.
+- `MUST NOT` — текст не жертвуется ради анимации.
 - Баланс: **дизайн ведёт, контент подтверждает**.
 
 ---
@@ -158,6 +458,8 @@
 |---|---|---|
 | `PHONE_MAIN` | `+66 80 870 5704` | Реальный с сайта |
 | `WHATSAPP` | `https://wa.me/66808705704` | Реальный с сайта |
+| `TELEGRAM_BOT` | `@formaisland_bot` | Реальный с сайта |
+| `EMAIL_GENERAL` | `info@forma.in.th` | Реальный с сайта |
 | `ADDRESS` | `Koh Phangan, Surat Thani, Thailand` | Реальный с сайта |
 | `COUNTRY` | `Thailand` | Реальный |
 | `TIMEZONE` | `Asia/Bangkok` | Реальный |
@@ -169,32 +471,26 @@ Claude Code **генерирует** недостающие контакты п�
 
 | Ключ | Сгенерированное значение |
 |---|---|
-| `EMAIL_GENERAL` | `hello@creativelab.in.th` |
-| `EMAIL_LEADS` | `leads@creativelab.in.th` |
-| `EMAIL_PRESS` | `press@creativelab.in.th` |
-| `TELEGRAM` | `@creativelab` |
-| `TELEGRAM_BOT` | `@creativelab_bot` |
-| `INSTAGRAM` | `https://instagram.com/creativelab.in.th` |
-| `FACEBOOK` | `https://facebook.com/creativelab.in.th` |
-| `YOUTUBE` | `https://youtube.com/@creativelab` |
-| `TIKTOK` | `https://tiktok.com/@creativelab` |
-| `LINKEDIN` | `https://linkedin.com/company/creativelab` |
-| `BEHANCE` | `https://behance.net/creativelab` |
-| `VIMEO` | `https://vimeo.com/creativelab` |
+| `EMAIL_LEADS` | `leads@forma.in.th` |
+| `EMAIL_PRESS` | `press@forma.in.th` |
+| `TELEGRAM` | `@formaisland` |
+| `INSTAGRAM` | `https://instagram.com/forma.in.th` |
+| `FACEBOOK` | `https://facebook.com/forma.in.th` |
+| `YOUTUBE` | `https://youtube.com/@forma.in.th` |
+| `LINKEDIN` | `https://linkedin.com/company/forma.in.th` |
+| `PINTEREST` | `https://pinterest.com/forma.in.th` |
+| `HOUZZ` | `https://houzz.com/forma.in.th` |
 | `GOOGLE_MAPS_URL` | `https://maps.google.com/?q=Koh+Phangan+Thailand` |
 | `GEO_LAT` | `9.7319` |
 | `GEO_LNG` | `100.0135` |
-| `HOURS` | `Mon–Sat 09:00–19:00 ICT` |
-| `LEGAL_NAME` | `CreativeLAB Co., Ltd.` |
+| `HOURS` | `Mon–Fri 09:00–18:00 ICT` |
+| `LEGAL_NAME` | `FORMA Co., Ltd.` |
 | `JURISDICTION` | `Thailand` |
 | `TAX_ID` | `0-0000-00000-00-0` |
-| `GSC_VERIFICATION` | placeholder |
-| `GA4_ID` | `G-XXXXXXXXXX` |
-| `UMAMI_ID` | placeholder |
 
 ### 3.3. Боты (генерировать конфигурацию)
-- Telegram: `@creativelab_bot`.
-- WhatsApp: `+66 80 870 5704`.
+- Telegram: `@formaisland_bot`.
+- WhatsApp: `+66 80 870 5704` (webhook требует публичный HTTPS).
 - Токены — в `.env` / GitHub Secrets.
 - Claude Code пишет рабочий код с чтением из `process.env`.
 - При отсутствии токена — код готов, токен подставляет владелец.
@@ -227,15 +523,16 @@ Claude Code **генерирует** недостающие контакты п�
 --color-bg-dark:      #1C1C1C;
 --color-accent:       #A97142;
 ```
-Акцент — приглушённая медь и тёплое золото на глубоком графите.
+**Специфика FORMA:** преобладание светлых нейтральных тонов (bone, limestone,
+sand), акцент — приглушённая медь. Меньше контраста, чем в CreativeLAB.
 
 ### 4.2. Типографика
-- Контент: современный гротеск + антиква с хорошей оптикой.
-- Схемы, аннотации, цены: моноширинный / технический.
-- Variable fonts для плавных анимаций веса.
+- Контент: современный гротеск / антиква с архитектурной оптикой.
+- Чертежи, схемы, цены: моноширинный / технический.
+- Variable fonts.
 - `font-display: swap`, subsetting, preload.
-- Модульная шкала: 1.125 или 1.25.
-- Интерлиньяж: 1.4–1.6 для текста, 1.05–1.15 для заголовков.
+- Модульная шкала: 1.125 или 1.2.
+- Интерлиньяж: 1.5–1.7 для текста, 1.05–1.15 для заголовков.
 - Ширина строки: 60–75 символов.
 - Шрифты по умолчанию: Inter / Fraunces / JetBrains Mono (или аналоги).
 
@@ -247,7 +544,7 @@ Claude Code **генерирует** недостающие контакты п�
 - Тени: минимальные.
 
 ### 4.4. Текстуры
-- Камень, штукатурка, бумага, зерно, высеченная линия.
+- Камень, известняк, штукатурка, бумага, зерно, высеченная линия.
 - Film grain: 3–5% opacity.
 
 ### 4.5. Компоненты
@@ -277,16 +574,16 @@ Claude Code **генерирует** недостающие контакты п�
 |---|---|
 | `HeroPetroglyph` | Герой с анимированным глифом |
 | `DirectAnswer` | Ответ 50–80 слов |
-| `PillarIntro` | Вводный блок pillar |
-| `SpokeGrid` | Сетка подуслуг |
+| `PillarIntro` | Вводный блок |
+| `ServiceGrid` | Сетка 13 услуг |
 | `ServiceCard` | Карточка услуги |
-| `CaseSpotlight` | Кейс с крупным изображением |
-| `CaseGrid` | Сетка кейсов |
+| `ProjectSpotlight` | Проект с крупным изображением |
+| `ProjectGrid` | Сетка проектов |
 | `PriceTable` | Таблица цен |
 | `ProcessSchema` | Анимированная схема процесса |
 | `WorkPlan` | Анимированный план работ |
 | `Blueprint` | Чертёж с проявлением линий |
-| `StrataDiagram` | Слои |
+| `StrataDiagram` | Слои (виллы) |
 | `Timeline` | Высеченная линия времени |
 | `FAQBlock` | FAQ с JSON-LD |
 | `FeaturedSnippetBlock` | Под snippet |
@@ -297,7 +594,7 @@ Claude Code **генерирует** недостающие контакты п�
 | `CTA` | Финальный призыв |
 | `JournalTeaser` | Тизер журнала |
 | `ContactRitual` | Блок связи с глифом |
-| `LocationMap` | Карта с метками |
+| `LocationMap` | Карта с петроглифическими метками |
 | `LegalSimple` | Юридический блок |
 | `Newsletter` | Подписка |
 | `Breadcrumbs` | Хлебные крошки |
@@ -321,7 +618,7 @@ Claude Code **генерирует** недостающие контакты п�
 - Scroll-driven SVG line drawing (`stroke-dasharray` / `stroke-dashoffset`).
 - Pecking / chipping reveal (эффект высекания).
 - Mask reveals.
-- Layered rock parallax.
+- Layered rock / stone parallax.
 - Morphing geometry.
 - Variable font weight animation.
 - Subtle grain.
@@ -334,9 +631,10 @@ Claude Code **генерирует** недостающие контакты п�
 - Автоплей видео со звуком.
 - Параллакс, ломающий CLS.
 
-### 6.3. Где можно тяжёлое
-- WebGL / canvas 2D — только на hero.
-- Остальные страницы — inline SVG + CSS + GSAP + ScrollTrigger.
+### 6.3. Специфика FORMA
+- Анимации сдержаннее, чем в CreativeLAB.
+- WebGL — только на hero (опционально).
+- Приоритет: blueprint-проявление линий, стратиграфия, пропорции.
 
 ### 6.4. Обязательно
 - `prefers-reduced-motion: reduce` отключает анимацию, оставляя
@@ -360,6 +658,10 @@ Claude Code **генерирует** недостающие контакты п�
 - Канцелярит, вода, повторы.
 - Общие фразы: «в современном мире», «не секрет, что», «динамично
   развивающаяся компания», «индивидуальный подход», «широкий спектр».
+- Английские штампы: "bespoke", "seamless", "tailored", "timeless",
+  "we bring your vision to life", "we make brands unforgettable",
+  "take your business to the next level", "unparalleled",
+  "one-stop solution".
 - Кликбейт.
 - Ложные обещания.
 - Плагиат.
@@ -367,22 +669,20 @@ Claude Code **генерирует** недостающие контакты п�
 
 ### 7.2. Обязательно
 - Каждый абзац — новая информация.
-- Конкретика: числа, сроки, примеры, кейсы, имена, локации.
+- Конкретика: числа, сроки, примеры, проекты, локации.
 - Один смысл — одно предложение.
 - Ритм: короткие + длинные предложения.
 - Информативные заголовки.
-- Уверенный, экспертный тон.
+- Экспертный тон.
 - Каждая языковая версия — уникальный текст.
 - Вычитка носителем.
 
 ### 7.3. Объёмы
 | Тип | Минимум |
 |---|---|
-| Pillar | 1500+ слов |
-| Spoke | 800+ слов |
 | Service hub | 1200+ слов |
 | Sub-service | 800+ слов |
-| Case | 600+ слов |
+| Project | 600+ слов |
 | Journal post | 800+ слов |
 | FAQ (страница) | 300+ слов |
 | About | 600+ слов |
@@ -395,7 +695,7 @@ Claude Code **генерирует** недостающие контакты п�
 1. H1 (один).
 2. Direct Answer 50–80 слов.
 3. H2-секции.
-4. Списки / таблицы.
+4. Списки / таблицы / планы.
 5. FAQ.
 6. CTA.
 7. Внутренние ссылки.
@@ -428,12 +728,12 @@ Claude Code **генерирует** недостающие контакты п�
 
 ### 8.2. JSON-LD
 `Organization`, `LocalBusiness`, `WebSite` + `SearchAction`, `Service`,
-`Offer` / `OfferCatalog` / `PriceSpecification`, `Article` / `BlogPosting`,
-`BreadcrumbList`, `FAQPage`, `HowTo`, `ItemList`, `ImageObject`,
-`VideoObject`, `Person`, `Review` / `AggregateRating`.
+`Offer` / `OfferCatalog` / `PriceSpecification`, `Article`, `BreadcrumbList`,
+`FAQPage`, `HowTo`, `ItemList`, `ImageObject`, `VideoObject`, `Person`,
+`Review` / `AggregateRating`.
 
 ### 8.3. AI-краулеры
-- `llms.txt`, `llms-full.txt`.
+- `llms.txt`, `llms-full.txt` — создать (см. задачу 4 live audit).
 - `robots.txt`: разрешить GPTBot, ClaudeBot, PerplexityBot,
   Google-Extended, CCBot, Bingbot, Applebot-Extended, YouBot.
 - `sitemap.xml` + index.
@@ -454,7 +754,7 @@ Claude Code **генерирует** недостающие контакты п�
 
 ### 8.6. Проверка
 - Ручная проверка в ChatGPT, Gemini, Perplexity, Claude.
-- Фиксация результатов в разделе 20.
+- Фиксация результатов в `NOTES.md`.
 
 ---
 
@@ -488,15 +788,19 @@ Claude Code **генерирует** недостающие контакты п�
 
 ### 10.1. Цены — генерировать
 Claude Code генерирует реалистичные цены для рынка Ко Панган / Таиланд:
-- Social Media: от 15 000 THB / мес.
-- Meta Ads: от 20 000 THB / мес.
-- Видео: от 30 000 THB / проект.
-- Фотосъёмка: от 12 000 THB / день.
-- Web: от 45 000 THB / проект.
-- Branding: от 60 000 THB / проект.
-- Villas & Real Estate: от 25 000 THB / мес.
-- Food: от 18 000 THB / мес.
-- Local: от 10 000 THB / мес.
+- Архитектура: от 80 000 THB / проект.
+- Дизайн вилл: от 60 000 THB / проект.
+- Интерьер: от 50 000 THB / проект.
+- Строительство: от 500 000 THB / проект.
+- Реновация: от 200 000 THB / проект.
+- Управление проектами: от 40 000 THB / мес.
+- Авторский надзор: от 30 000 THB / мес.
+- Ландшафт: от 35 000 THB / проект.
+- Разрешения: от 25 000 THB / проект.
+- Проекты «под ключ»: от 1 000 000 THB / проект.
+- Eco Construction: от 450 000 THB / проект.
+- Concrete Construction Turnkey: от 550 000 THB / проект.
+- `<3 услуги уточнить>`: `<цена>`.
 
 Помечать `<!-- GEN -->`.
 
@@ -527,6 +831,10 @@ Claude Code генерирует реалистичные планы работ 
 - ответственные,
 - стоимость.
 
+**Специфика FORMA:** WorkPlan — ключевой блок. Аудитория — клиенты,
+строящие виллы. Прозрачность этапов, сроков, стоимости — конкурентное
+преимущество.
+
 ---
 
 ## 12. Локализация и RTL
@@ -554,13 +862,13 @@ Claude Code генерирует реалистичные планы работ 
 ## 13. Боты
 
 ### 13.1. Обязательные
-- Telegram bot: `@creativelab_bot`.
+- Telegram bot: `@formaisland_bot`.
 - WhatsApp bot: `+66 80 870 5704`.
 
 ### 13.2. Воронка
 1. Приветствие + выбор языка.
-2. Выбор услуги.
-3. Выбор локации.
+2. Выбор услуги (13).
+3. Выбор локации (11).
 4. Бюджет.
 5. Загрузка файлов (опционально).
 6. Контакт.
@@ -576,138 +884,122 @@ Claude Code генерирует реалистичные планы работ 
 - Возврат назад.
 - Смена языка на любом шаге.
 - Fallback на человека.
-- Тест: все услуги × все локации × все языки.
+- Тест: все 13 услуг × все 11 локаций × все 4 языка.
 - Rate limiting.
 - PDPA / GDPR согласие.
 
 ### 13.4. Токены
-- `CL_TELEGRAM_BOT_TOKEN` — в `.env`.
-- `CL_TELEGRAM_MANAGER_CHAT_ID` — в `.env`.
+- `FO_TELEGRAM_BOT_TOKEN` — в `.env`.
+- `FO_TELEGRAM_MANAGER_CHAT_ID` — в `.env`.
 - `WHATSAPP_TOKEN` — в `.env`.
 - Claude Code пишет рабочий код с чтением из `process.env`.
-- При отсутствии токена — код готов, токен подставляет владелец.
 
 ---
 
 ## 14. Архитектура и URL
 
-### 14.1. Масштаб
-- Целевой: 3000+ URL (архитектурная цель).
-- `MUST NOT` — thin pages.
-- `MUST` — уникальный контент на каждой.
+### 14.1. 13 услуг (3 уточнить)
+1. Архитектура
+2. Дизайн вилл
+3. Интерьер
+4. Строительство
+5. Реновация
+6. Управление проектами
+7. Авторский надзор
+8. Ландшафт
+9. Разрешения
+10. Проекты «под ключ»
+11. Eco Construction `[P0]` — проверить полноту (задача 9)
+12. Concrete Construction Turnkey `[P0]` — проверить полноту (задача 9)
+13. `<уточнить>`
 
-### 14.2. Основные направления (8)
-1. Advertising
-2. Social Media
-3. Villas & Real Estate
-4. Food
-5. Local
-6. Web
-7. Video
-8. Branding
-
-### 14.3. Структура URL
+### 14.2. Структура URL
 ```
-/en/
-/en/advertising/
-/en/advertising/meta-ads/
-/en/advertising/google-ads/
-/en/advertising/tiktok-ads/
-/en/social-media/
-/en/villas-real-estate/
-/en/food/
-/en/local/
-/en/web/
-/en/video/
-/en/branding/
-/en/cases/
-/en/cases/{case-slug}/
-/en/journal/
-/en/journal/{post-slug}/
-/en/pricing/
-/en/process/
-/en/locations/
-/en/locations/{location-slug}/
-/en/about/
-/en/contact/
-/en/faq/
-/en/legal/
-/en/privacy/
-/en/terms/
+/
+/services/architecture/
+/services/villa-design/
+/services/interior-design/
+/services/construction/
+/services/renovation/
+/services/project-management/
+/services/supervision/
+/services/landscape/
+/services/permits/
+/services/turnkey/
+/services/eco-construction/
+/services/concrete-construction-turnkey/
+/services/<13>/
+/projects/
+/projects/{project-slug}/
+/journal/
+/journal/{post-slug}/
+/pricing/
+/process/
+/locations/
+/locations/{location-slug}/
+/about/
+/contact/
+/faq/
+/legal/
+/privacy/
+/terms/
 ```
 
-### 14.4. Обязательные страницы
-Home, 8 hubs, 50+ sub-services, cases, journal, pricing, process, locations,
-about, contact, FAQ, legal, privacy, terms, 404, 500, offline, search results,
+### 14.3. Обязательные страницы
+Root `/` = Services landing page (per proposal.md §24).
+13 service pages, projects, journal, pricing, process, locations, about,
+contact, FAQ, legal, privacy, terms, 404, 500, offline, search results,
 HTML sitemap.
 
-### 14.5. 50+ подуслуг — генерировать
-Claude Code генерирует 50+ подуслуг по 8 направлениям:
-- **Advertising:** Meta Ads, Google Ads, TikTok Ads, YouTube Ads,
-  LinkedIn Ads, Programmatic, Retargeting, Creative Strategy.
-- **Social Media:** Content, Community, Influencer, Reels, Stories, TikTok,
-  Instagram, Facebook, Line.
-- **Villas & Real Estate:** Listing, Drone, Interior, Exterior, Virtual
-  Tour, CGI, Aerial, Twilight.
-- **Food:** Menu, Restaurant, Café, Delivery, Product, Lifestyle, Chef,
-  Story.
-- **Local:** Google Business, Maps, Local SEO, Reviews, Community.
-- **Web:** Landing, Corporate, E-commerce, Portfolio, SEO, Analytics.
-- **Video:** Commercial, Documentary, Music Video, Reels, Drone, Post.
-- **Branding:** Logo, Identity, Guidelines, Naming, Packaging, Voice.
+### 14.4. Специфика FORMA
+- Root URL (`/`) = Services landing page.
+- Нет отдельного `/services/` index route (см. задачу 2 live audit).
+- Навигация начинается с «Services», а не «Home».
 
 ---
 
 ## 15. Постраничные улучшения (шаблоны)
 
-### 15.1. Home
+### 15.1. Root / Services
 - `HeroPetroglyph` с master-глифом.
 - `DirectAnswer` 50–80 слов.
-- Секция 8 направлений.
-- Кейсы.
-- Процесс.
-- Отзывы.
+- Секция 13 услуг.
+- Секция проектов.
+- Секция процесса.
+- Секция отзывов.
 - Журнал teaser.
 - CTA.
 - JSON-LD: `Organization`, `WebSite` + `SearchAction`.
-- Schema: master petroglyph hub.
+- Schema: master petroglyph hub + архитектурная пропорция.
 
-### 15.2. Service hub
+### 15.2. Service page (13)
+Эталон — `/services/architecture/` (подтверждено аудитом). Остальные 12 —
+привести к тому же шаблону.
 - `HeroPetroglyph` с глифом услуги.
 - `DirectAnswer`.
 - `PillarIntro`.
-- `SpokeGrid` подуслуг.
-- `CaseGrid` релевантных кейсов.
-- `ProcessSchema`.
-- `PriceTable`.
-- `FAQBlock`.
-- CTA.
-- JSON-LD: `Service`, `FAQPage`, `BreadcrumbList`.
-- Schema: глиф услуги + blueprint.
-
-### 15.3. Sub-service
-- `HeroPetroglyph` с ответвлением глифа.
-- `DirectAnswer`.
-- Основной текст 800+ слов.
+- Основной текст 1200+.
 - `WorkPlan`.
 - `PriceTable`.
+- `ProjectGrid` релевантных проектов.
 - `FAQBlock`.
 - CTA.
-- JSON-LD: `Service`, `HowTo`, `FAQPage`.
-- Schema: ответвление.
+- JSON-LD: `Service`, `HowTo`, `FAQPage`, `BreadcrumbList`.
+- Schema: глиф + blueprint.
 
-### 15.4. Case
+### 15.3. Project
 - `HeroPetroglyph`.
 - `DirectAnswer`.
 - Клиент, задача, решение, результат.
 - Галерея.
 - Метрики.
+- Планы / разрезы.
 - `Testimonial`.
 - CTA.
 - JSON-LD: `Article` / `CreativeWork`.
-- Schema: site plan / timeline.
+- Schema: site plan / sections / strata.
 
-### 15.5. Pricing
+### 15.4. Pricing
 - `DirectAnswer`.
 - `PriceTable` по услугам.
 - `Comparison` пакетов.
@@ -716,7 +1008,7 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - JSON-LD: `OfferCatalog`, `FAQPage`.
 - Schema: анимированная таблица.
 
-### 15.6. Process
+### 15.5. Process
 - `DirectAnswer`.
 - `ProcessSchema`.
 - `WorkPlan`.
@@ -725,7 +1017,7 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - JSON-LD: `HowTo`.
 - Schema: анимированный план работ.
 
-### 15.7. About
+### 15.6. About
 - `DirectAnswer`.
 - Команда.
 - Ценности.
@@ -734,30 +1026,30 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - JSON-LD: `Organization`, `Person`.
 - Schema: process circle.
 
-### 15.8. Locations
+### 15.7. Locations
 - `DirectAnswer`.
 - Карта с метками.
 - Описание локаций.
 - JSON-LD: `LocalBusiness`.
 - Schema: карта.
 
-### 15.9. Contact
+### 15.8. Contact
 - `DirectAnswer`.
-- Форма.
+- Форма (см. задачу 5 live audit).
 - Боты.
 - Карта.
 - Часы.
 - JSON-LD: `LocalBusiness`, `ContactPoint`.
 - Schema: connection glyph.
 
-### 15.10. Journal
+### 15.9. Journal
 - Список постов.
 - Фильтры.
 - Поиск.
 - JSON-LD: `ItemList`, `BlogPosting`.
 - Schema: engraved timeline.
 
-### 15.11. Journal post
+### 15.10. Journal post
 - `DirectAnswer`.
 - Основной текст 800+.
 - Автор.
@@ -767,19 +1059,19 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - JSON-LD: `BlogPosting`, `Person`, `BreadcrumbList`.
 - Schema: engraved timeline.
 
-### 15.12. FAQ
+### 15.11. FAQ
 - `DirectAnswer`.
 - Аккордеон.
 - JSON-LD: `FAQPage`.
 - Schema: вопрос / ответ.
 
-### 15.13. Legal / Privacy / Terms
+### 15.12. Legal / Privacy / Terms
 - Текст.
 - Дата обновления.
 - JSON-LD: `WebPage`.
 - Schema: минимальный глиф.
 
-### 15.14. 404 / 500 / offline
+### 15.13. 404 / 500 / offline
 - Сообщение.
 - Навигация.
 - Поиск.
@@ -862,19 +1154,21 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 
 ---
 
-## 18. Стек
+## 18. Стек (Static-first / no CMS)
 
-- Next.js (App Router) + TypeScript strict.
-- Tailwind или CSS-модули + design tokens.
+- **Static-first, без CMS и БД в первом релизе.**
+- Astro (текущий).
+- TypeScript strict.
 - GSAP + ScrollTrigger.
 - Lenis (опционально).
 - Inline SVG + SVGO.
-- i18n: next-intl.
-- GA4 + Plausible / Umami.
+- i18n через статические JSON.
+- GA4 + Umami.
 - web-vitals (RUM).
-- Деплой: Vercel / Cloudflare.
+- Деплой: Cloudflare Pages / GitHub Pages (текущий).
 - Branch strategy: `main` + `feature/*`.
 - Conventional commits.
+- **Запрещено:** CMS, БД, server-side rendering с базой в первом релизе.
 
 ---
 
@@ -882,10 +1176,11 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 
 ### 19.1. Перед задачей
 - [ ] Прочитан раздел 0.
+- [ ] Прочитан раздел 0.10 (live audit findings).
 - [ ] Прочитан раздел 22 (правила).
+- [ ] Прочитан `NOTES.md`.
 - [ ] Понятен закрываемый пункт.
-- [ ] Понятны acceptance criteria.
-- [ ] Не нарушены позиционирование / RTL / no-autotranslate.
+- [ ] Не нарушены позиционирование / RTL / static-first / no-autotranslate.
 
 ### 19.2. После задачи (per page)
 - [ ] H1 один.
@@ -911,8 +1206,9 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - [ ] Alt у изображений.
 
 ### 19.3. Перед релизом
-- [ ] Все страницы раздела 14.4.
-- [ ] Боты протестированы (4 языка × все услуги × все локации).
+- [ ] Раздел 0.10 полностью пройден (все P0/P1).
+- [ ] Все страницы раздела 14.3.
+- [ ] Боты протестированы (13 × 11 × 4 = 0 dead ends).
 - [ ] `sitemap.xml` + index.
 - [ ] `robots.txt`.
 - [ ] `llms.txt` + `llms-full.txt`.
@@ -926,24 +1222,24 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 - [ ] Раздел 25 полностью пройден.
 - [ ] Раздел 0 актуален.
 - [ ] Раздел 20 актуален.
+- [ ] `NOTES.md` актуален.
+- [ ] `URL_INTENT_MAP.md` создан.
+- [ ] `INTERNAL_LINKING_MAP.md` создан.
 
 ---
 
 ## 20. Журнал изменений
 
 ### 2026-09-18
-- Создан `Improvements.md` v2.0.
+- Создан `Improvements.md` v2.0 — сводная версия.
+- Встроены Live Audit Findings от 18.09.2026 (раздел 0.10).
+- Обновлён раздел 0 статусами на основе реального состояния сайта.
 - Зафиксирован манифест дизайна (petroglyph & sacred geometry + luxury).
 - Зафиксирована терминология: **петроглифы** — основной термин.
 - Запрещено: «наскальная живопись», «иероглифы», «руны», «клипарт»,
-  «эзотерика».
-- Зафиксирован приоритет дизайна над формой контента.
+  «эзотерика», «bespoke», «seamless», «tailored», «timeless».
 - Добавлен режим Draft: генерация контента и контактов.
-- Добавлены реальные контакты с сайта: `+66 80 870 5704`,
-  `Koh Phangan, Thailand`.
 - Добавлен раздел 25 «Соответствие Google 2026».
-- Добавлены требования: AI-first, GEO, AEO, LLM, Featured Snippets,
-  Price Tables, Animated Schematics & Work Plans, Luxury Blocks.
 
 ### <дата>
 - <что сделано>
@@ -952,10 +1248,14 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 
 ## 21. Блокеры и вопросы
 
-- [BLOCKED] Токены ботов — только у владельца (внешний API-ключ).
-- [BLOCKED] Токены платёжных систем — только у владельца.
+- [BLOCKED] Токен Telegram-бота — только у владельца.
+- [BLOCKED] WhatsApp webhook — нужен публичный HTTPS URL.
+- [BLOCKED] 3 из 13 услуг — уточнить.
+- [BLOCKED] Реальные проекты и фото — у владельца.
+- [BLOCKED] Юридические данные (PUBLIC_LEGAL_*).
+- [BLOCKED] Аналитика (GA4_ID, UMAMI_ID).
 - [QUESTION] Staging URL?
-- [QUESTION] Хостинг (Vercel / Cloudflare)?
+- [QUESTION] Хостинг (Cloudflare Pages / GitHub Pages)?
 - [QUESTION] CRM: куда падают заявки?
 - [QUESTION] KPI: сколько лидов в месяц ожидается?
 - [QUESTION] Валюты: только отображение или оплата?
@@ -968,55 +1268,74 @@ Claude Code генерирует 50+ подуслуг по 8 направлен�
 > **Этот раздел читается первым.**
 
 ### 22.1. Контекст
-- Репозиторий: `CreativeLAB.in.th`.
+- Репозиторий: `FORMA.in.th`.
 - Главный документ: `Improvements.md` (этот файл).
+- Дополнительно: `NOTES.md` — журнал решений, ассумпций и багов.
+- Аудит от 13.09.2026 — в `NOTES.md`.
+- Live audit от 18.09.2026 — в разделе 0.10 этого файла.
 - Секреты: `.env` / GitHub Secrets.
 
 ### 22.2. Правила
-1. `MUST` — не менять позиционирование (раздел 1).
-2. `MUST NOT` — добавлять автоперевод.
-3. `MUST` — сохранять RTL для `he`.
-4. `MUST NOT` — использовать стоковые изображения.
-5. `MUST NOT` — создавать thin pages.
-6. `MUST` — каждая страница: Direct Answer + JSON-LD + OG + canonical +
+1. `MUST` — **сначала раздел 0.10 (live audit), потом всё остальное.**
+   `[P0]` > `[P1]` > `[P2]`.
+2. `MUST` — не менять позиционирование (раздел 1).
+3. `MUST` — static-first. Никакой CMS/БД в первом релизе.
+4. `MUST NOT` — добавлять автоперевод.
+5. `MUST` — сохранять RTL для `he`.
+6. `MUST NOT` — использовать стоковые изображения.
+7. `MUST NOT` — создавать thin pages.
+8. `MUST` — каждая страница: Direct Answer + JSON-LD + OG + canonical +
    hreflang.
-7. `MUST` — каждая страница: свой petroglyph-глиф + анимация (раздел 6).
-8. `MUST` — каждая страница: минимум один snippet-блок (раздел 9).
-9. `MUST` — цены → PriceTable + `Offer` (раздел 10).
-10. `MUST` — процесс → ProcessSchema / WorkPlan + `HowTo` (раздел 11).
-11. `MUST` — текст уникальный, 10/10, без AI-слопа (раздел 7).
-12. `MUST` — компоненты — только из luxury blocks (раздел 5).
-13. `MUST` — уважать `prefers-reduced-motion` (раздел 6).
-14. `MUST` — после задачи обновить раздел 0 и раздел 20.
-15. `MUST` — не коммитить секреты.
-16. `MUST` — если данных нет, **генерировать** по шаблону раздела 3.
+9. `MUST` — каждая страница: свой petroglyph-глиф + анимация (раздел 6).
+10. `MUST` — каждая страница: минимум один snippet-блок (раздел 9).
+11. `MUST` — цены → PriceTable + `Offer` (раздел 10).
+12. `MUST` — процесс → ProcessSchema / WorkPlan + `HowTo` (раздел 11).
+13. `MUST` — текст уникальный, 10/10, без AI-слопа (раздел 7).
+14. `MUST` — компоненты — только из luxury blocks (раздел 5).
+15. `MUST` — уважать `prefers-reduced-motion` (раздел 6).
+16. `MUST` — перед началом читать `NOTES.md` (актуальные решения и баги).
+17. `MUST` — после задачи обновить раздел 0, раздел 20 и `NOTES.md`
+    (если применимо).
+18. `MUST` — не коммитить секреты.
+19. `MUST` — если данных нет, **генерировать** по шаблону раздела 3.
     Не блокировать задачу.
-17. `MUST` — `[BLOCKED]` только для внешних API-ключей.
-18. `MUST` — дизайн первичен (раздел 2).
-19. `MUST` — каждая страница соответствует Google 2026 (раздел 25).
-20. `MUST` — проверять каждый пункт раздела 25 перед коммитом.
+20. `MUST` — `[BLOCKED]` только для внешних API-ключей.
+21. `MUST` — дизайн первичен (раздел 2), но сдержаннее, чем в CreativeLAB.
+22. `MUST` — каждая страница соответствует Google 2026 (раздел 25).
+23. `MUST` — проверять каждый пункт раздела 25 перед коммитом.
+24. `MUST NOT` — оставлять в UI слова `bespoke`, `seamless`, `tailored`,
+    `timeless` (задача 4 live audit).
+25. `MUST NOT` — оставлять `XXX`, `<...>`, `TODO` в UI.
 
 ### 22.3. Порядок работы
 1. Прочитать раздел 0.
-2. Прочитать раздел 22 (этот).
-3. Прочитать раздел 21 (блокеры).
-4. Прочитать соответствующий раздел задачи.
-5. Прочитать раздел 19 (чек-лист).
-6. Реализовать.
-7. Прогнать чек-лист раздела 19 и раздела 25.
-8. Обновить статус и журнал.
-9. Приложить доказательства.
+2. Прочитать раздел 0.10 (live audit).
+3. Прочитать раздел 22 (этот).
+4. Прочитать `NOTES.md`.
+5. Прочитать раздел 21 (блокеры).
+6. Взять задачу: сначала `[P0]` из 0.10, потом `[P1]`, потом `[P2]`,
+   потом стратегические разделы 1–21.
+7. Прочитать соответствующий раздел задачи.
+8. Прочитать раздел 19 (чек-лист).
+9. Реализовать.
+10. Прогнать чек-лист раздела 19 и раздела 25.
+11. Обновить статус, журнал и `NOTES.md`.
+12. Приложить доказательства (скриншоты, Lighthouse, axe).
 
 ### 22.4. Запрещено
+- Начинать новые фичи, не закрыв `[P0]` из раздела 0.10.
+- Подключать CMS / БД в первом релизе.
 - Менять палитру / типографику без согласования.
-- WebGL на всех страницах.
+- Ломать статическую генерацию.
+- Ломать RTL.
 - Ломать LCP / CLS ради анимации.
 - Оставлять TODO без записи в раздел 20.
 - Коммитить секреты и реальные данные.
 - Использовать стоковые изображения.
 - Писать AI-слоп.
-- Игнорировать RTL.
+- Использовать "bespoke", "seamless", "tailored", "timeless".
 - Игнорировать `prefers-reduced-motion`.
+- Игнорировать `NOTES.md`.
 - Игнорировать раздел 25.
 - Оставлять `XXX`, `<...>`, `TODO` в UI.
 
@@ -1030,8 +1349,7 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
   самостоятельно: тексты, заголовки, Direct Answer, FAQ, описания услуг.
 - `MUST` — контакты генерируются по шаблону раздела 3.
 - `MUST` — все сгенерированные данные помечаются `<!-- GEN -->`.
-- `MUST` — сгенерированный текст соответствует требованиям раздела 7
-  (объём, тон, Direct Answer, без AI-слопа).
+- `MUST` — сгенерированный текст соответствует требованиям раздела 7.
 - `MUST NOT` — не помечать `[BLOCKED]` из-за отсутствия телефона, email
   или адреса.
 - `MUST` — после генерации добавить запись в раздел 20:
@@ -1042,12 +1360,17 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
 ## 23. Стоп-условия
 
 Задача **не принимается**, если:
+- Не закрыт хотя бы один `[P0]` из раздела 0.10, при том что задача
+  заявлялась как приоритетная.
+- Подключена CMS / БД в первом релизе.
 - Нарушено позиционирование.
 - Появился автоперевод.
 - Сломан RTL.
+- Сломан static-first.
 - Появились thin pages.
 - Использованы стоковые изображения.
 - Написан AI-слоп.
+- Использованы слова "bespoke", "seamless", "tailored", "timeless".
 - LCP > 2.5s / INP > 200ms / CLS > 0.1.
 - Lighthouse ниже порога.
 - axe-core critical / serious.
@@ -1059,6 +1382,7 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
 - Секреты закоммичены.
 - Не обновлён раздел 0.
 - Не обновлён раздел 20.
+- Не обновлён `NOTES.md`.
 - Не пройден раздел 25.
 - В UI остались `XXX`, `<...>`, `TODO`.
 
@@ -1066,25 +1390,32 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
 
 ## 24. Acceptance Criteria (общий релиз)
 
+- [ ] Все `[P0]` из раздела 0.10 закрыты.
+- [ ] Все `[P1]` из раздела 0.10 закрыты.
+- [ ] Static-first, без CMS и БД.
+- [ ] 13 услуг + projects + about + process + locations + journal + pricing.
 - [ ] 4 языка, RTL для `he`.
-- [ ] 8 hubs + 50+ sub-services + cases + journal + pricing + process.
 - [ ] Уникальный текст 10/10 на всех языках.
 - [ ] Direct Answer + Featured Snippet на каждой странице.
 - [ ] Таблицы цен с `Offer` JSON-LD.
 - [ ] Анимированные ProcessSchema / WorkPlan с `HowTo`.
 - [ ] Petroglyph-глиф и анимация на каждой странице.
 - [ ] Luxury blocks внедрены.
-- [ ] Telegram + WhatsApp боты на 4 языках.
+- [ ] Telegram + WhatsApp боты на 4 языках, 0 dead ends.
 - [ ] Lighthouse: Perf ≥ 90, SEO 100, A11y ≥ 95.
 - [ ] axe-core: 0 critical / 0 serious.
 - [ ] LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1.
 - [ ] `llms.txt`, `llms-full.txt`, sitemap, robots, JSON-LD, hreflang — на месте.
 - [ ] `prefers-reduced-motion` работает.
-- [ ] Нет thin pages / автоперевода / стока / AI-слопа.
+- [ ] Нет thin pages / автоперевода / стока / AI-слопа / CMS / БД.
 - [ ] Раздел 25 полностью пройден.
 - [ ] Раздел 0 актуален.
 - [ ] Раздел 20 актуален.
+- [ ] `NOTES.md` актуален.
+- [ ] `URL_INTENT_MAP.md` создан.
+- [ ] `INTERNAL_LINKING_MAP.md` создан.
 - [ ] В UI нет `XXX`, `<...>`, `TODO`.
+- [ ] В UI нет "bespoke", "seamless", "tailored", "timeless".
 
 ---
 
@@ -1101,7 +1432,7 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
 
 **Spam-политики:**
 - [ ] Нет «back button hijacking».
-- [ ] Нет scaled content abuse (массовый AI-контент без ценности).
+- [ ] Нет scaled content abuse.
 - [ ] Нет манипуляций с историей браузера.
 - [ ] Нет скрытого текста и ссылок.
 - [ ] Нет doorway pages.
@@ -1159,6 +1490,7 @@ Claude Code НЕ блокирует задачи из-за отсутствия 
 - [ ] Нет AI-слопа.
 - [ ] Нет mass-produced content.
 - [ ] Нет content scraping.
+- [ ] Нет клише: "bespoke", "seamless", "tailored", "timeless".
 
 ### 25.6. Mobile-first
 
