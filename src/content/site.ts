@@ -7,8 +7,13 @@ export const SITE = {
   corePromise:
     "We create content that makes island businesses look better — and sell better.",
   location: "Koh Phangan, Thailand",
-  // Contact details are not yet confirmed by the client — placeholders only,
-  // tracked in NOTES.md, never rendered as if verified.
+  // Email/phone/WhatsApp were provided by the team on 2026-09-15,
+  // replacing an earlier [[VERIFY]]/all-zeros placeholder — treat as real
+  // unless told otherwise. `telegram` was set in that SAME commit as the
+  // fake "+66-00-000-0000" placeholder and never revisited afterward the
+  // way phone/whatsapp were — unverified, do not wire bot integrations to
+  // it without confirming it's a real, live bot first. See PROGRESS.md's
+  // "Open Questions & Blockers".
   email: "karma8chakra@gmail.com",
   whatsapp: "+66 80 870 5704",
   telegram: "https://t.me/creativelab1_bot",

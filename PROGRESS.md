@@ -181,12 +181,20 @@ omitted, phrased qualitatively, or marked `[[VERIFY]]` in source.
 
 ### Needs real client input
 
-- **Contact details**: email is a plausible-but-unconfirmed placeholder
-  (`hello@creativelab.in.th`); WhatsApp number, Telegram bot handle,
-  physical address, phone, and legal entity details are all unset.
-  `BotEntry` falls back to a "Message Us" link rather than a
-  fake/broken chat link; Footer/schema omit `PostalAddress`/`telephone`
-  rather than invent them.
+- **Contact details**: email (`karma8chakra@gmail.com`), phone, and
+  WhatsApp (`+66 80 870 5704`, same number for both) were provided by the
+  team on 2026-09-15, replacing an earlier `[[VERIFY]]`/all-zeros
+  placeholder — treat these three as real. **`telegram` (`@creativelab1_bot`)
+  is still unverified**: it was set in that same commit as the fake
+  `+66-00-000-0000` placeholder and never revisited the way phone/WhatsApp
+  were, so there's no evidence it's a real, live bot — confirm before
+  relying on it. Physical address and legal entity details remain unset.
+  `BotEntry` still correctly falls back to a "Message Us" link (its env
+  vars, `NEXT_PUBLIC_WHATSAPP_NUMBER`/`NEXT_PUBLIC_TELEGRAM_BOT`, are
+  unset) rather than wiring to `SITE.whatsapp`/`SITE.telegram` directly —
+  intentionally not changed here given the Telegram handle's unverified
+  status; Footer/schema still omit `PostalAddress`/`telephone` rather than
+  invent them.
 - **No real proof content yet**: no real client projects, testimonials,
   awards, or case studies exist. `/portfolio/` and `/case-studies/`
   intentionally show an honest "in progress" state instead of fabricated
