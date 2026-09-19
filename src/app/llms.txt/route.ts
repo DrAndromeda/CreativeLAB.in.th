@@ -1,6 +1,8 @@
 import { HUBS } from "@/content/hubs";
 import { SITE } from "@/content/site";
 
+export const dynamic = "force-static";
+
 export function GET() {
   const lines: string[] = [];
 
