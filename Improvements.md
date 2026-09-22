@@ -210,6 +210,33 @@
 - [ ] Koh Phangan business listings
 - [ ] Гостевые статьи на travel/real estate блогах
 
+### 13. BRO-SERVICE: Доставка цветов Copang на KP
+
+**Концепция:** Одна страница-визитка для сервиса доставки цветов на Koh Phangan.
+Не в главном меню, ссылка в футере + sitemap. Индексируется, но не продвигается.
+
+**Где:** `/{lang}/flower-delivery-copang/`
+
+**Что сделать:**
+- [ ] Создать страницу `/flower-delivery-copang/`
+- [ ] H1: «Flower Delivery on Koh Phangan — Copang»
+- [ ] SEO title + description (50-60 / 140-160 chars)
+- [ ] Direct Answer 50-80 слов
+- [ ] H2-секции: ассортимент, зоны доставки, цены, FAQ
+- [ ] FAQ 5 вопросов (сроки, зоны, оплата, минимальный заказ)
+- [ ] JSON-LD: `LocalBusiness` + `FAQPage`
+- [ ] Кнопки: WhatsApp + Telegram для заказа
+- [ ] Ссылка в футере: `Flower Delivery — Copang`
+- [ ] `sitemap.xml` — добавить
+- [ ] Все 4 языка (EN/RU/TH/HE)
+- [ ] hreflang + canonical
+
+**Дизайн:**
+- Hero: крупное фото букета / цветов KP
+- Минималистичный, editorial стиль (как весь сайт)
+- Акцент: яркие фото цветов, CTA
+- Не добавлять в главную навигацию (только футер)
+
 ---
 
 ## ✅ ЧТО УЖЕ СДЕЛАНО
